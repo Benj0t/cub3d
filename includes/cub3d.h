@@ -8,9 +8,9 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "mlx.h"
 //#include "utils/gnl/get_next_line.h"
 //#include "utils/printf/libftprintf.h"
-#include "mlx.h"
 
 #define RED_COMP 2
 #define GREEN_COMP 1
@@ -59,6 +59,10 @@ typedef struct s_draw
 
 typedef struct s_player
 {
+	double		oldDirX;
+	double		oldPlaneX;
+	double		moveSpeed;
+	double		rotSpeed;
 	double		posX;
 	double		posY;
 	double		dirX;
@@ -67,8 +71,8 @@ typedef struct s_player
 	double		planeY;
 	double		stepX;
 	double		stepY;
-	int		mapX;
-	int		mapY;
+	int			mapX;
+	int			mapY;
 }				t_player;
 
 typedef struct s_color

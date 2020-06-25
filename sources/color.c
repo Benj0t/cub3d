@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/06/25 16:24:27 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:46:04 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_color	ft_light_blue()
 {
 	t_color color;
 
-	color.R = 26;
-	color.G = 77;
-	color.B = 127;
+	color.R = 53;
+	color.G = 155;
+	color.B = 255;
 	return (color);
 }
 
@@ -37,9 +37,9 @@ t_color	ft_gray()
 {
 	t_color color;
 
-	color.R = 64;
-	color.G = 64;
-	color.B = 64;
+	color.R = 128;
+	color.G = 128;
+	color.B = 128;
 	return (color);
 }
 
@@ -47,7 +47,7 @@ t_color	ft_red()
 {
 	t_color color;
 
-	color.R = 127;
+	color.R = 255;
 	color.G = 0;
 	color.B = 0;
 	return (color);
@@ -58,7 +58,7 @@ t_color	ft_green()
 	t_color color;
 
 	color.R = 0;
-	color.G = 127;
+	color.G = 255;
 	color.B = 0;
 	return (color);
 }
@@ -69,7 +69,7 @@ t_color	ft_blue()
 
 	color.R = 0;
 	color.G = 0;
-	color.B = 127;
+	color.B = 255;
 	return (color);
 }
 
@@ -87,8 +87,8 @@ t_color	ft_yellow()
 {
 	t_color color;
 
-	color.R = 127;
-	color.G = 127;
+	color.R = 255;
+	color.G = 255;
 	color.B = 0;
 	return (color);
 }
