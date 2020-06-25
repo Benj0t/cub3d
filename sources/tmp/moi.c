@@ -25,6 +25,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "mlx.h"
 
 /*
 g++ *.cpp -lSDL -O3 -W -Wall -ansi -pedantic
@@ -69,8 +70,54 @@ int worldMap[mapWidth][mapHeight]=
 
 
 
+char	*ft_conv_hex(int nb)
+{
+	char	*base = "0123456789ABCDEF";
+	char	*str;
+	int		len;
+	int		mult;
+
+	len = nb / 16;
+	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+		return(NULL);
+	str[len--] = '\0';
+	mult = 1;
+	while (nb >= 0)
+	{
+		str[len--] = base[nb % 16];
+		nb -= 16 * mult++;
+	}
+	return(str);
+}
+
+char **ft_hex(int **buffer)
+{
+	char **tab;
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (buffer[x])
+	{
+		while(buffer[x][y])
+			y++;
+		x++;
+	}
+	char tab[x][y];
+	x = -1;
+	y = -1;
+	while (buffer[++x])
+		while(buffer[x][++y])
+			tab[x][y] = ft_conv_hex(buffer[x][y]);
+	return(tab);
+}
+
+
 int main(int argc, char **argv)
 {
+	void	*ptr;
+	void	*win_ptr;
     (void)argc;
     (void)argv;
     unsigned int buffer[screenHeight][screenWidth];
@@ -83,17 +130,19 @@ int main(int argc, char **argv)
 
     unsigned int *texture[8];
     int i = -1;
-    while (++i <= 8)
+
+	while (++i <= 8)
     {
         if (!(texture[i] = (unsigned int *)malloc(sizeof(int) * (texWidth * texHeight))))
             return (0); //
     }
 
     //screen(screenWidth,screenHeight, 0, "Raycaster"); // start MLX
+	
+	ptr = mlx_init();
+	win_ptr = mlx_new_window(ptr, screenHeight, screenWidth, "Cub3D");
 
     //generate some textures
-    int bool = 0;
-    if (!bool)
     for(int x = 0; x < texWidth; x++)
     {
         for(int y = 0; y < texHeight; y++)
@@ -131,9 +180,8 @@ int main(int argc, char **argv)
     int h = screenHeight;
     //start the main loop
     int bis = 0;
-    while(bis == 0)
+    while(!bis++)
     {
-      bis = 1;
       for(int x = 0; x < w; x++)
       {
           //calculate ray position and direction
@@ -241,17 +289,24 @@ int main(int argc, char **argv)
             texPos += step;
             unsigned int color = texture[texNum][texHeight * texY + texX];
             //make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-            if(side == 1) color = (color >> 1) & 8355711;
+            if(side == 1) 
+				color = (color >> 1) & 8355711;
             buffer[y][x] = color;
           }
       }
       (void)time;
       (void)oldTime;
     }
-}
-      /*
-      drawBuffer(buffer[0]);
-      for(int y = 0; y < h; y++) for(int x = 0; x < w; x++) buffer[y][x] = 0; //clear the buffer instead of cls()
+		void	*img_ptr;
+		char	*img;
+		int		bits;
+		int		bits_extended;
+		int		endian;
+		img_ptr = mlx_new_image(ptr, screenWidth, screenHeight);
+		img = mlx_get_data_addr(ptr, &bits, &bits_extended, &endian);
+
+	  /*
+	  for(int y = 0; y < h; y++) for(int x = 0; x < w; x++) buffer[y][x] = 0; //clear the buffer instead of cls()
       //timing for input and FPS counter
       oldTime = time;
       time = getTicks();
@@ -303,5 +358,5 @@ int main(int argc, char **argv)
           break;
       }
     }
+	*/
 }
-*/
