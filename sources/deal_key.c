@@ -12,72 +12,34 @@
 
 #include "cub3d.h"
 
-int	map[mapWidth][mapHeight]={
-{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
+int		deal_key_press(int key, t_pmlx *pmlx)
+{
+	printf("%d\n", key);
+	if (key == ESC_KEY_L)
+		pmlx->bool_ESC = 1;
+	if (key == W_KEY_L)//W
+		pmlx->bool_W = 1;
+	if (key == S_KEY_L)//S
+		pmlx->bool_S = 1;
+	if (key == A_KEY_L)//A
+		pmlx->bool_A = 1;
+	if (key == D_KEY_L)//D
+		pmlx->bool_D = 1;
+	main_loop(pmlx);
+	return(0);
+}
 
-
-int		deal_key(int key, t_pmlx *pmlx)
+int		deal_key_release(int key, t_pmlx *pmlx)
 {
 	printf("%d\n", key);
 	if (key == W_KEY_L)//W
-	{
-		if(map[(int)(pmlx->pl.posX + pmlx->pl.dirX * pmlx->pl.moveSpeed)][(int)pmlx->pl.posY] == 0)
-		{
-			pmlx->pl.posX += pmlx->pl.dirX * pmlx->pl.moveSpeed;
-		}
-		if(map[(int)pmlx->pl.posX][(int)(pmlx->pl.posY + pmlx->pl.dirY * pmlx->pl.moveSpeed)] == 0)
-			pmlx->pl.posY += pmlx->pl.dirY * pmlx->pl.moveSpeed;
-	}
+		pmlx->bool_W = 0;
 	if (key == S_KEY_L)//S
-	{
-		if(map[(int)(pmlx->pl.posX - pmlx->pl.dirX * pmlx->pl.moveSpeed)][(int)pmlx->pl.posY] == 0)
-			pmlx->pl.posX -= pmlx->pl.dirX * pmlx->pl.moveSpeed;
-		if(map[(int)pmlx->pl.posX][(int)(pmlx->pl.posY - pmlx->pl.dirY * pmlx->pl.moveSpeed)] == 0)
-			pmlx->pl.posY -= pmlx->pl.dirY * pmlx->pl.moveSpeed;
-	}
+		pmlx->bool_S = 0;
 	if (key == A_KEY_L)//A
-	{
-		//both camera direction and camera plane must be rotated
-		pmlx->pl.oldDirX = pmlx->pl.dirX;
-		pmlx->pl.dirX = pmlx->pl.dirX * cos(pmlx->pl.rotSpeed) - pmlx->pl.dirY * sin(pmlx->pl.rotSpeed);
-		pmlx->pl.dirY = pmlx->pl.oldDirX * sin(pmlx->pl.rotSpeed) + pmlx->pl.dirY * cos(pmlx->pl.rotSpeed);
-		pmlx->pl.oldPlaneX = pmlx->pl.planeX;
-		pmlx->pl.planeX = pmlx->pl.planeX * cos(pmlx->pl.rotSpeed) - pmlx->pl.planeY * sin(pmlx->pl.rotSpeed);
-		pmlx->pl.planeY = pmlx->pl.oldPlaneX * sin(pmlx->pl.rotSpeed) + pmlx->pl.planeY * cos(pmlx->pl.rotSpeed);
-	}
+		pmlx->bool_A = 0;
 	if (key == D_KEY_L)//D
-	{
-		//both camera direction and camera plane must be rotated
-		pmlx->pl.oldDirX = pmlx->pl.dirX;
-		pmlx->pl.dirX = pmlx->pl.dirX * cos(-pmlx->pl.rotSpeed) - pmlx->pl.dirY * sin(-pmlx->pl.rotSpeed);
-		pmlx->pl.dirY = pmlx->pl.oldDirX * sin(-pmlx->pl.rotSpeed) + pmlx->pl.dirY * cos(-pmlx->pl.rotSpeed);
-		pmlx->pl.oldPlaneX = pmlx->pl.planeX;
-		pmlx->pl.planeX = pmlx->pl.planeX * cos(-pmlx->pl.rotSpeed) - pmlx->pl.planeY * sin(-pmlx->pl.rotSpeed);
-		pmlx->pl.planeY = pmlx->pl.oldPlaneX * sin(-pmlx->pl.rotSpeed) + pmlx->pl.planeY * cos(-pmlx->pl.rotSpeed);
-	}
+		pmlx->bool_D = 0;
 	main_loop(pmlx);
 	return(0);
 }

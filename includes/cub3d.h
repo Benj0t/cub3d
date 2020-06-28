@@ -15,8 +15,8 @@
 #define RED_COMP 2
 #define GREEN_COMP 1
 #define BLUE_COMP 0
-#define screenWidth 1920
-#define screenHeight 1080
+#define screenWidth 640
+#define screenHeight 480
 #define mapWidth 24
 #define mapHeight 24
 #define RGB_RED 16711680
@@ -87,6 +87,11 @@ typedef struct	s_pmlx
 {
 	t_mlx		mlx;
 	t_player	pl;
+	int			bool_W;
+	int			bool_A;
+	int			bool_S;
+	int			bool_D;
+	int			bool_ESC;
 }				t_pmlx;
 
 t_color	ft_light_blue();
@@ -97,6 +102,12 @@ t_color	ft_blue();
 t_color	ft_white();
 t_color	ft_yellow();
 t_color ft_color_divide(t_color color);
+int		deal_key_press(int key, t_pmlx *pmlx);
+int		deal_key_release(int key, t_pmlx *pmlx);;
 int		deal_key(int key, t_pmlx *pmlx);
+void    forward(t_pmlx *pmlx);
+void    downward(t_pmlx *pmlx);
+void    mv_left(t_pmlx *pmlx);
+void    mv_right(t_pmlx *pmlx);
 void	main_loop(t_pmlx *pmlx);
 #endif

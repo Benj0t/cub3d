@@ -114,6 +114,14 @@ void	main_loop(t_pmlx *pmlx)
 	t_color color;
 	t_draw draw;
 
+	if (pmlx->bool_W == 1)//W
+		forward(pmlx);
+	if (pmlx->bool_S == 1)//S
+		downward(pmlx);
+	if (pmlx->bool_A == 1)//A
+		mv_left(pmlx);
+	if (pmlx->bool_D == 1)//D
+		mv_right(pmlx);
 	for(int x = 0; x < screenWidth; x++)
 	{
 		//calculate ray position and direction
@@ -173,11 +181,10 @@ void	main_loop(t_pmlx *pmlx)
 	mlx_put_image_to_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr, pmlx->mlx.img_ptr, 0, 0);
 }
 
-
 int main()//(int argc, char *argv[])
 {
 	t_pmlx pmlx;
-
+	pmlx.bool_ESC = 0;
 	pmlx.pl.posX = 22;
 	pmlx.pl.posY = 12;	//x and y start position
 	pmlx.pl.dirX = -1;
@@ -186,7 +193,7 @@ int main()//(int argc, char *argv[])
 	pmlx.pl.planeY = 0.66; //the 2d raycaster version of camera plane
 
 	pmlx.pl.moveSpeed = 0.2;
-	pmlx.pl.rotSpeed = 0.1;
+	pmlx.pl.rotSpeed = 0.05;
 
 	pmlx.mlx.mlx_ptr = mlx_init();
 	pmlx.mlx.win_ptr = mlx_new_window(pmlx.mlx.mlx_ptr, screenWidth, screenHeight, "Cub3D");
@@ -194,6 +201,7 @@ int main()//(int argc, char *argv[])
 	pmlx.mlx.data_addr = mlx_get_data_addr(pmlx.mlx.img_ptr, &(pmlx.mlx.bpp), &(pmlx.mlx.size_l), &(pmlx.mlx.endian));
 	//while(x != screenWidth)
 	main_loop(&pmlx);
-	mlx_hook(pmlx.mlx.win_ptr, 2, (1L << 0), &deal_key, &pmlx);
+	mlx_hook(pmlx.mlx.win_ptr, KEYPRESS, KEYPRESSMASK, &deal_key_press, &pmlx);
+	mlx_hook(pmlx.mlx.win_ptr, KEYRELEASE, KEYRELEASEMASK, &deal_key_release, &pmlx);
 	mlx_loop(pmlx.mlx.mlx_ptr);
 }

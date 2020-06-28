@@ -111,6 +111,7 @@
 # define A_KEY_L 113
 # define S_KEY_L 115
 # define D_KEY_L 100
+# define ESC_KEY_L 65307
 /*
  * ** Numbers (not numeric keypad ones)
  * */
