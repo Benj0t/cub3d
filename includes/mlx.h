@@ -107,7 +107,10 @@
 # define X_KEY 7
 # define Y_KEY 16
 # define Z_KEY 6
-
+# define W_KEY_L 122
+# define A_KEY_L 113
+# define S_KEY_L 115
+# define D_KEY_L 100
 /*
  * ** Numbers (not numeric keypad ones)
  * */
