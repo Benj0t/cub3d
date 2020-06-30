@@ -23,8 +23,8 @@
 #define RED_COMP 2
 #define GREEN_COMP 1
 #define BLUE_COMP 0
-#define screenWidth 640
-#define screenHeight 480
+#define screenWidth 1000
+#define screenHeight 600
 #define mapWidth 24
 #define mapHeight 24
 #define RGB_RED 16711680
