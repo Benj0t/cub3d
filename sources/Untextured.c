@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	worldMap[mapWidth][mapHeight]={
 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -57,7 +57,8 @@ void	dda(t_ray *ray, t_pmlx *pmlx)
 			ray->side = 1;
 		}
 		//Check if ray has ray.hit a wall
-		if(worldMap[pmlx->pl.mapX][pmlx->pl.mapY] > 0) ray->hit = 1;
+		if(worldMap[pmlx->pl.mapX][pmlx->pl.mapY] > 0)
+			ray->hit = 1;
 	}
 }
 
@@ -90,17 +91,30 @@ void	putpix(char *data_addr, int x, int y, t_color color)
 	data_addr[pos + BLUE_COMP] = color.B;
 }
 
-void	draw_ray(char *data_addr, int x, t_draw draw, t_color color)
+void	draw_ray(char *data_addr, int x, t_draw draw, t_color color, t_pmlx *pmlx, t_ray ray)
 {
 	int y;
 
 	y = 0;
+
 	while (y < screenHeight)
 	{
 		if (y < draw.Start)
 			putpix(data_addr, x, y, ft_light_blue());
 		else if (y >= draw.Start && y <= draw.End)
+		{
+			pmlx->tex.step = (1.0 * texHeight) / draw.lineHeight;
+			//pmlx->tex.texPos = (draw.Start - screenHeight / 2 + draw.lineHeight / 2) * pmlx->tex.step;
+			pmlx->tex.texY = (int)pmlx->tex.texPos & (texHeight - 1);
+			pmlx->tex.texPos += pmlx->tex.step;
+			color.R = pmlx->img.image[pmlx->tex.texNum][(texHeight * pmlx->tex.texY + pmlx->tex.texX) * 4 + RED_COMP];
+			color.G = pmlx->img.image[pmlx->tex.texNum][(texHeight * pmlx->tex.texY + pmlx->tex.texX) * 4 + BLUE_COMP];
+			color.B = pmlx->img.image[pmlx->tex.texNum][(texHeight * pmlx->tex.texY + pmlx->tex.texX) * 4 + GREEN_COMP];			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+			//pmlx->tex.texY += (int)pmlx->tex.texPos;
+			if(ray.side == 1)
+				color = ft_color_divide(color);
 			putpix(data_addr, x, y, color);
+		}
 		else
 		{
 			putpix(data_addr, x, y, ft_gray());
@@ -114,14 +128,6 @@ void	main_loop(t_pmlx *pmlx)
 	t_color color;
 	t_draw draw;
 
-	if (pmlx->bool_W == 1)//W
-		forward(pmlx);
-	if (pmlx->bool_S == 1)//S
-		downward(pmlx);
-	if (pmlx->bool_A == 1)//A
-		mv_left(pmlx);
-	if (pmlx->bool_D == 1)//D
-		mv_right(pmlx);
 	for(int x = 0; x < screenWidth; x++)
 	{
 		//calculate ray position and direction
@@ -169,21 +175,57 @@ void	main_loop(t_pmlx *pmlx)
 		draw.lineHeight = (int)(screenHeight / ray.perpWallDist);
 		//calculate lowest and highest pixel to fill in current stripe
 		draw.Start = -draw.lineHeight / 2 + screenHeight / 2;
-		if(draw.Start < 0)draw.Start = 0;
-			draw.End = draw.lineHeight / 2 + screenHeight / 2;
-		if(draw.End >= screenHeight)draw.End = screenHeight - 1;
-			color = ft_choose_color(*pmlx);
+
+		if(draw.Start < 0)
+			draw.Start = 0;
+		draw.End = draw.lineHeight / 2 + screenHeight / 2;
+		if(draw.End >= screenHeight)
+			draw.End = screenHeight - 1;
+		color = ft_choose_color(*pmlx);
 		if(ray.side == 1)
 			color = ft_color_divide(color);
+		pmlx->tex.texNum = worldMap[pmlx->pl.mapX][pmlx->pl.mapY] - 1;
+	    if(ray.side == 0)
+			pmlx->tex.wallX = pmlx->pl.posY + ray.perpWallDist * ray.rayDirY;
+		else
+		{
+			pmlx->tex.wallX = pmlx->pl.posX + ray.perpWallDist * ray.rayDirX;
+		}
+		pmlx->tex.wallX -= floor((pmlx->tex.wallX));
+
+		pmlx->tex.texX = (int)(pmlx->tex.wallX * (double)texWidth);
+		pmlx->tex.texPos = (draw.Start - screenHeight / 2 + draw.lineHeight / 2) * pmlx->tex.step;
+		if(ray.side == 0 && ray.rayDirX > 0)
+			pmlx->tex.texX = texWidth - pmlx->tex.texX - 1;
+		if(ray.side == 1 && ray.rayDirY < 0)
+			pmlx->tex.texX = texWidth - pmlx->tex.texX - 1;
 		//draw the pixels of the stripe as a vertical line
-		draw_ray(pmlx->mlx.data_addr, x, draw, color);
+		pmlx->tex.step = (1.0 * texHeight) / draw.lineHeight;
+		pmlx->tex.texPos = (draw.Start - screenHeight / 2 + draw.lineHeight / 2) * pmlx->tex.step;
+		//printf("%d\n", pmlx->tex.step);
+		draw_ray(pmlx->mlx.data_addr, x, draw, color, pmlx, ray);
 	}
 	mlx_put_image_to_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr, pmlx->mlx.img_ptr, 0, 0);
+}
+
+int	loop(t_pmlx *pmlx)
+{
+	if (pmlx->bool_W == 1)//W
+		forward(pmlx);
+	if (pmlx->bool_S == 1)//S
+		downward(pmlx);
+	if (pmlx->bool_A == 1)//A
+		mv_left(pmlx);
+	if (pmlx->bool_D == 1)//D
+		mv_right(pmlx);
+	main_loop(pmlx);
+	return (0);
 }
 
 int main()//(int argc, char *argv[])
 {
 	t_pmlx pmlx;
+
 	pmlx.bool_ESC = 0;
 	pmlx.pl.posX = 22;
 	pmlx.pl.posY = 12;	//x and y start position
@@ -192,16 +234,18 @@ int main()//(int argc, char *argv[])
 	pmlx.pl.planeX = 0;
 	pmlx.pl.planeY = 0.66; //the 2d raycaster version of camera plane
 
-	pmlx.pl.moveSpeed = 0.2;
-	pmlx.pl.rotSpeed = 0.05;
+	pmlx.pl.moveSpeed = 0.25;
+	pmlx.pl.rotSpeed = 0.1;
 
 	pmlx.mlx.mlx_ptr = mlx_init();
 	pmlx.mlx.win_ptr = mlx_new_window(pmlx.mlx.mlx_ptr, screenWidth, screenHeight, "Cub3D");
 	pmlx.mlx.img_ptr = mlx_new_image(pmlx.mlx.mlx_ptr, screenWidth, screenHeight);
 	pmlx.mlx.data_addr = mlx_get_data_addr(pmlx.mlx.img_ptr, &(pmlx.mlx.bpp), &(pmlx.mlx.size_l), &(pmlx.mlx.endian));
 	//while(x != screenWidth)
-	main_loop(&pmlx);
+	init_texture(&pmlx);
+	//main_loop(&pmlx);
 	mlx_hook(pmlx.mlx.win_ptr, KEYPRESS, KEYPRESSMASK, &deal_key_press, &pmlx);
 	mlx_hook(pmlx.mlx.win_ptr, KEYRELEASE, KEYRELEASEMASK, &deal_key_release, &pmlx);
+	mlx_loop_hook(pmlx.mlx.mlx_ptr, &loop, &pmlx);
 	mlx_loop(pmlx.mlx.mlx_ptr);
 }
