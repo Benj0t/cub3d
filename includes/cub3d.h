@@ -23,8 +23,8 @@
 #define RED_COMP 2
 #define GREEN_COMP 1
 #define BLUE_COMP 0
-#define screenWidth 1000
-#define screenHeight 600
+#define screenWidth 640
+#define screenHeight 480
 #define mapWidth 24
 #define mapHeight 24
 #define RGB_RED 16711680
@@ -34,6 +34,16 @@
 #define RGB_YELLOW 16776960
 #define texWidth 64
 #define texHeight 64
+
+#define uDiv 1
+#define vDiv 1
+#define vMove 0.0
+
+typedef struct	s_vector
+{
+	double	distance;
+	int		ordre;
+}				t_vector;
 
 typedef struct	s_image
 {
@@ -126,8 +136,36 @@ typedef struct s_img
 	int		img_W;
 }				t_img;
 
+typedef struct	s_sprite
+{
+	double		ZBuffer[screenWidth];
+	double		spriteX;
+	double		spriteY;
+	double		spriteScreenX;
+	double		invDet;
+	double		transformX;
+	double		transformY;
+	int			vMoveScreen;
+	int			spriteHeight;
+	int			drawStartY;
+	int			drawStartX;
+	int			drawEndY;
+	int			drawEndX;
+	int			stripe;
+	int			spriteWidth;
+	int			texX;
+	int			texY;
+	int			d;
+
+	double		x;
+	double		y;
+	int			sprite;
+}				t_sprite;
+
+
 typedef struct	s_pmlx
 {
+	t_sprite	sp;
 	t_img		img;
 	t_wall		tex;
 	t_mlx		mlx;
@@ -139,6 +177,17 @@ typedef struct	s_pmlx
 	int			bool_ESC;
 }				t_pmlx;
 
+typedef struct s_coords_sprite
+{
+	double		x;
+	double		y;
+	int			texture;
+}				t_coords_sprite;
+
+void    ft_sprites(t_pmlx *pmlx);
+void    sortSprites(int* order, double* dist, int amount);
+void    ft_swap(double *a, double *b);
+void    ft_sprites(t_pmlx *pmlx);
 t_color	ft_light_blue();
 t_color	ft_gray();
 t_color	ft_red();
@@ -146,8 +195,9 @@ t_color	ft_green();
 t_color	ft_blue();
 t_color	ft_white();
 t_color	ft_yellow();
+t_color	ft_dark();
 t_color ft_color_divide(t_color color);
-void	draw_ray(char *data_addr, int x, t_draw draw, t_color color, t_pmlx *pmlx, t_ray ray);
+void	draw_ray(char *data_addr, int x, t_draw draw, t_pmlx *pmlx, t_ray ray);
 int		deal_key_press(int key, t_pmlx *pmlx);
 int		deal_key_release(int key, t_pmlx *pmlx);
 int		deal_key(int key, t_pmlx *pmlx);

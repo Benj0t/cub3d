@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 16:25:37 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/06/25 19:46:26 by bemoreau         ###   ########.fr       */
+/*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
+/*   Updated: 2020/06/25 18:54:14 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	worldMap[mapWidth][mapHeight]={
 {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
 {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -35,7 +35,7 @@ int	worldMap[mapWidth][mapHeight]={
 {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,5,1},
 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
 //place the example code below here:
@@ -62,25 +62,6 @@ void	dda(t_ray *ray, t_pmlx *pmlx)
 	}
 }
 
-t_color	ft_choose_color(t_pmlx pmlx)
-{
-	t_color color;
-
-	if (worldMap[pmlx.pl.mapX][pmlx.pl.mapY] == 1)
-		color = ft_red();
-	else if (worldMap[pmlx.pl.mapX][pmlx.pl.mapY] == 2)
-		color = ft_blue(); //green
-	else if (worldMap[pmlx.pl.mapX][pmlx.pl.mapY] == 3)
-		color = ft_green(); //blue
-	else if (worldMap[pmlx.pl.mapX][pmlx.pl.mapY] == 4)
-		color = ft_yellow(); //white
-	else
-	{
-		color = ft_white(); //yellow
-	}
-	return (color);
-}
-
 void	putpix(char *data_addr, int x, int y, t_color color)
 {
 	int pos;
@@ -91,16 +72,16 @@ void	putpix(char *data_addr, int x, int y, t_color color)
 	data_addr[pos + BLUE_COMP] = color.B;
 }
 
-void	draw_ray(char *data_addr, int x, t_draw draw, t_color color, t_pmlx *pmlx, t_ray ray)
+void	draw_ray(char *data_addr, int x, t_draw draw, t_pmlx *pmlx, t_ray ray)
 {
 	int y;
-
+	t_color color;
 	y = 0;
 
 	while (y < screenHeight)
 	{
 		if (y < draw.Start)
-			putpix(data_addr, x, y, ft_light_blue());
+			putpix(data_addr, x, y, ft_dark());
 		else if (y >= draw.Start && y <= draw.End)
 		{
 			pmlx->tex.step = (1.0 * texHeight) / draw.lineHeight;
@@ -125,7 +106,6 @@ void	draw_ray(char *data_addr, int x, t_draw draw, t_color color, t_pmlx *pmlx, 
 void	main_loop(t_pmlx *pmlx)
 {
 	t_ray ray;
-	t_color color;
 	t_draw draw;
 
 	for(int x = 0; x < screenWidth; x++)
@@ -181,11 +161,8 @@ void	main_loop(t_pmlx *pmlx)
 		draw.End = draw.lineHeight / 2 + screenHeight / 2;
 		if(draw.End >= screenHeight)
 			draw.End = screenHeight - 1;
-		color = ft_choose_color(*pmlx);
-		if(ray.side == 1)
-			color = ft_color_divide(color);
 		pmlx->tex.texNum = worldMap[pmlx->pl.mapX][pmlx->pl.mapY] - 1;
-	    if(ray.side == 0)
+		if(ray.side == 0)
 			pmlx->tex.wallX = pmlx->pl.posY + ray.perpWallDist * ray.rayDirY;
 		else
 		{
@@ -203,8 +180,10 @@ void	main_loop(t_pmlx *pmlx)
 		pmlx->tex.step = (1.0 * texHeight) / draw.lineHeight;
 		pmlx->tex.texPos = (draw.Start - screenHeight / 2 + draw.lineHeight / 2) * pmlx->tex.step;
 		//printf("%d\n", pmlx->tex.step);
-		draw_ray(pmlx->mlx.data_addr, x, draw, color, pmlx, ray);
+		draw_ray(pmlx->mlx.data_addr, x, draw, pmlx, ray);
+		pmlx->sp.ZBuffer[x] = ray.perpWallDist;
 	}
+	ft_sprites(pmlx);
 	mlx_put_image_to_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr, pmlx->mlx.img_ptr, 0, 0);
 }
 

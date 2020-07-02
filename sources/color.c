@@ -92,3 +92,13 @@ t_color	ft_yellow()
 	color.B = 0;
 	return (color);
 }
+
+t_color	ft_dark()
+{
+	t_color color;
+
+	color.R = 0;
+	color.G = 0;
+	color.B = 0;
+	return (color);
+}

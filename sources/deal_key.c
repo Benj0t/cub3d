@@ -14,7 +14,7 @@
 
 int		deal_key_press(int key, t_pmlx *pmlx)
 {
-	printf("%d\n", key);
+	//printf("%d\n", key);
 	if (key == ESC_KEY_L)
 		pmlx->bool_ESC = 1;
 	if (key == W_KEY_L)//W
@@ -31,7 +31,7 @@ int		deal_key_press(int key, t_pmlx *pmlx)
 
 int		deal_key_release(int key, t_pmlx *pmlx)
 {
-	printf("%d\n", key);
+	//printf("%d\n", key);
 	if (key == W_KEY_L)//W
 		pmlx->bool_W = 0;
 	if (key == S_KEY_L)//S

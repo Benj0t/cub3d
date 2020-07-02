@@ -18,12 +18,18 @@ void    init_texture(t_pmlx *pmlx)
     pmlx->img.addr[2] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/redbrick.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
     pmlx->img.addr[3] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/wood.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
     pmlx->img.addr[4] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/eagle.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
+    pmlx->img.addr[5] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/tonneau.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
+    pmlx->img.addr[6] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/potal.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
+    pmlx->img.addr[7] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/lamp.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
+    printf("%p\n", pmlx->img.addr[5]);
+    printf("%p\n", pmlx->img.addr[6]);
+    printf("%p\n", pmlx->img.addr[7]);
     write(1, "before\n", 7);
     //pmlx->img.addr[4] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/glowstone.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
     //pmlx->img.addr[5] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/gravel.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
     //pmlx->img.addr[6] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/lapis.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
     //pmlx->img.addr[7] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, "../images/wood.xpm", &(pmlx->img.img_W), &(pmlx->img.img_H));
-    while (i != 5)
+    while (i != 8)
     {
         pmlx->img.image[i] = mlx_get_data_addr(pmlx->img.addr[i], &(pmlx->img.bpp), &(pmlx->img.s_line), &(pmlx->img.endian));
         i++;
