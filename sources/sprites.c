@@ -1,13 +1,12 @@
 #include "../includes/cub3d.h"
 
-#define numSprites 19
-
 //arrays used to sort the sprites
-int spriteOrder[numSprites];
-double spriteDistance[numSprites];
-
 t_coords_sprite sprite[numSprites] =
 {
+  {18.5, 10.5, 6},
+  {18.5, 11.5, 6},
+  {18.5, 12.5, 6},
+  
   {20.5, 11.5, 7}, //green light in front of playerstart
   //green lights in every room
   {18.5,4.5, 7},
@@ -19,9 +18,6 @@ t_coords_sprite sprite[numSprites] =
   {14.5,20.5,7},
 
   //row of pillars in front of wall: fisheye test
-  {18.5, 10.5, 6},
-  {18.5, 11.5, 6},
-  {18.5, 12.5, 6},
 
   //some barrels around the map
   {21.5, 1.5, 5},
@@ -34,64 +30,77 @@ t_coords_sprite sprite[numSprites] =
   {10.5, 15.8,5},
 };
 
-void    ft_swap(double *a, double *b)
+void    ft_swap(t_vector *a, t_vector *b)
 {
-    double c;
+    t_vector c;
     c = *a;
     *a = *b;
-    *a = c;
+    *b = c;
 }
 
-void    sortSprites(int* order, double* dist, int amount)
+void    sortSprites(t_pmlx *pmlx, int amount)
 {
     t_vector sprites[amount];
-    for(int i = 0; i < amount; i++) {
-    sprites[i].distance = dist[i];
-    sprites[i].ordre = order[i];
+    for(int k = 0; k < amount; k++) {
+    sprites[k].distance = pmlx->sp.spriteDistance[k];
+    sprites[k].ordre = pmlx->sp.spriteOrder[k];
     }
     int i;
     int j;
 
     i = -1;
     j = -1;
+
+	int it = -1;
+	static int bool = 0;
+	while (++it < 19 && bool == 0)
+	{
+		printf("%f : %d\n", sprites[it].distance, sprites[it].ordre);
+	}
     while (++i < amount)
     {
         while (++j < amount)
         {
             if (sprites[i].distance > sprites[j].distance)
-            ft_swap(&(sprites[i].distance), &(sprites[j].distance));
+            ft_swap(&(sprites[i]), &(sprites[j]));
         }
         j = i;
     }
   // restore in reverse order to go from farthest to nearest   
-    for(int i = 0; i < amount; i++) {
+	for(int f = 0; f < amount; f++)
     {
-      dist[i] = sprites[amount - i - 1].distance;
-      order[i] = sprites[amount - i - 1].ordre;
+      pmlx->sp.spriteDistance[f] = sprites[amount - f - 1].distance;
+      pmlx->sp.spriteOrder[f] = sprites[amount - f - 1].ordre;
     }
-  }
+	bool = 1;
 }
 
 void    ft_sprites(t_pmlx *pmlx)
 {
 	for(int i = 0; i < numSprites; i++)
 	{
-		spriteOrder[i] = i;
-		spriteDistance[i] = ((pmlx->pl.posX - sprite[i].x) * (pmlx->pl.posX - sprite[i].x) + (pmlx->pl.posY - sprite[i].y) * (pmlx->pl.posY - sprite[i].y)); //sqrt not taken, unneeded
+		pmlx->sp.spriteOrder[i] = i;
+		pmlx->sp.spriteDistance[i] = ((pmlx->pl.posX - sprite[i].x) * (pmlx->pl.posX - sprite[i].x) + (pmlx->pl.posY - sprite[i].y) * (pmlx->pl.posY - sprite[i].y)); //sqrt not taken, unneeded
 	}
-	sortSprites(spriteOrder, spriteDistance, numSprites);
-
+	sortSprites(pmlx, numSprites);
+	static int bool = 0;
+	int it = -1;
+	while (++it < 19 && bool == 0)
+	{
+		printf("%d : %f\n", pmlx->sp.spriteOrder[it], pmlx->sp.spriteDistance[it]);
+	}
+	bool = 1;
 	//after sorting the sprites, do the projection and draw them
 	for(int i = 0; i < numSprites; i++)
 	{
 		//translate sprite position to relative to camera
-		pmlx->sp.spriteX = sprite[spriteOrder[i]].x - pmlx->pl.posX;
-		pmlx->sp.spriteY = sprite[spriteOrder[i]].y - pmlx->pl.posY;
+		pmlx->sp.spriteX = sprite[pmlx->sp.spriteOrder[i]].x - pmlx->pl.posX;
+		pmlx->sp.spriteY = sprite[pmlx->sp.spriteOrder[i]].y - pmlx->pl.posY;
 
 		pmlx->sp.invDet = 1.0 / (pmlx->pl.planeX * pmlx->pl.dirY - pmlx->pl.dirX * pmlx->pl.planeY); //required for correct matrix multiplication
 
 		pmlx->sp.transformX = pmlx->sp.invDet * (pmlx->pl.dirY * pmlx->sp.spriteX - pmlx->pl.dirX * pmlx->sp.spriteY);
-		pmlx->sp.transformY = pmlx->sp.invDet * (-pmlx->pl.planeY * pmlx->sp.spriteX + pmlx->pl.planeX * pmlx->sp.spriteY); //this is actually the depth inside the screen, that what Z is in 3D, the distance of sprite to player, matching sqrt(spriteDistance[i])
+		pmlx->sp.transformY = pmlx->sp.invDet * (-pmlx->pl.planeY * pmlx->sp.spriteX + pmlx->pl.planeX * pmlx->sp.spriteY); //this is actually the depth inside the screen, that what Z is in 3D, the distance of sprite to player, matching sqrt(pmlx->sp.spriteDistance[i])
 
 		pmlx->sp.spriteScreenX = (int)((screenWidth / 2) * (1 + pmlx->sp.transformX / pmlx->sp.transformY));
 
@@ -132,11 +141,11 @@ void    ft_sprites(t_pmlx *pmlx)
 					int d = (y-pmlx->sp.vMoveScreen) * 256 - screenHeight * 128 + pmlx->sp.spriteHeight * 128; //256 and 128 factors to avoid floats
 					int texY = ((d * texHeight) / pmlx->sp.spriteHeight) / 256;
 					t_color color;
-					color.R = pmlx->img.image[sprite[spriteOrder[i]].texture][(texWidth * texY + pmlx->sp.texX) * 4 + RED_COMP]; //get current color from the texture
-					color.G = pmlx->img.image[sprite[spriteOrder[i]].texture][(texWidth * texY + pmlx->sp.texX) * 4 + GREEN_COMP]; //get current color from the texture
-					color.B = pmlx->img.image[sprite[spriteOrder[i]].texture][(texWidth * texY + pmlx->sp.texX) * 4 + BLUE_COMP]; //get current color from the texture
+					color.R = pmlx->img.image[sprite[pmlx->sp.spriteOrder[i]].texture][(texWidth * texY + pmlx->sp.texX) * 4 + RED_COMP]; //get current color from the texture
+					color.G = pmlx->img.image[sprite[pmlx->sp.spriteOrder[i]].texture][(texWidth * texY + pmlx->sp.texX) * 4 + GREEN_COMP]; //get current color from the texture
+					color.B = pmlx->img.image[sprite[pmlx->sp.spriteOrder[i]].texture][(texWidth * texY + pmlx->sp.texX) * 4 + BLUE_COMP]; //get current color from the texture
                     //printf("R : %d\nG : %d\nB : %d\n", color.R, color.G, color.B);
-					if(color.R != 0 && color.G != 0 && color.B != 0)
+					if(!(color.R == 0 && color.G == 0 && color.B == 0))
 					{
 						pmlx->mlx.data_addr[(y * screenWidth + stripe) * 4 + RED_COMP] = color.R;//paint pixel if it isn't black, black is the invisible color
 						pmlx->mlx.data_addr[(y * screenWidth + stripe) * 4 + GREEN_COMP] = color.G;

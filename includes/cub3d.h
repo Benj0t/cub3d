@@ -20,6 +20,7 @@
 #define LAPIS ..\images\lapis.png
 #define WOOD ..\images\wood.png
 
+#define numSprites 19
 #define RED_COMP 2
 #define GREEN_COMP 1
 #define BLUE_COMP 0
@@ -138,6 +139,8 @@ typedef struct s_img
 
 typedef struct	s_sprite
 {
+	int			spriteOrder[numSprites];
+	double		spriteDistance[numSprites];
 	double		ZBuffer[screenWidth];
 	double		spriteX;
 	double		spriteY;
@@ -185,9 +188,8 @@ typedef struct s_coords_sprite
 }				t_coords_sprite;
 
 void    ft_sprites(t_pmlx *pmlx);
-void    sortSprites(int* order, double* dist, int amount);
-void    ft_swap(double *a, double *b);
-void    ft_sprites(t_pmlx *pmlx);
+void    sortSprites(t_pmlx *pmlx, int amount);
+void    ft_swap(t_vector *a, t_vector *b);
 t_color	ft_light_blue();
 t_color	ft_gray();
 t_color	ft_red();
