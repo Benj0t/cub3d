@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../../includes/cub3d.h"
 
 char	*ft_strdup(const char *src)
 {

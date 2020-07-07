@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "../../includes/parsing.h"
 
 int    store_res(t_parse *s)
 {
@@ -11,20 +11,16 @@ int    store_res(t_parse *s)
 
 int    store_f(t_parse *s)
 {
-    if ((!tab_is_rgb(s->tab)) || tab_len(s->tab) != 4)
+    if ((!tab_is_rgb(s->tab)) || tab_len(s->tab) != 2)
         return (0);
-    s->floor.R = ft_atoi(s->tab[1]);
-    s->floor.G = ft_atoi(s->tab[2]);
-    s->floor.B = ft_atoi(s->tab[3]);
+    put_rgb(&(s->floor), s->tab);
     return (1);
 }
 
 int    store_c(t_parse *s)
 {
-    if ((!tab_is_rgb(s->tab)) || tab_len(s->tab) != 4)
+    if ((!tab_is_rgb(s->tab)) || tab_len(s->tab) != 2)
         return (0);
-    s->ceil.R = ft_atoi(s->tab[1]);
-    s->ceil.G = ft_atoi(s->tab[2]);
-    s->ceil.B = ft_atoi(s->tab[3]);
+    put_rgb(&(s->ceil), s->tab);
     return (1);
 }

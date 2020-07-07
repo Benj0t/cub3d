@@ -31,7 +31,7 @@ typedef struct		s_struct
 int					ft_strlen(char *str);
 int					get_next_line(int fd, char **line);
 char				*ft_calloc(int count, int size);
-char				*ft_strdup(char *src, int len);
+char				*gnl_strdup(char *src, int len);
 char				*ft_substr(char *s, unsigned int start,
 					size_t len, int bool);
 char				*ft_strjoin(char *s1, char *s2, int len);

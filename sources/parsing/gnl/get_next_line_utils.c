@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../../includes/get_next_line.h"
 
 int		ft_strlen(char *str)
 {
@@ -24,7 +24,7 @@ int		ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strdup(char *src, int len)
+char	*gnl_strdup(char *src, int len)
 {
 	char	*str;
 	int		i;

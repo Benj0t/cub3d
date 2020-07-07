@@ -1,9 +1,9 @@
 R 500 600
-NO ../images/redbrick.xpm
-SO ../images/wood.xpm
-WE ../images/colorstone.xpm
-EA ../images/wood.xpm
-S ../images/greystone.xpm
+NO ../../images/redbrick.xpm
+SO ../../images/wood.xpm
+WE ../../images/colorstone.xpm
+EA ../../images/wood.xpm
+S ../../images/greystone.xpm
 F 209,209,209
 C 23,236,255
 
