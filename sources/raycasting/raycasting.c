@@ -214,8 +214,8 @@ int main()//(int argc, char *argv[])
 	pmlx.pl.planeX = 0;
 	pmlx.pl.planeY = 0.66; //the 2d raycaster version of camera plane
 
-	pmlx.pl.moveSpeed = 0.25;
-	pmlx.pl.rotSpeed = 0.1;
+	pmlx.pl.moveSpeed = 0.1;
+	pmlx.pl.rotSpeed = 0.05;
 	pmlx.mlx.mlx_ptr = mlx_init();
 	pmlx.mlx.win_ptr = mlx_new_window(pmlx.mlx.mlx_ptr, screenWidth, screenHeight, "Cub3D");
 	pmlx.mlx.img_ptr = mlx_new_image(pmlx.mlx.mlx_ptr, screenWidth, screenHeight);

@@ -69,7 +69,7 @@ char	*ft_calloc(int count, int size)
 	return (ret);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len, int bool)
+char	*gnl_substr(char *s, unsigned int start, size_t len, int bool)
 {
 	size_t	i;
 	int		leng;
@@ -91,7 +91,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len, int bool)
 	return (str);
 }
 
-char	*ft_strjoin(char *s1, char *s2, int len)
+char	*gnl_strjoin(char *s1, char *s2, int len)
 {
 	char	*pt;
 	int		i;

@@ -12,6 +12,25 @@
 
 #include "../../../includes/cub3d.h"
 
+char	*ft_strdup_N(const char *src)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	while (src[i])
+		i++;
+	if (!(str = (char *)malloc(sizeof(char) * (i + 2))))
+		return (NULL);
+	i = -1;
+	while (src[++i])
+		str[i] = src[i];
+	str[i++] = '\n';
+	str[i] = '\0';
+	return (str);
+}
+
+
 char	*ft_strdup(const char *src)
 {
 	char	*str;

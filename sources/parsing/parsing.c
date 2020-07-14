@@ -9,7 +9,6 @@ void    ft_putstr(char *str)
     {
         write(1, &(str[i++]), 1);
     }
-    write(1, "\n", 1);
 }
 
 int     get_arg(t_parse *s)
@@ -22,6 +21,8 @@ int     get_arg(t_parse *s)
     }
     write(1, "\n", 1);
     */
+    if (s->tab[0] == NULL)
+        return (0);
     if (s->tab[0][0] == 'R')
         return (store_res(s));
     else if (s->tab[0][0] == 'N' && s->tab[0][1] == 'O')
@@ -56,25 +57,51 @@ void    free_tab(char **tab)
     free(tab);
 }
 
-
+void    add_line(t_parse *s)
+{
+    s->map_join = ft_strdup_N(s->line);
+    free(s->line);
+    //ft_putstr(s->map_join);
+    while ((get_next_line(s->fd, &(s->line))) > 0)
+    {
+        if (ft_strlen(s->line) > 0)
+        {
+            s->tmp = ft_strjoin_N(s->map_join, s->line, (ft_strlen(s->map_join) + ft_strlen(s->line)));
+            free(s->map_join);
+            s->map_join = ft_strdup(s->tmp);
+            free(s->tmp);
+            free(s->line);
+        }
+    }
+    if (ft_strlen(s->line) > 1)
+    {
+        s->tmp = ft_strjoin(s->map_join, s->line, (ft_strlen(s->map_join) + ft_strlen(s->line)));
+        free(s->map_join);
+        s->map_join = ft_strdup(s->tmp);
+        free(s->tmp);
+    }
+}
 
 int ft_parse(t_parse *s, char *filename)
 {
-    char    *line;
-
     if ((s->fd = open(filename, O_RDONLY)) <= 0)
         return (0);
-    while ((get_next_line(s->fd, &line)) > 0)
+    s->tmp = NULL;
+    while ((get_next_line(s->fd, &(s->line))) > 0)
     {
-        //printf("%s\n", line);
-        if ((s->tab = ft_split(line)) == NULL)
+        if ((s->tab = ft_split(s->line)) == NULL)
+            free(s->line);
+        else
         {
-            free(line);
-            return (0);
+            if (s->tab[0][0] == '1')
+                add_line(s);
+            else
+            {
+                get_arg(s);
+            } 
+            free_tab(s->tab);
+            free(s->line);
         }
-        get_arg(s);
-        free_tab(s->tab);
-        free(line);
     }
     return (1);
 }
@@ -82,10 +109,15 @@ int ft_parse(t_parse *s, char *filename)
 int main(int argc, char **argv)
 {
     t_parse s;
+    s = init_parse();
     if (argc != 2)
         return (0);
-    
     ft_parse(&s, argv[1]);
+    create_map(&s);
+    printf("Valide ? %d\n", valid_map(&s));
+
+}
+    /*
     printf("NO %s\n", s.NO);
     printf("SO %s\n", s.SO);
     printf("WE %s\n", s.WE);
@@ -99,5 +131,5 @@ int main(int argc, char **argv)
     printf("C.r %d\n", s.ceil.R);
     printf("C.g %d\n", s.ceil.G);
     printf("C.b %d\n", s.ceil.B);
-
-}
+    printf("MAP:\n%s", s.map_join);
+    */

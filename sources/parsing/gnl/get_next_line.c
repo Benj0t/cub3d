@@ -58,9 +58,9 @@ static int		ft_ret(t_struct *v, char **line, int fd, int bool)
 	if (bool == 1 || bool == 2)
 	{
 		v->len = v->len - v->pos;
-		if (!(*line = ft_substr(v->s[fd], 0, v->pos, 0)))
+		if (!(*line = gnl_substr(v->s[fd], 0, v->pos, 0)))
 			return (ft_free(line, v, fd));
-		if (!(v->tmp = ft_substr(v->s[fd], v->pos + 1, v->len, 1)))
+		if (!(v->tmp = gnl_substr(v->s[fd], v->pos + 1, v->len, 1)))
 			return (ft_free(line, v, fd));
 		if (bool == 2 && !(v->s[fd] = gnl_strdup(v->tmp, v->len)))
 			return (ft_free(line, v, fd));
@@ -78,14 +78,14 @@ static int		my_gnl(int fd, char **line, t_struct *v)
 	{
 		v->buffer[v->ret] = '\0';
 		v->len += v->ret;
-		if (!(v->tmp = ft_strjoin(v->s[fd], v->buffer, v->len)))
+		if (!(v->tmp = gnl_strjoin(v->s[fd], v->buffer, v->len)))
 			return (ft_free(line, v, fd));
 		if (!(v->s[fd] = gnl_strdup(v->tmp, v->len)))
 			return (ft_free(line, v, fd));
 	}
 	v->len += v->ret;
 	v->buffer[v->ret] = '\0';
-	if (!(v->tmp = ft_strjoin(v->s[fd], v->buffer, v->len)))
+	if (!(v->tmp = gnl_strjoin(v->s[fd], v->buffer, v->len)))
 		return (ft_free(line, v, fd));
 	if (!(v->s[fd] = gnl_strdup(v->tmp, v->len)))
 		return (ft_free(line, v, fd));

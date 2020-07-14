@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../../includes/parsing.h"
 
 void ft_fill(char *tab, char *str, int n, int *i)
 {
@@ -76,6 +76,8 @@ char **ft_split(char *str)
     int tmp2;
     char **tab;
 
+    if (!str || ft_strlen(str) == 0)
+        return (NULL);
     tmp = 0;
     tmp2 = 0;
     i=0;

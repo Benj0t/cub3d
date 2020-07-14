@@ -1,8 +1,19 @@
 #include "../../includes/parsing.h"
 
+int     find_char (char *str, char c)
+{
+    int i;
 
+    i = 0;
+    while (str[i])
+    {
+        if (str[i++] == c)
+            return (1);
+    }
+    return (0);
+}
 
-int tab_len(char **tab)
+int     tab_len(char **tab)
 {
     int i;
 
