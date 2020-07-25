@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/07/07 00:19:11 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/07/25 15:23:59 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 //place the example code below here:
 void	dda(t_ray *ray, t_pmlx *pmlx)
 {
-	//printf("Bonsoir");
 	while (ray->hit == 0)
 	{
 		//jump to next map square, OR in x-direction, OR in y-direction
