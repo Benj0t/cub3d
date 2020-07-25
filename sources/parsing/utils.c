@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "cub3d.h"
 
 int     find_char (char *str, char c)
 {

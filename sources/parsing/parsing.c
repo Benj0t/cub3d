@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "cub3d.h"
 
 void    ft_putstr(char *str)
 {
@@ -11,34 +11,26 @@ void    ft_putstr(char *str)
     }
 }
 
-int     get_arg(t_parse *s)
+int     get_arg(t_pmlx *pmlx)
 {
-    /*
-    int i = 0;
-    while (s->tab[i])
-    {
-        ft_putstr(s->tab[i++]);
-    }
-    write(1, "\n", 1);
-    */
-    if (s->tab[0] == NULL)
+    if (pmlx->s.tab[0] == NULL)
         return (0);
-    if (s->tab[0][0] == 'R')
-        return (store_res(s));
-    else if (s->tab[0][0] == 'N' && s->tab[0][1] == 'O')
-        return (store_no(s));
-    else if (s->tab[0][0] == 'S' && s->tab[0][1] == 'O')
-        return (store_so(s));
-    else if (s->tab[0][0] == 'W' && s->tab[0][1] == 'E')
-        return (store_we(s));
-    else if (s->tab[0][0] == 'E' && s->tab[0][1] == 'A')
-        return (store_ea(s));
-    else if (s->tab[0][0] == 'S')
-        return (store_s(s));
-    else if (s->tab[0][0] == 'F')
-        return (store_f(s));
-    else if (s->tab[0][0] == 'C')
-        return (store_c(s));
+    if (pmlx->s.tab[0][0] == 'R')
+        return (store_res(pmlx));
+    else if (pmlx->s.tab[0][0] == 'N' && pmlx->s.tab[0][1] == 'O')
+        return (store_no(pmlx));
+    else if (pmlx->s.tab[0][0] == 'S' && pmlx->s.tab[0][1] == 'O')
+        return (store_so(pmlx));
+    else if (pmlx->s.tab[0][0] == 'W' && pmlx->s.tab[0][1] == 'E')
+        return (store_we(pmlx));
+    else if (pmlx->s.tab[0][0] == 'E' && pmlx->s.tab[0][1] == 'A')
+        return (store_ea(pmlx));
+    else if (pmlx->s.tab[0][0] == 'S')
+        return (store_s(pmlx));
+    else if (pmlx->s.tab[0][0] == 'F')
+        return (store_f(pmlx));
+    else if (pmlx->s.tab[0][0] == 'C')
+        return (store_c(pmlx));
     else
     {
         return(0);
@@ -57,65 +49,139 @@ void    free_tab(char **tab)
     free(tab);
 }
 
-void    add_line(t_parse *s)
+void    add_line(t_pmlx *pmlx)
 {
-    s->map_join = ft_strdup_N(s->line);
-    free(s->line);
-    //ft_putstr(s->map_join);
-    while ((get_next_line(s->fd, &(s->line))) > 0)
+    pmlx->s.map_join = ft_strdup_N(pmlx->s.line);
+    free(pmlx->s.line);
+    while ((get_next_line(pmlx->s.fd, &(pmlx->s.line))) > 0)
     {
-        if (ft_strlen(s->line) > 0)
+        if (ft_strlen(pmlx->s.line) > 0)
         {
-            s->tmp = ft_strjoin_N(s->map_join, s->line, (ft_strlen(s->map_join) + ft_strlen(s->line)));
-            free(s->map_join);
-            s->map_join = ft_strdup(s->tmp);
-            free(s->tmp);
-            free(s->line);
+            pmlx->s.tmp = ft_strjoin_N(pmlx->s.map_join, pmlx->s.line, (ft_strlen(pmlx->s.map_join) + ft_strlen(pmlx->s.line)));
+            free(pmlx->s.map_join);
+            pmlx->s.map_join = ft_strdup(pmlx->s.tmp);
+            free(pmlx->s.tmp);
+            free(pmlx->s.line);
         }
     }
-    if (ft_strlen(s->line) > 1)
+    if (ft_strlen(pmlx->s.line) > 1)
     {
-        s->tmp = ft_strjoin(s->map_join, s->line, (ft_strlen(s->map_join) + ft_strlen(s->line)));
-        free(s->map_join);
-        s->map_join = ft_strdup(s->tmp);
-        free(s->tmp);
+        pmlx->s.tmp = ft_strjoin(pmlx->s.map_join, pmlx->s.line, (ft_strlen(pmlx->s.map_join) + ft_strlen(pmlx->s.line)));
+        free(pmlx->s.map_join);
+        pmlx->s.map_join = ft_strdup(pmlx->s.tmp);
+        free(pmlx->s.tmp);
     }
 }
 
-int ft_parse(t_parse *s, char *filename)
+int ft_parse(t_pmlx *pmlx, char *filename)
 {
-    if ((s->fd = open(filename, O_RDONLY)) <= 0)
+    if ((pmlx->s.fd = open(filename, O_RDONLY)) <= 0)
         return (0);
-    s->tmp = NULL;
-    while ((get_next_line(s->fd, &(s->line))) > 0)
+    pmlx->s.tmp = NULL;
+    while ((get_next_line(pmlx->s.fd, &(pmlx->s.line))) > 0)
     {
-        if ((s->tab = ft_split(s->line)) == NULL)
-            free(s->line);
+        if ((pmlx->s.tab = ft_split(pmlx->s.line)) == NULL)
+            free(pmlx->s.line);
         else
         {
-            if (s->tab[0][0] == '1')
-                add_line(s);
+            if (pmlx->s.tab[0][0] == '1')
+                add_line(pmlx);
             else
             {
-                get_arg(s);
+                get_arg(pmlx);
             } 
-            free_tab(s->tab);
-            free(s->line);
+            free_tab(pmlx->s.tab);
+            free(pmlx->s.line);
         }
     }
     return (1);
 }
 
+int get_pos(t_pmlx *pmlx)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (pmlx->s.cmap[j])
+    {
+        while (pmlx->s.cmap[j][i])
+        {
+            if (find_char("NESW", pmlx->s.cmap[j][i]))
+            {
+                pmlx->s.dir = pmlx->s.cmap[j][i];
+                pmlx->s.cmap[j][i] = '0';
+                pmlx->pl.posX = j;
+                pmlx->pl.posY = i;
+                return (1);
+            }
+            i++;
+        }
+        i = 0;
+        j++;
+    }
+    return (0);
+}
+
+int get_char(char c)
+{
+    if (c == ' ')
+        return (32);
+    if (c == '0')
+        return (0);
+    if (c == '1')
+        return (1);
+    return (-1);
+}
+
+int convert_map(t_pmlx *pmlx)
+{
+    int len;
+    int height;
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    height = tab_len(pmlx->s.cmap);
+    if (!(pmlx->s.map = (int **)malloc(sizeof(int *) * (height + 1))))
+        return (0);
+    pmlx->s.map[height] = NULL;
+    while (i < height)
+    {
+        len = ft_strlen(pmlx->s.cmap[i]);
+        if (!(pmlx->s.map[i] = (int *)malloc(sizeof(int) * (len + 1))))
+            return (0);
+        pmlx->s.map[i][len] = '\0';
+        while (j < len)
+        {
+            pmlx->s.map[i][j] = get_char(pmlx->s.cmap[i][j]);
+            j++;
+        }
+        j = 0;
+        i++;
+    }
+    return (1);
+}
+// SPRITES COO = 2 dans la cmap // LISTE CHAINEES
+// PLAYER COO | S E O N > delete // DONE
+// SOLVE RAYCASTING PROBLEM
+
 int main(int argc, char **argv)
 {
-    t_parse s;
-    s = init_parse();
+    t_pmlx pmlx;
+    pmlx.s = init_parse();
     if (argc != 2)
         return (0);
-    ft_parse(&s, argv[1]);
-    create_map(&s);
-    printf("Valide ? %d\n", valid_map(&s));
-
+    if (!(ft_parse(&pmlx, argv[1])))
+        return (0);
+    if (!(create_map(&pmlx)))
+        return (0);
+    if (valid_map(&pmlx) || (!get_pos(&pmlx)) || (!convert_map(&pmlx)))
+        return (0);
+    raycast(&pmlx);
+    
 }
     /*
     printf("NO %s\n", s.NO);
@@ -131,5 +197,5 @@ int main(int argc, char **argv)
     printf("C.r %d\n", s.ceil.R);
     printf("C.g %d\n", s.ceil.G);
     printf("C.b %d\n", s.ceil.B);
-    printf("MAP:\n%s", s.map_join);
+    printf("cMAP:\n%s", s.cmap_join);
     */

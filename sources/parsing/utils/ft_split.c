@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parsing.h"
+#include "../../../includes/cub3d.h"
 
 void ft_fill(char *tab, char *str, int n, int *i)
 {

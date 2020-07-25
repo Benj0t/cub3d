@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "cub3d.h"
 
 void    hor_check(char **tab, t_w_check *wall, int y, int x)
 {
@@ -52,19 +52,19 @@ int     verif_pos(char **tab, int y, int x)
     return (0);
 }
 
-int     is_map_closed(t_parse *s)
+int     is_map_closed(t_pmlx *pmlx)
 {
     int i;
     int j;
 
     i = 0;
     j = 0;
-    while (s->map[j])
+    while (pmlx->s.cmap[j])
     {
-        while (s->map[j][i])
+        while (pmlx->s.cmap[j][i])
         {
-            if (s->map[j][i] == '0')
-                if (verif_pos(s->map, j, i))
+            if (pmlx->s.cmap[j][i] == '0')
+                if (verif_pos(pmlx->s.cmap, j, i))
                     return (1);
             i++;
         }
@@ -74,20 +74,20 @@ int     is_map_closed(t_parse *s)
     return (0);
 }
 
-int     auth_char(t_parse *s)
+int     auth_char(t_pmlx *pmlx)
 {
     int i;
     int j;
     char *str;
 
-    str = "012NSEW ";
+    str = "012NSEWO ";
     i = 0;
     j = 0;
-    while (s->map[j])
+    while (pmlx->s.cmap[j])
     {
-        while (s->map[j][i])
+        while (pmlx->s.cmap[j][i])
         {
-            if (!find_char(str, s->map[j][i]))
+            if (!find_char(str, pmlx->s.cmap[j][i]))
                 return (1);
             i++;
         }
@@ -97,12 +97,14 @@ int     auth_char(t_parse *s)
     return (0);
 }
 
-int     valid_map(t_parse *s)
+int     valid_map(t_pmlx *pmlx)
 {
     int ret;
 
-    ret = auth_char(s);
+    ret = auth_char(pmlx);
+    ft_putstr("auth OK\n");
     if (!ret)
-        ret = is_map_closed(s);
+        ret = is_map_closed(pmlx);
+    ft_putstr("valid_map OK\n");
     return (ret);
 }

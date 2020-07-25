@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "cub3d.h"
 
 static int     count_n(char *str)
 {
@@ -13,7 +13,7 @@ static int     count_n(char *str)
     return (n);
 }
 
-int     create_map(t_parse *s)
+int     create_map(t_pmlx *pmlx)
 {
     int n;
     int i;
@@ -24,23 +24,23 @@ int     create_map(t_parse *s)
     i = -1;
     j = 0;
     start = 0;
-    n = count_n(s->map_join);
+    n = count_n(pmlx->s.map_join);
     printf("%d\n", n);
-    if (!(s->map = (char **)malloc(sizeof(char *) * (n + 1))))
+    if (!(pmlx->s.cmap = (char **)malloc(sizeof(char *) * (n + 1))))
         return (0);
-    s->map[n] = NULL;
+    pmlx->s.cmap[n] = NULL;
     while (j < n)
     {
         start = ++i;
-        while (s->map_join[i] != '\n' || s->map_join[i] == '\r')
+        while (pmlx->s.map_join[i] != '\n' || pmlx->s.map_join[i] == '\r')
             i++;
         len = i - start;
-        s->map[j++] = ft_substr(s->map_join, start, len);
+        pmlx->s.cmap[j++] = ft_substr(pmlx->s.map_join, start, len);
     }
     int f = 0;
-    while (s->map[f])
+    while (pmlx->s.cmap[f])
     {
-        printf("%s\n", s->map[f++]);
+        printf("%s\n", pmlx->s.cmap[f++]);
     }
     return (1);
 }

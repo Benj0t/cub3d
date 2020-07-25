@@ -27,7 +27,21 @@ FILES =		./sources/raycasting/raycasting\
 			./sources/raycasting/deal_key\
 			./sources/raycasting/move\
 			./sources/raycasting/sprites\
-			./sources/raycasting/texture
+			./sources/raycasting/texture\
+			./sources/parsing/parsing\
+			./sources/parsing/arg_1\
+			./sources/parsing/arg_2\
+			./sources/parsing/utils\
+			./sources/parsing/gnl/get_next_line\
+			./sources/parsing/gnl/get_next_line_utils\
+			./sources/parsing/utils/ft_strdup\
+			./sources/parsing/utils/ft_split\
+			./sources/parsing/utils/ft_strjoin_N\
+			./sources/parsing/utils/ft_substr\
+			./sources/parsing/valid_map\
+			./sources/parsing/init\
+			./sources/parsing/utils/ft_atoi\
+			./sources/parsing/map\
 
 SRCS = $(addsuffix .c, $(FILES))
 OBJ = $(SRCS:.c=.o)
@@ -71,4 +85,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: 	all clean re fclean
+.PHONY: all clean re fclean

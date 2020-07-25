@@ -1,4 +1,4 @@
-#include "../../../includes/parsing.h"
+#include "../../../includes/cub3d.h"
 
 char	*ft_substr(char *s, int start, int len)
 {

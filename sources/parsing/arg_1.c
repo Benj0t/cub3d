@@ -1,26 +1,26 @@
-#include "../../includes/parsing.h"
+#include "cub3d.h"
 
-int    store_res(t_parse *s)
+int    store_res(t_pmlx *pmlx)
 {
-    if ((!tab_is_digit(s->tab)) || tab_len(s->tab) != 3)
+    if ((!tab_is_digit(pmlx->s.tab)) || tab_len(pmlx->s.tab) != 3)
         return (0);
-    s->R.x = ft_atoi(s->tab[1]);
-    s->R.y = ft_atoi(s->tab[2]);
+    pmlx->s.R.x = ft_atoi(pmlx->s.tab[1]);
+    pmlx->s.R.y = ft_atoi(pmlx->s.tab[2]);
     return (1);
 }
 
-int    store_f(t_parse *s)
+int    store_f(t_pmlx *pmlx)
 {
-    if ((!tab_is_rgb(s->tab)) || tab_len(s->tab) != 2)
+    if ((!tab_is_rgb(pmlx->s.tab)) || tab_len(pmlx->s.tab) != 2)
         return (0);
-    put_rgb(&(s->floor), s->tab);
+    put_rgb(&(pmlx->s.floor), pmlx->s.tab);
     return (1);
 }
 
-int    store_c(t_parse *s)
+int    store_c(t_pmlx *pmlx)
 {
-    if ((!tab_is_rgb(s->tab)) || tab_len(s->tab) != 2)
+    if ((!tab_is_rgb(pmlx->s.tab)) || tab_len(pmlx->s.tab) != 2)
         return (0);
-    put_rgb(&(s->ceil), s->tab);
+    put_rgb(&(pmlx->s.ceil), pmlx->s.tab);
     return (1);
 }
