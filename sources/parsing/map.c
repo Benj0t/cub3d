@@ -37,7 +37,6 @@ int     create_map(t_pmlx *pmlx)
     j = 0;
     start = 0;
     n = count_n(pmlx->s.map_join);
-    printf("%d\n", n);
     if (!(pmlx->s.cmap = (char **)malloc(sizeof(char *) * (n + 1))))
         return (0);
     pmlx->s.cmap[n] = NULL;
@@ -48,11 +47,6 @@ int     create_map(t_pmlx *pmlx)
             i++;
         len = i - start;
         pmlx->s.cmap[j++] = ft_substr(pmlx->s.map_join, start, len);
-    }
-    int f = 0;
-    while (pmlx->s.cmap[f])
-    {
-        printf("%s\n", pmlx->s.cmap[f++]);
     }
     return (1);
 }

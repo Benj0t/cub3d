@@ -44,12 +44,12 @@ typedef struct	s_vec
 	int	 y;
 }				t_vec;
 
-typedef struct	s_list
+typedef struct	s_texture
 {
-	t_vec		vec;
-	struct		s_list *next;
-}				t_list;
-
+	int		x;
+	int		y;
+	int		texture;
+}				t_texture;
 
 typedef struct	s_w_check
 {
@@ -69,26 +69,27 @@ typedef struct	s_color
 
 typedef struct	s_parse
 {
-	t_list	*list;
-	int		tabHeight;
-	char	dir;
-	char	*f_line;
-	char	*tmp;
-	char	*map_join;
-	char	**cmap;
-	int		**map;
-	char	*line;
-	char	**tab;
-	int	 fd;
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	char	*S;
-	char	*C;
-	t_color floor;
-	t_color ceil;
-	t_vec	R;
+	int			sprite_num;
+	t_texture	*list;
+	int			tabHeight;
+	char		dir;
+	char		*f_line;
+	char		*tmp;
+	char		*map_join;
+	char		**cmap;
+	int			**map;
+	char		*line;
+	char		**tab;
+	int	 		fd;
+	char		*NO;
+	char		*SO;
+	char		*WE;
+	char		*EA;
+	char		*S;
+	char		*C;
+	t_color 	floor;
+	t_color 	ceil;
+	t_vec		R;
 
 }				t_parse;
 
@@ -288,6 +289,4 @@ void		pos_east(t_pmlx *pmlx);
 void		pos_south(t_pmlx *pmlx);
 void		pos_west(t_pmlx *pmlx);
 void		pos_dealer(t_pmlx *pmlx, char c);
-void		ft_lstadd_front(t_list **alst, t_list *new);
-t_list		*ft_lstnew(int y, int x);
 #endif

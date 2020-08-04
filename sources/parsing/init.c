@@ -42,6 +42,7 @@ t_parse     init_parse()
 {
     t_parse s;
 
+    s.sprite_num = 0;
     s.NO = NULL;
     s.SO = NULL;
     s.WE = NULL;

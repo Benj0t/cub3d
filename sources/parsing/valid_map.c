@@ -66,21 +66,29 @@ int	 verif_pos(char **tab, int y, int x)
 
 int	 map_closed(t_pmlx *pmlx, int y, int x)
 {
-	if (y < 0 || x < 0 || x > pmlx->s.tabHeight || y > ft_strlen(pmlx->s.cmap))
-		return (0);
+	/*
+	ft_putstr("\n");
+	write(1, &(pmlx->s.cmap[x][y]), 1);
+	ft_putstr("\n");
+	*/
+	if (y < 0 || x < 0 || x > pmlx->s.tabHeight || y >= ft_strlen(pmlx->s.cmap[x]))
+		exit(0);
 	if (find_char("O1S", pmlx->s.cmap[x][y]))
 		return (1);
+	if (pmlx->s.cmap[x][y] == '\0' || pmlx->s.cmap[x][y] == ' ')
+		exit(0);
 	if (pmlx->s.cmap[x][y] == '0')
 		pmlx->s.cmap[x][y] = 'O';
 	else if (pmlx->s.cmap[x][y] == '2')
 	{
-		lst_add_front(pmlx->s.list, ft_lstnew(y, x));
+		pmlx->s.sprite_num = pmlx->s.sprite_num + 1;
 		pmlx->s.cmap[x][y] = 'S';
 	}
 	map_closed(pmlx, y + 1, x);
 	map_closed(pmlx, y, x + 1);
 	map_closed(pmlx, y - 1, x);
 	map_closed(pmlx, y, x - 1);
+	return (1);
 }
 
 int	 auth_char(t_pmlx *pmlx)
@@ -111,9 +119,7 @@ int	 valid_map(t_pmlx *pmlx)
 	int ret;
 
 	ret = auth_char(pmlx);
-	ft_putstr("auth OK\n");
 	if (!ret)
-		ret = map_closed(pmlx);
-	ft_putstr("valid_map OK\n");
+		ret = map_closed(pmlx, pmlx->pl.posY, pmlx->pl.posX);
 	return (ret);
 }

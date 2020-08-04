@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	ft_putstr(char *str)
 {
@@ -115,7 +115,6 @@ void	set_pos(t_pmlx *pmlx, int j, int i)
 	pmlx->s.cmap[j][i] = '0';
 	pmlx->pl.posX = j;
 	pmlx->pl.posY = i;
-	pmlx->s.line = ft_lstnew(j, i);
 }
 
 int get_pos(t_pmlx *pmlx)
@@ -136,6 +135,7 @@ int get_pos(t_pmlx *pmlx)
 				set_pos(pmlx, j, i);
 				if (++bool > 1)
 					return (0);
+				printf("get_pos OK\n");
 				return (1);
 			}
 			i++;
@@ -184,12 +184,24 @@ int convert_map(t_pmlx *pmlx)
 		j = 0;
 		i++;
 	}
+	printf("Convert Map OK");
 	return (1);
 }
 // SPRITES COO = 2 dans la cmap // LISTE CHAINEES
 // PLAYER COO | S E O N > delete // DONE
 // SOLVE RAYCASTING PROBLEM
 
+/*
+int	sprites_tab(t_pmlx *pmlx)
+{
+	if (!(pmlx->s.list = (t_texture *)malloc(sizeof(t_texture) * (pmlx->s.sprite_num + 1))))
+		return (0);
+	while (get_index(pmlx))
+	{
+
+	}
+}
+*/
 int main(int argc, char **argv)
 {
 	t_pmlx pmlx;
@@ -201,7 +213,10 @@ int main(int argc, char **argv)
 	if (!(create_map(&pmlx)))
 		return (0);
 	pmlx.s.tabHeight = tab_len(pmlx.s.cmap);
-	if ((!convert_map(&pmlx)) || (!get_pos(&pmlx)) ||  valid_map(&pmlx))
+	if ((!convert_map(&pmlx)) || (!get_pos(&pmlx)) ||  !valid_map(&pmlx))
 		return (0);
+	printf("valid_mapped OK\n");
+	//if (!sprites_tab(&pmlx))
+	//	return (0);
 	raycast(&pmlx);
 }
