@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "cub3d.h"
 
 void	ft_putstr(char *str)
 {
@@ -154,6 +154,8 @@ int get_char(char c)
 		return (0);
 	if (c == '1')
 		return (1);
+	if (c == '2')
+		return (0);
 	return (-1);
 }
 
@@ -191,17 +193,36 @@ int convert_map(t_pmlx *pmlx)
 // PLAYER COO | S E O N > delete // DONE
 // SOLVE RAYCASTING PROBLEM
 
-/*
+
 int	sprites_tab(t_pmlx *pmlx)
 {
-	if (!(pmlx->s.list = (t_texture *)malloc(sizeof(t_texture) * (pmlx->s.sprite_num + 1))))
-		return (0);
-	while (get_index(pmlx))
-	{
+	int i;
+	int j;
+	int count;
 
+	count = 0;
+	j = 0;
+	i = 0;
+	if (!(pmlx->s.list = (t_vec *)malloc(sizeof(t_vec) * (pmlx->s.sprite_num + 1))))
+		return (0);
+	while (pmlx->s.cmap[i])
+	{
+		while (pmlx->s.cmap[i][j])
+			if (pmlx->s.cmap[i][j++] == 'S')
+			{
+				pmlx->s.list[count].x = i;
+				pmlx->s.list[count++].y = j - 1;
+			}
+		j = 0;
+		i++;
 	}
+	printf("count : %d | num %d \n", count, pmlx->s.sprite_num);
+	if (count != pmlx->s.sprite_num)
+		return (0);
+	return (1);
 }
-*/
+
+
 int main(int argc, char **argv)
 {
 	t_pmlx pmlx;
@@ -216,7 +237,7 @@ int main(int argc, char **argv)
 	if ((!convert_map(&pmlx)) || (!get_pos(&pmlx)) ||  !valid_map(&pmlx))
 		return (0);
 	printf("valid_mapped OK\n");
-	//if (!sprites_tab(&pmlx))
-	//	return (0);
+	if (!sprites_tab(&pmlx))
+		return (0);
 	raycast(&pmlx);
 }

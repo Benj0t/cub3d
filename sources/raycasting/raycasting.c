@@ -173,14 +173,25 @@ int	loop(t_pmlx *pmlx)
 // screemHeight
 // pmlx->s.R.x
 // pmlx->s.map
+
+int		ft_error(t_pmlx *pmlx)
+{
+	return (0);
+}
+
 int		raycast(t_pmlx *pmlx)//(int argc, char *argv[])
 {
+	printf("\n%d | %d\n", pmlx->s.list[0].x, pmlx->s.list[0].y );
 	init_player(pmlx);
 	init_mlx(pmlx);
+	if (init_sprite(pmlx) == 0)
+		return (ft_error(pmlx));
 	init_texture(pmlx);
 	mlx_hook(pmlx->mlx.win_ptr, KEYPRESS, KEYPRESSMASK, &deal_key_press, pmlx);
 	mlx_hook(pmlx->mlx.win_ptr, KEYRELEASE, KEYRELEASEMASK, &deal_key_release, pmlx);
 	mlx_loop_hook(pmlx->mlx.mlx_ptr, &loop, pmlx);
+	ft_putstr("loop_hook OK\n");
 	mlx_loop(pmlx->mlx.mlx_ptr);
+	ft_putstr("loop OK\n");
 	return (1);
 }

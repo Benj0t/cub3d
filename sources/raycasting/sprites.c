@@ -12,10 +12,7 @@
 
 #include "cub3d.h"
 
-//arrays used to sort the sprites
-t_coords_sprite sprite[numSprites] =
-{
-};
+//arrays used to sort the 
 
 void    ft_swap(t_vector *a, t_vector *b)
 {
@@ -56,18 +53,18 @@ void    sortSprites(t_pmlx *pmlx, int amount)
 
 void    ft_sprites(t_pmlx *pmlx, double ZBuffer[pmlx->s.R.x])
 {
-	for(int i = 0; i < numSprites; i++)
+	for(int i = 0; i < pmlx->s.sprite_num; i++)
 	{
 		pmlx->sp.spriteOrder[i] = i;
-		pmlx->sp.spriteDistance[i] = ((pmlx->pl.posX - sprite[i].x) * (pmlx->pl.posX - sprite[i].x) + (pmlx->pl.posY - sprite[i].y) * (pmlx->pl.posY - sprite[i].y)); //sqrt not taken, unneeded
+		pmlx->sp.spriteDistance[i] = ((pmlx->pl.posX - pmlx->s.list[i].x) * (pmlx->pl.posX - pmlx->s.list[i].x) + (pmlx->pl.posY - pmlx->s.list[i].y) * (pmlx->pl.posY - pmlx->s.list[i].y)); //sqrt not taken, unneeded
 	}
-	sortSprites(pmlx, numSprites);
+	sortSprites(pmlx, pmlx->s.sprite_num);
 	//after sorting the sprites, do the projection and draw them
-	for(int i = 0; i < numSprites; i++)
+	for(int i = 0; i < pmlx->s.sprite_num; i++)
 	{
 		//translate sprite position to relative to camera
-		pmlx->sp.spriteX = sprite[pmlx->sp.spriteOrder[i]].x - pmlx->pl.posX;
-		pmlx->sp.spriteY = sprite[pmlx->sp.spriteOrder[i]].y - pmlx->pl.posY;
+		pmlx->sp.spriteX = pmlx->s.list[pmlx->sp.spriteOrder[i]].x - pmlx->pl.posX;
+		pmlx->sp.spriteY = pmlx->s.list[pmlx->sp.spriteOrder[i]].y - pmlx->pl.posY;
 
 		pmlx->sp.invDet = 1.0 / (pmlx->pl.planeX * pmlx->pl.dirY - pmlx->pl.dirX * pmlx->pl.planeY); //required for correct matrix multiplication
 
@@ -104,19 +101,16 @@ void    ft_sprites(t_pmlx *pmlx, double ZBuffer[pmlx->s.R.x])
 			//2) it's on the screen (left)
 			//3) it's on the screen (right)
 			//4) ZBuffer, with perpendicular distance
-            //printf("%f, %d, %f\n", pmlx->sp.transformY, stripe, pmlx->sp.ZBuffer[stripe]);
             if(pmlx->sp.transformY > 0 && stripe > 0 && stripe < pmlx->s.R.x && pmlx->sp.transformY < ZBuffer[stripe])
 			{
-                //printf("Michel Forever Tonight\n");
 				for(int y = pmlx->sp.drawStartY; y < pmlx->sp.drawEndY; y++) //for every pixel of the current stripe
 				{
 					int d = (y-pmlx->sp.vMoveScreen) * 256 - pmlx->s.R.y * 128 + pmlx->sp.spriteHeight * 128; //256 and 128 factors to avoid floats
 					int texY = ((d * texHeight) / pmlx->sp.spriteHeight) / 256;
 					t_color color;
-					color.R = pmlx->img.image[sprite[pmlx->sp.spriteOrder[i]].texture][(texWidth * texY + pmlx->sp.texX) * 4 + RED_COMP]; //get current color from the texture
-					color.G = pmlx->img.image[sprite[pmlx->sp.spriteOrder[i]].texture][(texWidth * texY + pmlx->sp.texX) * 4 + GREEN_COMP]; //get current color from the texture
-					color.B = pmlx->img.image[sprite[pmlx->sp.spriteOrder[i]].texture][(texWidth * texY + pmlx->sp.texX) * 4 + BLUE_COMP]; //get current color from the texture
-                    //printf("R : %d\nG : %d\nB : %d\n", color.R, color.G, color.B);
+					color.R = pmlx->img.image[1][(texWidth * texY + pmlx->sp.texX) * 4 + RED_COMP]; //get current color from the texture
+					color.G = pmlx->img.image[1][(texWidth * texY + pmlx->sp.texX) * 4 + GREEN_COMP]; //get current color from the texture
+					color.B = pmlx->img.image[1][(texWidth * texY + pmlx->sp.texX) * 4 + BLUE_COMP]; //get current color from the texture
 					if(!(color.R == 0 && color.G == 0 && color.B == 0))
 					{
 						pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + RED_COMP] = color.R;//paint pixel if it isn't black, black is the invisible color

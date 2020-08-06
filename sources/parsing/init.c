@@ -20,15 +20,18 @@ void        init_mlx(t_pmlx *pmlx)
 	pmlx->mlx.data_addr = mlx_get_data_addr(pmlx->mlx.img_ptr, &(pmlx->mlx.bpp), &(pmlx->mlx.size_l), &(pmlx->mlx.endian));
 }
 
+int         init_sprite(t_pmlx *pmlx)
+{
+    if (!(pmlx->sp.spriteOrder = (int *)malloc(sizeof(int) * (pmlx->s.sprite_num))))
+        return (0);
+    if (!(pmlx->sp.spriteDistance = (double *)malloc(sizeof(double) * (pmlx->s.sprite_num))))
+        return (0);
+    return (1);
+}
+
 void        init_player(t_pmlx *pmlx)
 {
 	pmlx->bool_ESC = 0;
-    /*
-    N : x -1 y 0 P : y 0.66 x 0
-S : x 1 y 0 P : y -0.66 x 0
-E : x 0 y 1 P : y 0 x 0.66
-W : x 0 y -1 P : y 0 x -0.66
-    */
 	pmlx->pl.dirX = 0;
 	pmlx->pl.dirY = -1; //initial direction vector
 	pmlx->pl.planeX = -0.66;

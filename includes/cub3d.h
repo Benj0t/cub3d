@@ -20,7 +20,7 @@
 #define LAPIS ..\images\lapis.png
 #define WOOD ..\images\wood.png
 
-#define numSprites 0
+#define numSprites 1
 #define RED_COMP 2
 #define GREEN_COMP 1
 #define BLUE_COMP 0
@@ -70,7 +70,7 @@ typedef struct	s_color
 typedef struct	s_parse
 {
 	int			sprite_num;
-	t_texture	*list;
+	t_vec		*list;
 	int			tabHeight;
 	char		dir;
 	char		*f_line;
@@ -184,8 +184,8 @@ typedef struct s_img
 
 typedef struct	s_sprite
 {
-	int			spriteOrder[numSprites];
-	double		spriteDistance[numSprites];
+	int			*spriteOrder;
+	double		*spriteDistance;
 	double		spriteX;
 	double		spriteY;
 	double		spriteScreenX;
@@ -257,6 +257,7 @@ void		main_loop(t_pmlx *pmlx);
 void		init_texture(t_pmlx *pmlx);
 t_w_check	init_w_check();
 t_parse	 	init_parse();
+int         init_sprite(t_pmlx *pmlx);
 void		init_mlx(t_pmlx *pmlx);
 void		init_player(t_pmlx *pmlx);
 int			ft_strlen(char *str);
