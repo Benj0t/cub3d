@@ -12,15 +12,18 @@
 
 #include "cub3d.h"
 
+void	err_parsing(t_pmlx *pmlx)
+{
+	exit(1);
+}
+
 void	ft_putstr(char *str)
 {
 	int i;
 
 	i = 0;
 	while (str[i])
-	{
 		write(1, &(str[i++]), 1);
-	}
 }
 
 int	 get_arg(t_pmlx *pmlx)
@@ -45,7 +48,7 @@ int	 get_arg(t_pmlx *pmlx)
 		return (store_c(pmlx));
 	else
 	{
-		return(0);
+		return(1);
 	}
 }
 
@@ -55,9 +58,7 @@ void	free_tab(char **tab)
 
 	i = 0;
 	while (tab[i])
-	{
 		free(tab[i++]);
-	}
 	free(tab);
 }
 
@@ -100,7 +101,8 @@ int ft_parse(t_pmlx *pmlx, char *filename)
 				add_line(pmlx);
 			else
 			{
-				get_arg(pmlx);
+				if (!get_arg(pmlx))
+					err_parsing(pmlx);
 			} 
 			free_tab(pmlx->s.tab);
 			free(pmlx->s.line);
@@ -113,8 +115,8 @@ void	set_pos(t_pmlx *pmlx, int j, int i)
 {
 	pmlx->s.dir = pmlx->s.cmap[j][i];
 	pmlx->s.cmap[j][i] = '0';
-	pmlx->pl.posX = j;
-	pmlx->pl.posY = i;
+	pmlx->pl.posX = j + 0.5;
+	pmlx->pl.posY = i + 0.5;
 }
 
 int get_pos(t_pmlx *pmlx)
@@ -135,7 +137,6 @@ int get_pos(t_pmlx *pmlx)
 				set_pos(pmlx, j, i);
 				if (++bool > 1)
 					return (0);
-				printf("get_pos OK\n");
 				return (1);
 			}
 			i++;
@@ -148,6 +149,8 @@ int get_pos(t_pmlx *pmlx)
 
 int get_char(char c)
 {
+	if (find_char("NESW", c))
+		return (0);
 	if (c == ' ')
 		return (32);
 	if (c == '0')
@@ -162,37 +165,33 @@ int get_char(char c)
 int convert_map(t_pmlx *pmlx)
 {
 	int len;
-	int height;
 	int i;
 	int j;
 
 	i = 0;
-	j = 0;
-	height = tab_len(pmlx->s.cmap);
-	if (!(pmlx->s.map = (int **)malloc(sizeof(int *) * (height + 1))))
+	pmlx->s.tabHeight = tab_len(pmlx->s.cmap);
+	if (!(pmlx->s.map = (int **)malloc(sizeof(int *) * (pmlx->s.tabHeight + 1))))
 		return (0);
-	pmlx->s.map[height] = NULL;
-	while (i < height)
+	pmlx->s.map[pmlx->s.tabHeight] = NULL;
+	while (i < pmlx->s.tabHeight)
 	{
+		j = -1;
 		len = ft_strlen(pmlx->s.cmap[i]);
 		if (!(pmlx->s.map[i] = (int *)malloc(sizeof(int) * (len + 1))))
 			return (0);
 		pmlx->s.map[i][len] = '\0';
-		while (j < len)
-		{
-			pmlx->s.map[i][j] = get_char(pmlx->s.cmap[i][j]);
-			j++;
-		}
-		j = 0;
+		while (++j < len)
+			if ((pmlx->s.map[i][j] = get_char(pmlx->s.cmap[i][j])) == -1)
+				err_parsing(pmlx);
 		i++;
 	}
-	printf("Convert Map OK");
 	return (1);
 }
+
 // SPRITES COO = 2 dans la cmap // LISTE CHAINEES
 // PLAYER COO | S E O N > delete // DONE
 // SOLVE RAYCASTING PROBLEM
-
+// Parsing problem, retyurn 0 map valid
 
 int	sprites_tab(t_pmlx *pmlx)
 {
@@ -203,6 +202,7 @@ int	sprites_tab(t_pmlx *pmlx)
 	count = 0;
 	j = 0;
 	i = 0;
+	printf("%d\n", pmlx->s.sprite_num);
 	if (!(pmlx->s.list = (t_vec *)malloc(sizeof(t_vec) * (pmlx->s.sprite_num + 1))))
 		return (0);
 	while (pmlx->s.cmap[i])
@@ -216,28 +216,65 @@ int	sprites_tab(t_pmlx *pmlx)
 		j = 0;
 		i++;
 	}
-	printf("count : %d | num %d \n", count, pmlx->s.sprite_num);
 	if (count != pmlx->s.sprite_num)
 		return (0);
 	return (1);
 }
+//	Les textures sont chargees en dur, utiliser les donnes recuperees par la map
+//	Le parseur osef des textures qui n'existent pas. connard
 
+void	set_NULL(t_pmlx *pmlx)
+{
+	init_parse(pmlx);
+	pmlx->sp.spriteDistance = NULL;
+	pmlx->sp.spriteOrder = NULL;
+	pmlx->img.addr = NULL;
+	pmlx->img.image = NULL;
+	pmlx->mlx.img_ptr = NULL;
+	pmlx->mlx.win_ptr = NULL;
+	pmlx->mlx.data_addr = NULL;
+}
 
-int main(int argc, char **argv)
+void	ft_free(t_pmlx *pmlx)
+{
+	//FAIRE UN AUTRE BAIL
+}
+
+void	ft_puterr(char *str, t_pmlx *pmlx)
+{
+	ft_putstr(str);
+	ft_free(pmlx);
+	exit(1);
+}
+
+int		check_tex(t_pmlx *pmlx)
+{
+	if (!(pmlx->s.NO) || !(pmlx->s.EA) || !(pmlx->s.WE) || !(pmlx->s.SO))
+		return (0);
+	return (1);
+}
+
+int		main(int argc, char **argv)
 {
 	t_pmlx pmlx;
-	pmlx.s = init_parse();
-	if (argc != 2)
-		return (0);
-	if (!(ft_parse(&pmlx, argv[1])))
-		return (0);
-	if (!(create_map(&pmlx)))
-		return (0);
-	pmlx.s.tabHeight = tab_len(pmlx.s.cmap);
-	if ((!convert_map(&pmlx)) || (!get_pos(&pmlx)) ||  !valid_map(&pmlx))
-		return (0);
-	printf("valid_mapped OK\n");
-	if (!sprites_tab(&pmlx))
-		return (0);
-	raycast(&pmlx);
+
+	set_NULL(&pmlx);
+	if (argc >= 2 && argc <= 3)
+	{
+		if (!(ft_parse(&pmlx, argv[1])))
+			ft_puterr("Parsing error\n", &pmlx);
+		if (!(create_map(&pmlx)) || (!convert_map(&pmlx)))
+			ft_puterr("Map creation error\n", &pmlx);
+		if ((get_pos(&pmlx)) ||  !valid_map(&pmlx) || (!check_tex(&pmlx)))
+			ft_puterr("Map invalid\n", &pmlx);
+		if (!sprites_tab(&pmlx))
+			ft_puterr("Sprites creation error\n", &pmlx);
+		if (argc == 3 && !ft_strcmp(argv[2], "--save"))
+			pmlx.screenshot = 1;
+		raycast(&pmlx);
+	}
+	else
+	{
+		ft_puterr("Invalid Number of Arguments\n", &pmlx);
+	}
 }

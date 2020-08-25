@@ -80,20 +80,17 @@ int tab_is_rgb(char **tab)
     i = 0;
     j = 0;
     nb = 0;
-    while (j != 3)
+    while (j++ != 3)
     {
         while (tab[1][i + 1] && tab[1][i] != ',' && tab[1][i + 1] != '\n')
         {
             if (tab[1][i] >= '0' && tab[1][i] <= '9')
                 nb = nb * 10 + tab[1][i] - '0';
             else
-            {
                 return (0);
-            }
             i++;
         }
         i++;
-        j++;
         if (nb < 0 || nb > 255)
             return (0);
         nb = 0;
@@ -112,7 +109,7 @@ int tab_is_digit(char **tab)
     {
         while (tab[i])
         {
-            if (!(tab[y][i] >= '0' || tab[y][i] <= '9'))
+            if (!(tab[y][i] >= '0' && tab[y][i] <= '9'))
                 return (0);
             i++;
         }

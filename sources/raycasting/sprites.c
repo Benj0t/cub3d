@@ -108,9 +108,9 @@ void    ft_sprites(t_pmlx *pmlx, double ZBuffer[pmlx->s.R.x])
 					int d = (y-pmlx->sp.vMoveScreen) * 256 - pmlx->s.R.y * 128 + pmlx->sp.spriteHeight * 128; //256 and 128 factors to avoid floats
 					int texY = ((d * texHeight) / pmlx->sp.spriteHeight) / 256;
 					t_color color;
-					color.R = pmlx->img.image[1][(texWidth * texY + pmlx->sp.texX) * 4 + RED_COMP]; //get current color from the texture
-					color.G = pmlx->img.image[1][(texWidth * texY + pmlx->sp.texX) * 4 + GREEN_COMP]; //get current color from the texture
-					color.B = pmlx->img.image[1][(texWidth * texY + pmlx->sp.texX) * 4 + BLUE_COMP]; //get current color from the texture
+					color.R = pmlx->img.image[4][(texWidth * texY + pmlx->sp.texX) * 4 + RED_COMP]; //get current color from the texture
+					color.G = pmlx->img.image[4][(texWidth * texY + pmlx->sp.texX) * 4 + GREEN_COMP]; //get current color from the texture
+					color.B = pmlx->img.image[4][(texWidth * texY + pmlx->sp.texX) * 4 + BLUE_COMP]; //get current color from the texture
 					if(!(color.R == 0 && color.G == 0 && color.B == 0))
 					{
 						pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + RED_COMP] = color.R;//paint pixel if it isn't black, black is the invisible color

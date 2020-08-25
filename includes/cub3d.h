@@ -1,42 +1,30 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include <stdio.h>
-#include <math.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "mlx.h"
-//#include "utils/gnl/get_next_line.h"
-//#include "utils/printf/libftprintf.h"
-#define ALIEN ..\images\alien.png
-#define BRICK ..\images\brick.png
-#define COBBLE ..\images\cobblestone.png
-#define EAGLE ..\images\eagle.png
-#define GLOWSTONE ..\images\glowstone.png
-#define GRAVEL ..\images\gravel.png
-#define LAPIS ..\images\lapis.png
-#define WOOD ..\images\wood.png
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <stdint.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <math.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include "mlx.h"
+# include "get_next_line.h"
 
-#define numSprites 1
 #define RED_COMP 2
 #define GREEN_COMP 1
 #define BLUE_COMP 0
-#define RGB_RED 16711680
-#define RGB_GREEN 65280
-#define RGB_BLUE 255
-#define RGB_WHITE 16777215
-#define RGB_YELLOW 16776960
 #define texWidth 64
 #define texHeight 64
 
 #define uDiv 1
 #define vDiv 1
 #define vMove 0.0
-
-#include "./get_next_line.h"
 
 typedef struct	s_vec
 {
@@ -73,7 +61,6 @@ typedef struct	s_parse
 	t_vec		*list;
 	int			tabHeight;
 	char		dir;
-	char		*f_line;
 	char		*tmp;
 	char		*map_join;
 	char		**cmap;
@@ -98,18 +85,6 @@ typedef struct	s_vector
 	double	distance;
 	int		ordre;
 }				t_vector;
-
-typedef struct	s_image
-{
-	void		*img_ptr;
-	int			x;
-	int			y;
-
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-	int			*pixels;
-}				t_image;
 
 typedef struct  s_mlx
 {
@@ -214,10 +189,11 @@ typedef struct	s_pmlx
 {
 	t_sprite	sp;
 	t_img		img;
-	t_wall		tex;
+	t_wall		tex; 
 	t_mlx		mlx;
 	t_player	pl;
 	t_parse		s;
+	int			screenshot;
 	int			bool_W;
 	int			bool_A;
 	int			bool_S;
@@ -232,6 +208,15 @@ typedef struct s_coords_sprite
 	int			texture;
 }				t_coords_sprite;
 
+typedef struct s_bmp
+{
+	int size;
+	int reserved;
+	int offset_bits;
+	int header_bytes;
+	int planes;
+}				t_bmp;
+
 int			raycast();
 void		ft_sprites(t_pmlx *pmlx, double ZBuffer[pmlx->s.R.x]);
 void		sortSprites(t_pmlx *pmlx, int amount);
@@ -245,6 +230,7 @@ t_color		ft_white();
 t_color		ft_yellow();
 t_color		ft_dark();
 t_color 	ft_color_divide(t_color color);
+void		err_raycast(t_pmlx *pmlx);
 void		draw_ray(t_pmlx *pmlx, int x, t_draw draw, t_ray ray);
 int			deal_key_press(int key, t_pmlx *pmlx);
 int			deal_key_release(int key, t_pmlx *pmlx);
@@ -256,7 +242,7 @@ void		mv_right(t_pmlx *pmlx);
 void		main_loop(t_pmlx *pmlx);
 void		init_texture(t_pmlx *pmlx);
 t_w_check	init_w_check();
-t_parse	 	init_parse();
+void	 	init_parse();
 int         init_sprite(t_pmlx *pmlx);
 void		init_mlx(t_pmlx *pmlx);
 void		init_player(t_pmlx *pmlx);
@@ -290,4 +276,7 @@ void		pos_east(t_pmlx *pmlx);
 void		pos_south(t_pmlx *pmlx);
 void		pos_west(t_pmlx *pmlx);
 void		pos_dealer(t_pmlx *pmlx, char c);
+int			screenshot(t_pmlx *pmlx);
+void		err_parsing(t_pmlx *pmlx);
+int			ft_strcmp(char *str1, char *str2);
 #endif

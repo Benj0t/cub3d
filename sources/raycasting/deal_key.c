@@ -12,6 +12,26 @@
 
 #include "cub3d.h"
 
+void	ft_destroy(t_pmlx *pmlx)
+{
+	int i;
+	
+	i = 0;
+	while (i <= 5)
+	{
+		free(pmlx->img.addr[i]);
+		free(pmlx->img.image[i++]);
+	}
+	free(pmlx->img.addr);
+	free(pmlx->img.image);
+	free(pmlx->mlx.data_addr);
+	mlx_destroy_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr);
+	//mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);
+	free(pmlx->mlx.img_ptr);
+	free(pmlx->mlx.mlx_ptr);
+	exit(1);
+}
+
 int		deal_key_press(int key, t_pmlx *pmlx)
 {
 	if (key == ESC_KEY_L)
@@ -30,6 +50,8 @@ int		deal_key_press(int key, t_pmlx *pmlx)
 
 int		deal_key_release(int key, t_pmlx *pmlx)
 {
+	if (key == ESC_KEY_L)
+		ft_destroy(pmlx);
 	if (key == W_KEY_L)//W
 		pmlx->bool_W = 0;
 	if (key == S_KEY_L)//S

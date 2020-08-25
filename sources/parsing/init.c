@@ -12,12 +12,29 @@
 
 #include "cub3d.h"
 
+void        init_parse(t_pmlx *pmlx)
+{
+    pmlx->s.sprite_num = 0;
+    pmlx->s.list = NULL;
+   	pmlx->s.NO = NULL;
+    pmlx->s.SO = NULL;
+    pmlx->s.WE = NULL;
+    pmlx->s.EA = NULL;
+    pmlx->s.S = NULL;
+    pmlx->s.line = NULL;
+    pmlx->s.tmp = NULL;
+    pmlx->s.map_join = NULL;
+    pmlx->s.cmap = NULL;
+    pmlx->s.map = NULL;
+    pmlx->s.C = NULL;
+}
+
 void        init_mlx(t_pmlx *pmlx)
 {
     pmlx->mlx.mlx_ptr = mlx_init();
 	pmlx->mlx.win_ptr = mlx_new_window(pmlx->mlx.mlx_ptr, pmlx->s.R.x, pmlx->s.R.y, "Cub3D");
-	pmlx->mlx.img_ptr = mlx_new_image(pmlx->mlx.mlx_ptr, pmlx->s.R.x, pmlx->s.R.y);
-	pmlx->mlx.data_addr = mlx_get_data_addr(pmlx->mlx.img_ptr, &(pmlx->mlx.bpp), &(pmlx->mlx.size_l), &(pmlx->mlx.endian));
+    pmlx->mlx.img_ptr = mlx_new_image(pmlx->mlx.mlx_ptr, pmlx->s.R.x, pmlx->s.R.y);
+    pmlx->mlx.data_addr = mlx_get_data_addr(pmlx->mlx.img_ptr, &(pmlx->mlx.bpp), &(pmlx->mlx.size_l), &(pmlx->mlx.endian));
 }
 
 int         init_sprite(t_pmlx *pmlx)
@@ -39,19 +56,6 @@ void        init_player(t_pmlx *pmlx)
 	//the 2d raycaster version of camera plane
 	pmlx->pl.moveSpeed = 0.075;
 	pmlx->pl.rotSpeed = 0.05;
-}
-
-t_parse     init_parse()
-{
-    t_parse s;
-
-    s.sprite_num = 0;
-    s.NO = NULL;
-    s.SO = NULL;
-    s.WE = NULL;
-    s.EA = NULL;
-    s.S = NULL;
-    return (s);
 }
 
 t_w_check   init_w_check()

@@ -66,11 +66,6 @@ int	 verif_pos(char **tab, int y, int x)
 
 int	 map_closed(t_pmlx *pmlx, int y, int x)
 {
-	/*
-	ft_putstr("\n");
-	write(1, &(pmlx->s.cmap[x][y]), 1);
-	ft_putstr("\n");
-	*/
 	if (y < 0 || x < 0 || x > pmlx->s.tabHeight || y >= ft_strlen(pmlx->s.cmap[x]))
 		exit(0);
 	if (find_char("O1S", pmlx->s.cmap[x][y]))
@@ -81,7 +76,7 @@ int	 map_closed(t_pmlx *pmlx, int y, int x)
 		pmlx->s.cmap[x][y] = 'O';
 	else if (pmlx->s.cmap[x][y] == '2')
 	{
-		pmlx->s.sprite_num = pmlx->s.sprite_num + 1;
+		pmlx->s.sprite_num++;
 		pmlx->s.cmap[x][y] = 'S';
 	}
 	map_closed(pmlx, y + 1, x);

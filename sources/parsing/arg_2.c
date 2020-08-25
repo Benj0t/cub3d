@@ -14,9 +14,9 @@
 
 int    store_no(t_pmlx *pmlx)
 {
-    int fd;
+    int fd;;
 
-    if (((tab_len(pmlx->s.tab)) != 2) || (fd = open(pmlx->s.tab[1], O_RDONLY)) < 0)
+    if (((tab_len(pmlx->s.tab)) != 2) || (fd = open(pmlx->s.tab[1], O_RDONLY)) <= 0)
         return (0);
     pmlx->s.NO = ft_strdup(pmlx->s.tab[1]);
     close(fd);
