@@ -277,7 +277,6 @@ int		check_tex(t_pmlx *pmlx)
 }
 
 // Si y a un espace dans la map
-// Check couleur > 255 | < 0 | Ca marche pas dans le C
 // REsolution a reparer.
 
 int		main(int argc, char **argv)
