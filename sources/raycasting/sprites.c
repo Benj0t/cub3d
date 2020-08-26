@@ -12,46 +12,43 @@
 
 #include "cub3d.h"
 
-//arrays used to sort the 
-
-void    ft_swap(t_vector *a, t_vector *b)
+void	ft_swap(t_vector *a, t_vector *b)
 {
-    t_vector c;
-    c = *a;
-    *a = *b;
-    *b = c;
+	t_vector c;
+	c = *a;
+	*a = *b;
+	*b = c;
 }
 
-void    sortSprites(t_pmlx *pmlx, int amount)
+void	sortSprites(t_pmlx *pmlx, int amount)
 {
-    t_vector sprites[amount];
-    for(int k = 0; k < amount; k++) {
-    sprites[k].distance = pmlx->sp.spriteDistance[k];
-    sprites[k].ordre = pmlx->sp.spriteOrder[k];
-    }
-    int i;
-    int j;
+	t_vector sprites[amount];
+	for(int k = 0; k < amount; k++) {
+	sprites[k].distance = pmlx->sp.spriteDistance[k];
+	sprites[k].ordre = pmlx->sp.spriteOrder[k];
+	}
+	int i;
+	int j;
 
-    i = -1;
-    j = -1;
-    while (++i < amount)
-    {
-        while (++j < amount)
-        {
-            if (sprites[i].distance > sprites[j].distance)
-            ft_swap(&(sprites[i]), &(sprites[j]));
-        }
-        j = i;
-    }
-  // restore in reverse order to go from farthest to nearest   
+	i = -1;
+	j = -1;
+	while (++i < amount)
+	{
+		while (++j < amount)
+		{
+			if (sprites[i].distance > sprites[j].distance)
+			ft_swap(&(sprites[i]), &(sprites[j]));
+		}
+		j = i;
+	}
 	for(int f = 0; f < amount; f++)
-    {
-      pmlx->sp.spriteDistance[f] = sprites[amount - f - 1].distance;
-      pmlx->sp.spriteOrder[f] = sprites[amount - f - 1].ordre;
-    }
+	{
+		pmlx->sp.spriteDistance[f] = sprites[amount - f - 1].distance;
+		pmlx->sp.spriteOrder[f] = sprites[amount - f - 1].ordre;
+	}
 }
 
-void    ft_sprites(t_pmlx *pmlx, double ZBuffer[pmlx->s.R.x])
+void	ft_sprites(t_pmlx *pmlx, double ZBuffer[pmlx->s.R.x])
 {
 	for(int i = 0; i < pmlx->s.sprite_num; i++)
 	{
@@ -101,7 +98,7 @@ void    ft_sprites(t_pmlx *pmlx, double ZBuffer[pmlx->s.R.x])
 			//2) it's on the screen (left)
 			//3) it's on the screen (right)
 			//4) ZBuffer, with perpendicular distance
-            if(pmlx->sp.transformY > 0 && stripe > 0 && stripe < pmlx->s.R.x && pmlx->sp.transformY < ZBuffer[stripe])
+			if(pmlx->sp.transformY > 0 && stripe > 0 && stripe < pmlx->s.R.x && pmlx->sp.transformY < ZBuffer[stripe])
 			{
 				for(int y = pmlx->sp.drawStartY; y < pmlx->sp.drawEndY; y++) //for every pixel of the current stripe
 				{
@@ -116,9 +113,11 @@ void    ft_sprites(t_pmlx *pmlx, double ZBuffer[pmlx->s.R.x])
 						pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + RED_COMP] = color.R;//paint pixel if it isn't black, black is the invisible color
 						pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + GREEN_COMP] = color.G;
 						pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + BLUE_COMP] = color.B; 
-                    }
+					}
 				}
 			}
 		}
-    }
+	}
+	if (pmlx->screenshot == 1)
+		screenshot(pmlx);
 }

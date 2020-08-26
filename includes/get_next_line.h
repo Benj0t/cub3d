@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 10:57:49 by bemoreau          #+#    #+#             */
-/*   Updated: 2019/12/18 18:41:44 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/26 11:51:56 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
+//# include <limits.h>
 
 # define OPEN_MAX 4096
 

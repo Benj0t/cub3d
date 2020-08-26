@@ -12,9 +12,14 @@
 
 #include "cub3d.h"
 
-void	err_parsing(t_pmlx *pmlx)
+void	ft_putendl(char *str)
 {
-	exit(1);
+	int i;
+
+	i = 0;
+	while (str[i])
+		write(1, &(str[i++]), 1);
+	write(1, "\n", 1);
 }
 
 void	ft_putstr(char *str)
@@ -64,25 +69,31 @@ void	free_tab(char **tab)
 
 void	add_line(t_pmlx *pmlx)
 {
-	pmlx->s.map_join = ft_strdup_N(pmlx->s.line);
+	if (!(pmlx->s.map_join = ft_strdup_N(pmlx->s.line)))
+		ft_puterr("Malloc failed (strdup)", pmlx);
 	free(pmlx->s.line);
 	while ((get_next_line(pmlx->s.fd, &(pmlx->s.line))) > 0)
-	{
 		if (ft_strlen(pmlx->s.line) > 0)
 		{
-			pmlx->s.tmp = ft_strjoin_N(pmlx->s.map_join, pmlx->s.line, (ft_strlen(pmlx->s.map_join) + ft_strlen(pmlx->s.line)));
+			if (!(pmlx->s.tmp = ft_strjoin_N(pmlx->s.map_join, pmlx->s.line, (ft_strlen(pmlx->s.map_join) + ft_strlen(pmlx->s.line)))))
+				ft_puterr("Malloc failed (strjoin)", pmlx);
 			free(pmlx->s.map_join);
-			pmlx->s.map_join = ft_strdup(pmlx->s.tmp);
+			if (!(pmlx->s.map_join = ft_strdup(pmlx->s.tmp)))
+				ft_puterr("Malloc failed (strdup)", pmlx);
 			free(pmlx->s.tmp);
 			free(pmlx->s.line);
+			pmlx->s.tmp = NULL;
+			pmlx->s.line = NULL;
 		}
-	}
 	if (ft_strlen(pmlx->s.line) > 1)
 	{
-		pmlx->s.tmp = ft_strjoin(pmlx->s.map_join, pmlx->s.line, (ft_strlen(pmlx->s.map_join) + ft_strlen(pmlx->s.line)));
+		if (!(pmlx->s.tmp = ft_strjoin(pmlx->s.map_join, pmlx->s.line, (ft_strlen(pmlx->s.map_join) + ft_strlen(pmlx->s.line)))))
+			ft_puterr("Malloc failed (strjoin)", pmlx);
 		free(pmlx->s.map_join);
-		pmlx->s.map_join = ft_strdup(pmlx->s.tmp);
+		if (!(pmlx->s.map_join = ft_strdup(pmlx->s.tmp)))
+			ft_puterr("Malloc failed (strdup)", pmlx);
 		free(pmlx->s.tmp);
+		pmlx->s.tmp = NULL;
 	}
 }
 
@@ -93,7 +104,7 @@ int ft_parse(t_pmlx *pmlx, char *filename)
 	pmlx->s.tmp = NULL;
 	while ((get_next_line(pmlx->s.fd, &(pmlx->s.line))) > 0)
 	{
-		if ((pmlx->s.tab = ft_split(pmlx->s.line)) == NULL)
+		if ((pmlx->s.tab = ft_split(pmlx->s.line, pmlx)) == NULL)
 			free(pmlx->s.line);
 		else
 		{
@@ -102,7 +113,7 @@ int ft_parse(t_pmlx *pmlx, char *filename)
 			else
 			{
 				if (!get_arg(pmlx))
-					err_parsing(pmlx);
+					ft_puterr("Something went wrong with your .cub arguments", pmlx);
 			} 
 			free_tab(pmlx->s.tab);
 			free(pmlx->s.line);
@@ -124,7 +135,7 @@ int get_pos(t_pmlx *pmlx)
 	int i;
 	int j;
 	int bool;
-	
+
 	bool = 0;
 	i = 0;
 	j = 0;
@@ -136,7 +147,9 @@ int get_pos(t_pmlx *pmlx)
 			{
 				set_pos(pmlx, j, i);
 				if (++bool > 1)
+				{
 					return (0);
+				}
 				return (1);
 			}
 			i++;
@@ -152,7 +165,7 @@ int get_char(char c)
 	if (find_char("NESW", c))
 		return (0);
 	if (c == ' ')
-		return (32);
+		return (0);
 	if (c == '0')
 		return (0);
 	if (c == '1')
@@ -182,16 +195,11 @@ int convert_map(t_pmlx *pmlx)
 		pmlx->s.map[i][len] = '\0';
 		while (++j < len)
 			if ((pmlx->s.map[i][j] = get_char(pmlx->s.cmap[i][j])) == -1)
-				err_parsing(pmlx);
+				ft_puterr("Unauthorized character", pmlx);
 		i++;
 	}
 	return (1);
 }
-
-// SPRITES COO = 2 dans la cmap // LISTE CHAINEES
-// PLAYER COO | S E O N > delete // DONE
-// SOLVE RAYCASTING PROBLEM
-// Parsing problem, retyurn 0 map valid
 
 int	sprites_tab(t_pmlx *pmlx)
 {
@@ -202,7 +210,6 @@ int	sprites_tab(t_pmlx *pmlx)
 	count = 0;
 	j = 0;
 	i = 0;
-	printf("%d\n", pmlx->s.sprite_num);
 	if (!(pmlx->s.list = (t_vec *)malloc(sizeof(t_vec) * (pmlx->s.sprite_num + 1))))
 		return (0);
 	while (pmlx->s.cmap[i])
@@ -220,8 +227,6 @@ int	sprites_tab(t_pmlx *pmlx)
 		return (0);
 	return (1);
 }
-//	Les textures sont chargees en dur, utiliser les donnes recuperees par la map
-//	Le parseur osef des textures qui n'existent pas. connard
 
 void	set_NULL(t_pmlx *pmlx)
 {
@@ -234,16 +239,33 @@ void	set_NULL(t_pmlx *pmlx)
 	pmlx->mlx.win_ptr = NULL;
 	pmlx->mlx.data_addr = NULL;
 }
-
-void	ft_free(t_pmlx *pmlx)
+void	err_parsing(t_pmlx *pmlx)
 {
-	//FAIRE UN AUTRE BAIL
+	(pmlx->s.list) ? free(pmlx->s.list) : 0;
+	(pmlx->s.NO) ? free(pmlx->s.NO) : 0;
+	(pmlx->s.SO) ? free(pmlx->s.SO) : 0;
+	(pmlx->s.WE) ? free(pmlx->s.WE) : 0;
+	(pmlx->s.EA) ? free(pmlx->s.EA) : 0;
+	(pmlx->s.S) ? free(pmlx->s.S) : 0;
+	(pmlx->s.line) ? free(pmlx->s.line) : 0;
+	(pmlx->s.tmp) ? free(pmlx->s.tmp) : 0;
+	(pmlx->s.map_join) ? free(pmlx->s.map_join) : 0;
+	(pmlx->s.cmap) ? free(pmlx->s.cmap) : 0;
+	(pmlx->s.map) ? free(pmlx->s.map) : 0;
+	(pmlx->s.C) ? free(pmlx->s.C) : 0;
+	(pmlx->sp.spriteDistance) ? free(pmlx->sp.spriteDistance) : 0;
+	(pmlx->sp.spriteOrder) ? free(pmlx->sp.spriteOrder) : 0;
+	(pmlx->img.addr) ? free(pmlx->img.addr ) : 0;
+	(pmlx->img.image) ? free(pmlx->img.image) : 0;
+	(pmlx->mlx.img_ptr) ? free(pmlx->mlx.img_ptr) : 0;
+	(pmlx->mlx.win_ptr) ? free(pmlx->mlx.win_ptr) : 0;
+	(pmlx->mlx.data_addr) ? free(pmlx->mlx.data_addr) : 0;
 }
 
 void	ft_puterr(char *str, t_pmlx *pmlx)
 {
-	ft_putstr(str);
-	ft_free(pmlx);
+	ft_putendl(str);
+	err_parsing(pmlx);
 	exit(1);
 }
 
@@ -253,6 +275,10 @@ int		check_tex(t_pmlx *pmlx)
 		return (0);
 	return (1);
 }
+
+// Si y a un espace dans la map
+// Check couleur > 255 | < 0 | Ca marche pas dans le C
+// REsolution a reparer.
 
 int		main(int argc, char **argv)
 {
@@ -265,7 +291,7 @@ int		main(int argc, char **argv)
 			ft_puterr("Parsing error\n", &pmlx);
 		if (!(create_map(&pmlx)) || (!convert_map(&pmlx)))
 			ft_puterr("Map creation error\n", &pmlx);
-		if ((get_pos(&pmlx)) ||  !valid_map(&pmlx) || (!check_tex(&pmlx)))
+		if (!(get_pos(&pmlx)) ||  !(valid_map(&pmlx)) || !(check_tex(&pmlx)))
 			ft_puterr("Map invalid\n", &pmlx);
 		if (!sprites_tab(&pmlx))
 			ft_puterr("Sprites creation error\n", &pmlx);

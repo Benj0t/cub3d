@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
+/*   Updated: 2020/08/26 17:07:35 by bemoreau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -108,7 +120,7 @@ typedef struct s_ray
 	double	deltaDistY;
 	double	perpWallDist;
 	int		hit;
-	int		side; //was a NS or a EW wall ray.hit?
+	int		side;
 }				t_ray;
 
 typedef struct s_draw
@@ -234,6 +246,7 @@ void		err_raycast(t_pmlx *pmlx);
 void		draw_ray(t_pmlx *pmlx, int x, t_draw draw, t_ray ray);
 int			deal_key_press(int key, t_pmlx *pmlx);
 int			deal_key_release(int key, t_pmlx *pmlx);
+int			deal_key_leave(int key, t_pmlx *pmlx);
 int			deal_key(int key, t_pmlx *pmlx);
 void		forward(t_pmlx *pmlx);
 void		downward(t_pmlx *pmlx);
@@ -258,7 +271,7 @@ void		ft_putstr(char *str);
 char		*ft_strdup(const char *src);
 char		*ft_strdup_N(const char *src);
 int			ft_atoi(char *str);
-char		**ft_split(char *str);
+char		**ft_split(char *str, t_pmlx *pmlx);
 int			store_res(t_pmlx *pmlx);
 int			store_no(t_pmlx *pmlx);
 int			store_so(t_pmlx *pmlx);
@@ -279,4 +292,8 @@ void		pos_dealer(t_pmlx *pmlx, char c);
 int			screenshot(t_pmlx *pmlx);
 void		err_parsing(t_pmlx *pmlx);
 int			ft_strcmp(char *str1, char *str2);
+void		ft_putendl(char *str);
+void		ft_putstr(char *str);
+void		ft_puterr(char *str, t_pmlx *pmlx);
+void		ray_err(char *str, t_pmlx *pmlx);
 #endif

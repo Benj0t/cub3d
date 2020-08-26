@@ -12,90 +12,101 @@
 
 #include "../../../includes/cub3d.h"
 
-void ft_fill(char *tab, char *str, int n, int *i)
+void		ft_fill(char *tab, char *str, int n, int *i)
 {
-    int j;
+	int j;
 
-    j=0;
-    while  ((str[*i] == '\n' || str[*i] == '\t' || str[*i] == ' ') && str[*i] != '\0')
-        *i = *i +1;
-    while (str[*i] != '\0' && j <= n)
-    {    
-        if ((str[*i] == '\n' || str[*i] == '\t' || str[*i] == ' ') && str[*i] != '\0')
-            *i = *i + 1;
-        else
-        {
-            tab[j] = str[*i];
-            *i = *i + 1;
-            if (j < n)    
-                j++;
-            if (j >= n)
-                return;
-        }
-    }    
+	j=0;
+	while ((str[*i] == '\n' || str[*i] == '\t' || str[*i] == ' ') && str[*i] != '\0')
+		*i = *i +1;
+	while (str[*i] != '\0' && j <= n)
+	{	
+		if ((str[*i] == '\n' || str[*i] == '\t' || str[*i] == ' ') && str[*i] != '\0')
+			*i = *i + 1;
+		else
+		{
+			tab[j] = str[*i];
+			*i = *i + 1;
+			if (j < n)
+				j++;
+			if (j >= n)
+				return;
+		}
+	}	
 }
 
-int ft_count_letters(char *str, int *i)
+int			ft_count_letters(char *str, int *i)
 {
-    int j;
-    j=0;
-    while  ((str[*i] == '\n' || str[*i] == '\t' || str[*i] == ' ') && str[*i] != '\0')
-        *i = *i + 1;
-    while (str[*i] != '\n' && str[*i] != '\t' && str[*i] != ' ' && str[*i] != '\0')
-    {   
-        j++;
-        *i = *i + 1;
-    }
-    while  ((str[*i] == '\n' || str[*i] == '\t' || str[*i] == ' ') && str[*i] != '\0')
-        *i = *i + 1;
-    return(j);
+	int j;
+	j=0;
+	while  ((str[*i] == '\n' || str[*i] == '\t' || str[*i] == ' ') && str[*i] != '\0')
+		*i = *i + 1;
+	while (str[*i] != '\n' && str[*i] != '\t' && str[*i] != ' ' && str[*i] != '\0')
+	{   
+		j++;
+		*i = *i + 1;
+	}
+	while  ((str[*i] == '\n' || str[*i] == '\t' || str[*i] == ' ') && str[*i] != '\0')
+		*i = *i + 1;
+	return(j);
 }
 
-void ft_skip_whitespaces(char *str, int *j)
+void		ft_skip_whitespaces(char *str, int *j)
 {
-    int i;
-    
-    i=0;
-    while (str[i])
-    {
-        if (str[i] != '\n' && str[i] != '\t' && str[i] != ' ' && str[i] != '\0') 
-            *j = *j + 1;
-        while (str[i] != '\n' && str[i] != '\t' && str[i] != ' '  && str[i] != '\0')
-            i++;
-        while (str[i] == '\n' || str[i] == '\t' || str[i] == ' ')
-            i++;
-    }
+	int i;
+		
+	i=0;
+	while (str[i])
+	{
+		if (str[i] != '\n' && str[i] != '\t' && str[i] != ' ' && str[i] != '\0') 
+			*j = *j + 1;
+		while (str[i] != '\n' && str[i] != '\t' && str[i] != ' '  && str[i] != '\0')
+			i++;
+		while (str[i] == '\n' || str[i] == '\t' || str[i] == ' ')
+			i++;
+	}
 }
 
-char **ft_split(char *str)
+static char	**split_free(char **tab, int j, t_pmlx *pmlx)
 {
-    int i;
-    int j;
-    int h;
-    int tmp;
-    int tmp2;
-    char **tab;
+	while (--j >= 0)
+	{
+		free(tab[j]);
+	}
+	free(tab);
+	err_parsing(pmlx);
+	return (NULL);
+}
 
-    if (!str || ft_strlen(str) == 0)
-        return (NULL);
-    tmp = 0;
-    tmp2 = 0;
-    i=0;
-    ft_skip_whitespaces(str, &i);
-    h=0;
-    j=-1;
-    if (!(tab = (char**)malloc(sizeof(char*) * (i + 1))))
+char		**ft_split(char *str, t_pmlx *pmlx)
+{
+	int i;
+	int j;
+	int h;
+	int tmp;
+	int tmp2;
+	char **tab;
+
+	if (!str || ft_strlen(str) == 0)
 		return (NULL);
-    tab[i] = NULL;
-    while (++j < i)
-    {
-        h = ft_count_letters(str, &tmp);
-        if (!(tab[j] = (char*)malloc(sizeof(char) * (h+1))))
-		    return (NULL);
-        tab[j][h] = '\0';
-        ft_fill(tab[j], str, h, &tmp2);
-    }
-    tmp = 0;
-    tmp2 = 0;
-    return(tab);
+	tmp = 0;
+	tmp2 = 0;
+	i=0;
+	ft_skip_whitespaces(str, &i);
+	h=0;
+	j=-1;
+	if (!(tab = (char**)malloc(sizeof(char*) * (i + 1))))
+		return (NULL);
+	tab[i] = NULL;
+	while (++j < i)
+	{
+		h = ft_count_letters(str, &tmp);
+		if (!(tab[j] = (char*)malloc(sizeof(char) * (h+1))))
+			return (split_free(tab, j, pmlx));
+		tab[j][h] = '\0';
+		ft_fill(tab[j], str, h, &tmp2);
+	}
+	tmp = 0;
+	tmp2 = 0;
+	return(tab);
 }

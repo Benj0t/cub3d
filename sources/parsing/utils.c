@@ -73,29 +73,29 @@ void put_rgb(t_color *c, char **tab)
 
 int tab_is_rgb(char **tab)
 {
-    int i;
-    int j;
-    int nb;
+	int i;
+	int j;
+	int nb;
 
-    i = 0;
-    j = 0;
-    nb = 0;
-    while (j++ != 3)
-    {
-        while (tab[1][i + 1] && tab[1][i] != ',' && tab[1][i + 1] != '\n')
-        {
-            if (tab[1][i] >= '0' && tab[1][i] <= '9')
-                nb = nb * 10 + tab[1][i] - '0';
-            else
-                return (0);
-            i++;
-        }
-        i++;
-        if (nb < 0 || nb > 255)
-            return (0);
-        nb = 0;
-    }
-    return (1);
+	i = 0;
+	j = 0;
+	nb = 0;
+	while (j++ < 3)
+	{
+		while (tab[1][i] && tab[1][i] != ',' && tab[1][i + 1] != '\n')
+		{
+			if (tab[1][i] >= '0' && tab[1][i] <= '9')
+				nb = nb * 10 + tab[1][i] - 48;
+			else
+				return (0);
+			i++;
+		}
+		i++;
+		if (nb < 0 || nb > 255)
+			return (0);
+		nb = 0;
+	}
+	return (1);
 }
 
 int tab_is_digit(char **tab)

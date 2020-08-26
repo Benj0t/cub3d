@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/26 13:51:31 by bemoreau          #+#    #+#             */
+/*   Updated: 2020/08/26 13:51:33 by bemoreau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MLX_H
 #define	MLX_H
@@ -112,6 +123,11 @@
 # define S_KEY_L 115
 # define D_KEY_L 100
 # define ESC_KEY_L 65307
+# define W_KEY_M 13
+# define A_KEY_M 0
+# define S_KEY_M 1
+# define D_KEY_M 2
+# define ESC_KEY_M 53
 /*
  * ** Numbers (not numeric keypad ones)
  * */
