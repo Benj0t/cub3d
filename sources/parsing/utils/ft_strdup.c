@@ -6,13 +6,13 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 21:20:05 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/02/20 14:18:09 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/27 18:33:49 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-char	*ft_strdup_N(const char *src)
+char	*ft_strdup_n(const char *src)
 {
 	char	*str;
 	int		i;
@@ -29,7 +29,6 @@ char	*ft_strdup_N(const char *src)
 	str[i] = '\0';
 	return (str);
 }
-
 
 char	*ft_strdup(const char *src)
 {

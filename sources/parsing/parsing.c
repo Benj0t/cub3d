@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:15 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 18:08:19 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/27 18:37:54 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void	add_line2(t_pmlx *pmlx)
 
 void	add_line(t_pmlx *pmlx)
 {
-	if (!(pmlx->s.map_join = ft_strdup_N(pmlx->s.line)))
+	if (!(pmlx->s.map_join = ft_strdup_n(pmlx->s.line)))
 		ft_puterr("Malloc failed (strdup)", pmlx);
 	free(pmlx->s.line);
 	while ((get_next_line(pmlx->s.fd, &(pmlx->s.line))) > 0)
 		if (ft_strlen(pmlx->s.line) > 0)
 		{
-			if (!(pmlx->s.tmp = ft_strjoin_N(pmlx->s.map_join, pmlx->s.line,\
+			if (!(pmlx->s.tmp = ft_strjoin_n(pmlx->s.map_join, pmlx->s.line,\
 				(ft_strlen(pmlx->s.map_join) + ft_strlen(pmlx->s.line)))))
 				ft_puterr("Malloc failed (strjoin)", pmlx);
 			free(pmlx->s.map_join);

@@ -41,7 +41,7 @@ FILES =		./sources/raycasting/raycasting\
 			./sources/parsing/utils/ft_putchars\
 			./sources/parsing/utils/ft_strdup\
 			./sources/parsing/utils/ft_split\
-			./sources/parsing/utils/ft_strjoin_N\
+			./sources/parsing/utils/ft_strjoin_n\
 			./sources/parsing/utils/ft_substr\
 			./sources/parsing/utils/ft_strcmp\
 			./sources/parsing/valid_map\

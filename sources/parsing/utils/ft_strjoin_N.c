@@ -1,6 +1,6 @@
 #include "../../../includes/cub3d.h"
 
-char	*ft_strjoin_N(char *s1, char *s2, int len)
+char	*ft_strjoin_n(char *s1, char *s2, int len)
 {
 	char	*pt;
 	int		i;

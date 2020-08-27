@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 17:12:24 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/27 18:37:27 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,11 +271,11 @@ int			valid_map(t_pmlx *pmlx);
 char		*ft_substr(char *s, int start, int len);
 int			create_map(t_pmlx *pmlx);
 char		*ft_strjoin(char *s1, char *s2, int len);
-char		*ft_strjoin_N(char *s1, char *s2, int len);
+char		*ft_strjoin_n(char *s1, char *s2, int len);
 int			store_map(t_parse *s);
 void		ft_putstr(char *str);
 char		*ft_strdup(const char *src);
-char		*ft_strdup_N(const char *src);
+char		*ft_strdup_n(const char *src);
 int			ft_atoi(char *str);
 char		**ft_split(char *str, t_pmlx *pmlx);
 int			store_res(t_pmlx *pmlx);
