@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 01:53:44 by marvin            #+#    #+#             */
-/*   Updated: 2020/08/27 18:24:53 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/27 18:32:16 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			ft_count_letters(char *str, int *i)
 	return (j);
 }
 
-int		ft_skip_whitespaces(char *str)
+int			ft_skip_whitespaces(char *str)
 {
 	int i;
 	int j;
