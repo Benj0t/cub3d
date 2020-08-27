@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/26 18:17:04 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/27 18:26:59 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,18 +186,6 @@ int		loop(t_pmlx *pmlx)
 		mv_right(pmlx);
 	main_loop(pmlx);
 	return (0);
-}
-
-void	err_raycast(t_pmlx *pmlx)
-{
-	//FAIRE UN AUTRE BAIL
-}
-
-void	ray_err(char *str, t_pmlx *pmlx)
-{
-	ft_putendl(str);
-	err_raycast(pmlx);
-	exit(1);
 }
 
 int		raycast(t_pmlx *pmlx)

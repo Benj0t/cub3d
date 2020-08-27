@@ -12,6 +12,59 @@
 
 #include "cub3d.h"
 
+int			init_sprite(t_pmlx *pmlx)
+{
+	if (!(pmlx->sp.spriteOrder = (int *)malloc(sizeof(int) *\
+		(pmlx->s.sprite_num))))
+		return (0);
+	if (!(pmlx->sp.spriteDistance = (double *)malloc(sizeof(double) *\
+		(pmlx->s.sprite_num))))
+		return (0);
+	return (1);
+}
+
+void		spr_rep(t_pmlx *pmlx, int n)
+{
+	int i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (pmlx->s.list[i].x == -0.5)
+			pmlx->s.list[i].x = 0;
+		if (pmlx->s.list[i].y == -0.5)
+			pmlx->s.list[i].y = 0;
+		i++;
+	}
+}
+int				sprites_tab(t_pmlx *pmlx)
+{
+	int i;
+	int j;
+	int count;
+
+	count = 0;
+	j = 0;
+	i = -1;
+	if (!(pmlx->s.list = (t_svec *)malloc(sizeof(t_svec) * (\
+		pmlx->s.sprite_num + 1))))
+		return (0);
+	while (pmlx->s.cmap[++i])
+	{
+		while (pmlx->s.cmap[i][j])
+			if (pmlx->s.cmap[i][j++] == 'S')
+			{
+				pmlx->s.list[count].x = i + 0.5;
+				pmlx->s.list[count++].y = j - 0.5;
+			}
+		j = 0;
+	}
+	spr_rep(pmlx, count);
+	if (count != pmlx->s.sprite_num)
+		return (0);
+	return (1);
+}
+
 void	ft_swap(t_vector *a, t_vector *b)
 {
 	t_vector c;
@@ -23,15 +76,18 @@ void	ft_swap(t_vector *a, t_vector *b)
 void	sortSprites(t_pmlx *pmlx, int amount)
 {
 	t_vector sprites[amount];
-	for(int k = 0; k < amount; k++) {
-	sprites[k].distance = pmlx->sp.spriteDistance[k];
-	sprites[k].ordre = pmlx->sp.spriteOrder[k];
-	}
+	int k;
 	int i;
 	int j;
 
+	k = -1;
 	i = -1;
 	j = -1;
+	while (++k < amount)
+	{
+		sprites[k].distance = pmlx->sp.spriteDistance[k];
+		sprites[k].ordre = pmlx->sp.spriteOrder[k];
+	}
 	while (++i < amount)
 	{
 		while (++j < amount)
@@ -41,10 +97,11 @@ void	sortSprites(t_pmlx *pmlx, int amount)
 		}
 		j = i;
 	}
-	for(int f = 0; f < amount; f++)
+	k = -1;
+	while(++k < amount)
 	{
-		pmlx->sp.spriteDistance[f] = sprites[amount - f - 1].distance;
-		pmlx->sp.spriteOrder[f] = sprites[amount - f - 1].ordre;
+		pmlx->sp.spriteDistance[k] = sprites[amount - k - 1].distance;
+		pmlx->sp.spriteOrder[k] = sprites[amount - k - 1].ordre;
 	}
 }
 

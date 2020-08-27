@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/26 17:07:35 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/27 17:12:24 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@
 #define uDiv 1
 #define vDiv 1
 #define vMove 0.0
+
+typedef struct	s_svec
+{
+	double x;
+	double y;
+}				t_svec;
 
 typedef struct	s_vec
 {
@@ -70,9 +76,9 @@ typedef struct	s_color
 typedef struct	s_parse
 {
 	int			sprite_num;
-	t_vec		*list;
+	t_svec		*list;
 	int			tabHeight;
-	char		dir;
+	char		id;
 	char		*tmp;
 	char		*map_join;
 	char		**cmap;
@@ -292,8 +298,23 @@ void		pos_dealer(t_pmlx *pmlx, char c);
 int			screenshot(t_pmlx *pmlx);
 void		err_parsing(t_pmlx *pmlx);
 int			ft_strcmp(char *str1, char *str2);
+void		ray_err(char *str, t_pmlx *pmlx);
+void		ft_puterr(char *str, t_pmlx *pmlx);
+
+void		ft_putchar(char c);
 void		ft_putendl(char *str);
 void		ft_putstr(char *str);
-void		ft_puterr(char *str, t_pmlx *pmlx);
-void		ray_err(char *str, t_pmlx *pmlx);
+
+int			convert_map(t_pmlx *pmlx);
+int			map_closed(t_pmlx *pmlx, int y, int x);
+
+int			get_char(char c);
+int			get_pos(t_pmlx *pmlx);
+void		set_pos(t_pmlx *pmlx, int j, int i);
+int			check_tex(t_pmlx *pmlx);
+int			ext_check(char *str);
+
+int			sprites_tab(t_pmlx *pmlx);
+void		free_tab(char **tab);
+void		set_null(t_pmlx *pmlx);
 #endif

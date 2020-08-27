@@ -29,11 +29,16 @@ FILES =		./sources/raycasting/raycasting\
 			./sources/raycasting/sprites\
 			./sources/raycasting/texture\
 			./sources/parsing/parsing\
+			./sources/parsing/error\
+			./sources/parsing/parsing_utils\
+			./sources/parsing/null\
+			./sources/parsing/rgb\
 			./sources/parsing/arg_1\
 			./sources/parsing/arg_2\
 			./sources/parsing/utils\
 			./sources/parsing/gnl/get_next_line\
 			./sources/parsing/gnl/get_next_line_utils\
+			./sources/parsing/utils/ft_putchars\
 			./sources/parsing/utils/ft_strdup\
 			./sources/parsing/utils/ft_split\
 			./sources/parsing/utils/ft_strjoin_N\

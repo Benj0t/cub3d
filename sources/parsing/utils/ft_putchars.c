@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_nbr2.c                                      :+:      :+:    :+:   */
+/*   ft_putchars.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/28 21:23:28 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/01/28 21:50:26 by bemoreau         ###   ########.fr       */
+/*   Created: 2020/08/27 15:47:29 by bemoreau          #+#    #+#             */
+/*   Updated: 2020/08/27 18:08:58 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "cub3d.h"
 
-void	ft_if_minus(int *tab, int *bool, int nb, char *str)
+void	ft_putendl(char *str)
 {
-	if (tab[5] == 1)
-	{
-		if (nb < 0)
-		{
-			*bool = 1;
-			ft_putchar('-');
-		}
-		ft_putstrr(str);
-	}
+	int i;
+
+	i = 0;
+	while (str[i])
+		write(1, &(str[i++]), 1);
+	write(1, "\n", 1);
 }
 
-void	ft_ifnot_minus(int *tab, int bool, int nb, char *str)
+void	ft_putstr(char *str)
 {
-	if (tab[5] == 0)
-	{
-		if (nb < 0 && bool == 0)
-			ft_putchar('-');
-		ft_putstrr(str);
-	}
+	int i;
+
+	i = 0;
+	while (str[i])
+		write(1, &(str[i++]), 1);
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
 }

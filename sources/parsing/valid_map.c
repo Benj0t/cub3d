@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:53 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/07/25 13:08:53 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/27 16:01:13 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	ver_check(char **tab, t_w_check *wall, int y, int x)
 	}
 }
 
-int	 verif_pos(char **tab, int y, int x)
+int		verif_pos(char **tab, int y, int x)
 {
-	int i;
-	int j;
-	t_w_check wall;
+	int			i;
+	int			j;
+	t_w_check	wall;
 
 	i = y;
 	j = x;
@@ -64,33 +64,11 @@ int	 verif_pos(char **tab, int y, int x)
 	return (0);
 }
 
-int	 map_closed(t_pmlx *pmlx, int y, int x)
+int		auth_char(t_pmlx *pmlx)
 {
-	if (y < 0 || x < 0 || x > pmlx->s.tabHeight || y >= ft_strlen(pmlx->s.cmap[x]))
-		exit(0);
-	if (find_char("O1S", pmlx->s.cmap[x][y]))
-		return (1);
-	if (pmlx->s.cmap[x][y] == '\0' || pmlx->s.cmap[x][y] == ' ')
-		exit(0);
-	if (pmlx->s.cmap[x][y] == '0')
-		pmlx->s.cmap[x][y] = 'O';
-	else if (pmlx->s.cmap[x][y] == '2')
-	{
-		pmlx->s.sprite_num++;
-		pmlx->s.cmap[x][y] = 'S';
-	}
-	map_closed(pmlx, y + 1, x);
-	map_closed(pmlx, y, x + 1);
-	map_closed(pmlx, y - 1, x);
-	map_closed(pmlx, y, x - 1);
-	return (1);
-}
-
-int	 auth_char(t_pmlx *pmlx)
-{
-	int i;
-	int j;
-	char *str;
+	int		i;
+	int		j;
+	char	*str;
 
 	str = "012NSEWO ";
 	i = 0;
@@ -109,7 +87,7 @@ int	 auth_char(t_pmlx *pmlx)
 	return (0);
 }
 
-int	 valid_map(t_pmlx *pmlx)
+int		valid_map(t_pmlx *pmlx)
 {
 	int ret;
 
