@@ -6,21 +6,15 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:55:31 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 16:57:19 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/28 11:23:03 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		ext_check(char *str)
+int		ext_check(char *str, char *ext)
 {
-	int len;
-
-	len = ft_strlen(str);
-	if (str[len - 1] == 'b' && str[len - 2] == 'u' &&\
-		str[len - 3] == 'c' && str[len - 4] == '.')
-		return (1);
-	return (0);
+	return (ft_strcmp(str + (ft_strlen(str) - ft_strlen(ext)), ext));
 }
 
 int		check_tex(t_pmlx *pmlx)

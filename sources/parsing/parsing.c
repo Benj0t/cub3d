@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:15 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 18:37:54 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/28 12:01:28 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	add_line(t_pmlx *pmlx)
 
 int		ft_parse(t_pmlx *pmlx, char *filename)
 {
-	if ((pmlx->s.fd = open(filename, O_RDONLY)) <= 0 || !(ext_check(filename)))
+	if ((pmlx->s.fd = open(filename, O_RDONLY)) <= 0 ||\
+		(ext_check(filename, ".cub") != 0))
 		ft_puterr("Wrong file", pmlx);
 	pmlx->s.tmp = NULL;
 	while ((get_next_line(pmlx->s.fd, &(pmlx->s.line))) > 0)
@@ -99,7 +100,7 @@ int		ft_parse(t_pmlx *pmlx, char *filename)
 	}
 	return (1);
 }
-// Norme + Leaks
+
 int		main(int argc, char **argv)
 {
 	t_pmlx pmlx;
@@ -107,7 +108,6 @@ int		main(int argc, char **argv)
 	set_null(&pmlx);
 	if (argc >= 2 && argc <= 3)
 	{
-
 		if (!(ft_parse(&pmlx, argv[1])))
 			ft_puterr("Parsing error", &pmlx);
 		if (!(create_map(&pmlx)) || (!convert_map(&pmlx)))

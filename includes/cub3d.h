@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 18:37:27 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/28 11:24:01 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,7 +312,7 @@ int			get_char(char c);
 int			get_pos(t_pmlx *pmlx);
 void		set_pos(t_pmlx *pmlx, int j, int i);
 int			check_tex(t_pmlx *pmlx);
-int			ext_check(char *str);
+int			ext_check(char *str, char *ext);
 
 int			sprites_tab(t_pmlx *pmlx);
 void		free_tab(char **tab);

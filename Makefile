@@ -79,18 +79,19 @@ WHITE = \033[1;37m
 all: 		$(NAME)
 
 $(NAME): 	$(OBJ)
-			@echo "\n $(VIOLET)[$(CC)] $(CYAN)Constructing executable:$(NOC) $@"
+			@echo "$(CYAN)Constructing executable:$(NOC) $@"
 			@$(L_CC) -o $(NAME) $(OBJ) $(MAC_LIB)
 
 .c.o:		${SRCS}
 			@echo " $(VIOLET)[$(L_CC)] $(GREEN)[$(FLAGS)]$(NOC) $(YELLOW)in progress ...:$(NOC) $< $(RED)->$(NOC) $@"
 			@$(L_CC) -c -I$(INC_PATH) $< -o ${<:.c=.o}
-
 clean:
-	rm -f $(OBJ)
+	@echo "\n$(RED)Removing '.o' objects: $(NOC) $@"
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "\n$(RED)Removing executable: $(NOC) $@"
+	@rm -f $(NAME)
 
 re: fclean all
 
