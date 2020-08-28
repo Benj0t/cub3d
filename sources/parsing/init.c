@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:42 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 17:08:41 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/28 13:32:28 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void		init_mlx(t_pmlx *pmlx)
 {
+	pmlx->img.bpp = 0;
+	pmlx->img.s_line = 0;
+	pmlx->img.endian = 0;
 	pmlx->mlx.mlx_ptr = mlx_init();
 	pmlx->mlx.win_ptr = mlx_new_window(pmlx->mlx.mlx_ptr, pmlx->s.R.x,\
 	pmlx->s.R.y, "Cub3D");

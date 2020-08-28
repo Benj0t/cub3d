@@ -23,12 +23,15 @@ vpath %.c sources/utils
 vpath %.c sources/raycasting
 
 FILES =		./sources/raycasting/raycasting\
-			./sources/raycasting/color\
+			./sources/raycasting/dda\
+			./sources/raycasting/draw\
+			./sources/raycasting/init_sprites\
 			./sources/raycasting/deal_key\
 			./sources/raycasting/move\
 			./sources/raycasting/sprites\
 			./sources/raycasting/texture\
 			./sources/parsing/parsing\
+			./sources/parsing/create_sprite\
 			./sources/parsing/error\
 			./sources/parsing/parsing_utils\
 			./sources/parsing/null\
@@ -44,12 +47,13 @@ FILES =		./sources/raycasting/raycasting\
 			./sources/parsing/utils/ft_strjoin_n\
 			./sources/parsing/utils/ft_substr\
 			./sources/parsing/utils/ft_strcmp\
+			./sources/parsing/utils/ft_swap\
 			./sources/parsing/valid_map\
 			./sources/parsing/init\
 			./sources/parsing/utils/ft_atoi\
 			./sources/parsing/map\
 			./sources/parsing/pos\
-			./sources/screenshot\
+			./sources/raycasting/screenshot\
 
 
 SRCS = $(addsuffix .c, $(FILES))

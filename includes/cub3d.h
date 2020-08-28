@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 11:24:01 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/28 14:50:49 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,19 +235,14 @@ typedef struct s_bmp
 	int planes;
 }				t_bmp;
 
+void		putpix(t_pmlx *pmlx, int x, int y, t_color color);
 int			raycast();
-void		ft_sprites(t_pmlx *pmlx, double ZBuffer[pmlx->s.R.x]);
+void		dda(t_ray *ray, t_pmlx *pmlx);
+void		init_dda(t_ray *ray, t_pmlx *pmlx);
+void		init_loop(t_ray *ray, t_pmlx *pmlx, int x);
+void		ft_sprites(t_pmlx *pmlx, double zbuffer[pmlx->s.R.x]);
 void		sortSprites(t_pmlx *pmlx, int amount);
 void		ft_swap(t_vector *a, t_vector *b);
-t_color		ft_light_blue();
-t_color		ft_gray();
-t_color		ft_red();
-t_color		ft_green();
-t_color		ft_blue();
-t_color		ft_white();
-t_color		ft_yellow();
-t_color		ft_dark();
-t_color 	ft_color_divide(t_color color);
 void		err_raycast(t_pmlx *pmlx);
 void		draw_ray(t_pmlx *pmlx, int x, t_draw draw, t_ray ray);
 int			deal_key_press(int key, t_pmlx *pmlx);
@@ -289,6 +284,7 @@ int			store_c(t_pmlx *pmlx);
 int			tab_is_digit(char **tab);
 int			tab_is_rgb(char **tab);
 void		put_rgb(t_color *c, char **tab);
+void		sp_rgb(t_pmlx *pmlx, t_color color, int stripe, int y);
 int			tab_len(char **tab);
 void		pos_north(t_pmlx *pmlx);
 void		pos_east(t_pmlx *pmlx);
@@ -315,6 +311,9 @@ int			check_tex(t_pmlx *pmlx);
 int			ext_check(char *str, char *ext);
 
 int			sprites_tab(t_pmlx *pmlx);
+void		spr_fix(t_pmlx *pmlx, int n);
 void		free_tab(char **tab);
 void		set_null(t_pmlx *pmlx);
+void		init_sp_tab(t_pmlx *pmlx);
+int			init_sprite(t_pmlx *pmlx);
 #endif

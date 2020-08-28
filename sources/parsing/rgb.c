@@ -6,11 +6,18 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 16:03:43 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 16:04:16 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/28 14:45:04 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	sp_rgb(t_pmlx *pmlx, t_color color, int stripe, int y)
+{
+	pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + RED_COMP] = color.R;
+	pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + GREEN_COMP] = color.G;
+	pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + BLUE_COMP] = color.B;
+}
 
 void	store_rgb(t_color *c, int nb, int index)
 {

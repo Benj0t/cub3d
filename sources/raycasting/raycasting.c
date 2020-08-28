@@ -6,117 +6,11 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 18:26:59 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/28 13:23:19 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	dda(t_ray *ray, t_pmlx *pmlx)
-{
-	while (ray->hit == 0)
-	{
-		if (ray->sideDistX < ray->sideDistY)
-		{
-			ray->sideDistX += ray->deltaDistX;
-			pmlx->pl.mapX += pmlx->pl.stepX;
-			ray->side = 0;
-			pmlx->tex.texNum = 0;
-		}
-		else
-		{
-			ray->sideDistY += ray->deltaDistY;
-			pmlx->pl.mapY += pmlx->pl.stepY;
-			ray->side = 1;
-			pmlx->tex.texNum = 1;
-		}
-		if (pmlx->s.map[pmlx->pl.mapX][pmlx->pl.mapY] > 0)
-			ray->hit = 1;
-	}
-	if (pmlx->tex.texNum == 0 && pmlx->pl.posX > pmlx->pl.mapX)
-		pmlx->tex.texNum = 2;
-	else if (pmlx->tex.texNum && pmlx->pl.posY > pmlx->pl.mapY)
-		pmlx->tex.texNum = 3;
-}
-
-void	putpix(t_pmlx *pmlx, int x, int y, t_color color)
-{
-	int pos;
-
-	pos = (y * pmlx->s.R.x + x) * 4;
-	pmlx->mlx.data_addr[pos + RED_COMP] = color.R;
-	pmlx->mlx.data_addr[pos + GREEN_COMP] = color.G;
-	pmlx->mlx.data_addr[pos + BLUE_COMP] = color.B;
-}
-
-void	draw_ray(t_pmlx *pmlx, int x, t_draw draw, t_ray ray)
-{
-	int		y;
-	t_color	color;
-
-	y = 0;
-	while (y < pmlx->s.R.y)
-	{
-		if (y < draw.Start)
-			putpix(pmlx, x, y, pmlx->s.ceil);
-		else if (y >= draw.Start && y <= draw.End)
-		{
-			pmlx->tex.step = (1.0 * texHeight) / draw.lineHeight;
-			pmlx->tex.texY = (int)pmlx->tex.texPos & (texHeight - 1);
-			pmlx->tex.texPos += pmlx->tex.step;
-			color.R = pmlx->img.image[pmlx->tex.texNum]\
-			[(texHeight * pmlx->tex.texY + pmlx->tex.texX) * 4 + RED_COMP];
-			color.G = pmlx->img.image[pmlx->tex.texNum]\
-			[(texHeight * pmlx->tex.texY + pmlx->tex.texX) * 4 + BLUE_COMP];
-			color.B = pmlx->img.image[pmlx->tex.texNum]\
-			[(texHeight * pmlx->tex.texY + pmlx->tex.texX) * 4 + GREEN_COMP];
-			putpix(pmlx, x, y, color);
-		}
-		else
-			putpix(pmlx, x, y, pmlx->s.floor);
-		y++;
-	}
-}
-
-void	init_dda(t_ray *ray, t_pmlx *pmlx)
-{
-	if (ray->rayDirX < 0)
-	{
-		pmlx->pl.stepX = -1;
-		ray->sideDistX = (pmlx->pl.posX - pmlx->pl.mapX) * ray->deltaDistX;
-	}
-	else
-	{
-		pmlx->pl.stepX = 1;
-		ray->sideDistX = (pmlx->pl.mapX + 1.0 - \
-		pmlx->pl.posX) * ray->deltaDistX;
-	}
-	if (ray->rayDirY < 0)
-	{
-		pmlx->pl.stepY = -1;
-		ray->sideDistY = (pmlx->pl.posY - pmlx->pl.mapY) * ray->deltaDistY;
-	}
-	else
-	{
-		pmlx->pl.stepY = 1;
-		ray->sideDistY = (pmlx->pl.mapY + 1.0 - pmlx->pl.posY) *\
-		ray->deltaDistY;
-	}
-	dda(ray, pmlx);
-}
-
-void	init_loop(t_ray *ray, t_pmlx *pmlx, int x)
-{
-	ray->cameraX = 2 * x / (double)pmlx->s.R.x - 1;
-	ray->rayDirX = pmlx->pl.dirX + pmlx->pl.planeX * ray->cameraX;
-	ray->rayDirY = pmlx->pl.dirY + pmlx->pl.planeY * ray->cameraX;
-	pmlx->pl.mapX = (int)pmlx->pl.posX;
-	pmlx->pl.mapY = (int)pmlx->pl.posY;
-	ray->deltaDistX = fabs(1 / ray->rayDirX);
-	ray->deltaDistY = fabs(1 / ray->rayDirY);
-	ray->hit = 0;
-	init_dda(ray, pmlx);
-}
 
 void	set_tex_prop(t_ray *ray, t_pmlx *pmlx, t_draw *draw)
 {

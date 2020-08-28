@@ -6,11 +6,26 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:49 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 16:04:19 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/08/28 14:45:48 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	spr_fix(t_pmlx *pmlx, int n)
+{
+	int i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (pmlx->s.list[i].x == -0.5)
+			pmlx->s.list[i].x = 0;
+		if (pmlx->s.list[i].y == -0.5)
+			pmlx->s.list[i].y = 0;
+		i++;
+	}
+}
 
 void	free_tab(char **tab)
 {
