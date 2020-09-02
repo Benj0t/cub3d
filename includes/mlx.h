@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:31 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/26 13:51:33 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/02 20:25:14 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,10 @@
 
 # define UP_KEY 126
 # define DOWN_KEY 125
-# define RIGHT_KEY 124
-# define LEFT_KEY 123
+# define RIGHT_KEY_L 124
+# define LEFT_KEY_L 123
+# define RIGHT_KEY_M 124
+# define LEFT_KEY_M 123
 
 /*
  * ** Special keys
@@ -330,7 +332,7 @@ int	mlx_expose_hook (void *win_ptr, int (*funct_ptr)(), void *param);
 int	mlx_loop_hook (void *mlx_ptr, int (*funct_ptr)(), void *param);
 int	mlx_loop (void *mlx_ptr);
 
-
+int	mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 /*
 **  hook funct are called as follow :
 **

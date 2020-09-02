@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:09:05 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 14:49:45 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/02 20:21:19 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,4 @@ void	ft_sprites(t_pmlx *pmlx, double zbuffer[pmlx->s.R.x])
 				sprites_2(pmlx, stripe);
 		}
 	}
-	if (pmlx->screenshot == 1)
-		screenshot(pmlx);
 }

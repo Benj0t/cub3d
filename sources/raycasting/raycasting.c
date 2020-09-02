@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 13:23:19 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/02 20:23:49 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,35 @@ void	main_loop(t_pmlx *pmlx)
 
 int		loop(t_pmlx *pmlx)
 {
-	if (pmlx->bool_W == 1)
+	if (pmlx->b.bool_W == 1)
 		forward(pmlx);
-	if (pmlx->bool_S == 1)
+	if (pmlx->b.bool_S == 1)
 		downward(pmlx);
-	if (pmlx->bool_A == 1)
+	if (pmlx->b.bool_A == 1)
 		mv_left(pmlx);
-	if (pmlx->bool_D == 1)
+	if (pmlx->b.bool_D == 1)
 		mv_right(pmlx);
+	if (pmlx->b.bool_L == 1)
+		rot_left(pmlx);
+	if (pmlx->b.bool_R == 1)
+		rot_right(pmlx);
 	main_loop(pmlx);
 	return (0);
 }
 
 int		raycast(t_pmlx *pmlx)
 {
-	init_player(pmlx);
 	init_mlx(pmlx);
+	init_player(pmlx);
 	if (init_sprite(pmlx) == 0)
 		ray_err("Sprites initialisation failed", pmlx);
 	init_texture(pmlx);
+	if (pmlx->screenshot == 1)
+	{
+		main_loop(pmlx);
+		screenshot(pmlx);
+		ray_err("Screenshot done", pmlx);
+	}
 	mlx_hook(pmlx->mlx.win_ptr, KEYPRESS, KEYPRESSMASK,\
 	&deal_key_press, pmlx);
 	mlx_hook(pmlx->mlx.win_ptr, KEYRELEASE, KEYRELEASEMASK,\

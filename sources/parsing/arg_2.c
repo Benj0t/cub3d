@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:38 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 11:33:59 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/02 18:56:35 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	store_no(t_pmlx *pmlx)
 		return (0);
 	pmlx->s.NO = ft_strdup(pmlx->s.tab[1]);
 	close(fd);
+	pmlx->s.n_key++;
 	return (1);
 }
 
@@ -35,6 +36,7 @@ int	store_so(t_pmlx *pmlx)
 		return (0);
 	pmlx->s.SO = ft_strdup(pmlx->s.tab[1]);
 	close(fd);
+	pmlx->s.n_key++;
 	return (1);
 }
 
@@ -48,6 +50,7 @@ int	store_we(t_pmlx *pmlx)
 		return (0);
 	pmlx->s.WE = ft_strdup(pmlx->s.tab[1]);
 	close(fd);
+	pmlx->s.n_key++;
 	return (1);
 }
 
@@ -61,6 +64,7 @@ int	store_ea(t_pmlx *pmlx)
 		return (0);
 	pmlx->s.EA = ft_strdup(pmlx->s.tab[1]);
 	close(fd);
+	pmlx->s.n_key++;
 	return (1);
 }
 
@@ -74,5 +78,6 @@ int	store_s(t_pmlx *pmlx)
 		return (0);
 	pmlx->s.S = ft_strdup(pmlx->s.tab[1]);
 	close(fd);
+	pmlx->s.n_key++;
 	return (1);
 }

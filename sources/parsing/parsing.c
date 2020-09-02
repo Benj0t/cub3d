@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:15 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 13:15:43 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/02 18:54:48 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int		get_arg(t_pmlx *pmlx)
 		return (store_c(pmlx));
 	else
 	{
-		return (1);
+		ft_puterr("Invalid map argument", pmlx);
 	}
+	return (1);
 }
 
 void	add_line2(t_pmlx *pmlx)
@@ -99,29 +100,4 @@ int		ft_parse(t_pmlx *pmlx, char *filename)
 		}
 	}
 	return (1);
-}
-
-int		main(int argc, char **argv)
-{
-	t_pmlx pmlx;
-
-	set_null(&pmlx);
-	if (argc >= 2 && argc <= 3)
-	{
-		if (!(ft_parse(&pmlx, argv[1])))
-			ft_puterr("Parsing error", &pmlx);
-		if (!(create_map(&pmlx)) || (!convert_map(&pmlx)))
-			ft_puterr("Map creation error", &pmlx);
-		if (!(get_pos(&pmlx)) || !(valid_map(&pmlx)) || !(check_tex(&pmlx)))
-			ft_puterr("Map invalid", &pmlx);
-		if (!sprites_tab(&pmlx))
-			ft_puterr("Sprites creation error", &pmlx);
-		if (argc == 3 && !ft_strcmp(argv[2], "--save"))
-			pmlx.screenshot = 1;
-		raycast(&pmlx);
-	}
-	else
-	{
-		ft_puterr("Invalid Number of Arguments\n", &pmlx);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:42 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 13:32:28 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/02 20:39:08 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ static void	init_dir(t_pmlx *pmlx)
 
 void		init_player(t_pmlx *pmlx)
 {
-	pmlx->bool_ESC = 0;
-	pmlx->pl.moveSpeed = 0.075;
+	pmlx->pl.moveSpeed = 0.09;
 	pmlx->pl.rotSpeed = 0.05;
 	init_dir(pmlx);
 }

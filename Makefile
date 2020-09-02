@@ -31,6 +31,7 @@ FILES =		./sources/raycasting/raycasting\
 			./sources/raycasting/sprites\
 			./sources/raycasting/texture\
 			./sources/parsing/parsing\
+			./sources/parsing/main\
 			./sources/parsing/create_sprite\
 			./sources/parsing/error\
 			./sources/parsing/parsing_utils\

@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:49 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 14:45:48 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/02 17:17:56 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@ void	spr_fix(t_pmlx *pmlx, int n)
 			pmlx->s.list[i].y = 0;
 		i++;
 	}
-}
-
-void	free_tab(char **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
 }
 
 int		find_char(char *str, char c)

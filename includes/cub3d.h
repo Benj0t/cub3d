@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 14:50:49 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/02 20:27:16 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct	s_parse
 	char		*line;
 	char		**tab;
 	int	 		fd;
+	int			n_key;
 	char		*NO;
 	char		*SO;
 	char		*WE;
@@ -113,6 +114,8 @@ typedef struct  s_mlx
 	int		endian;
 	int		bpp;
 	int		size_l;
+	int		sizex;
+	int		sizey;
 }				t_mlx;
 
 typedef struct s_ray
@@ -202,6 +205,15 @@ typedef struct	s_sprite
 	int			sprite;
 }				t_sprite;
 
+typedef struct	s_bool
+{
+	int			bool_W;
+	int			bool_A;
+	int			bool_S;
+	int			bool_D;
+	int			bool_L;
+	int			bool_R;
+}				t_bool;
 
 typedef struct	s_pmlx
 {
@@ -211,12 +223,8 @@ typedef struct	s_pmlx
 	t_mlx		mlx;
 	t_player	pl;
 	t_parse		s;
+	t_bool		b;
 	int			screenshot;
-	int			bool_W;
-	int			bool_A;
-	int			bool_S;
-	int			bool_D;
-	int			bool_ESC;
 }				t_pmlx;
 
 typedef struct s_coords_sprite
@@ -235,6 +243,9 @@ typedef struct s_bmp
 	int planes;
 }				t_bmp;
 
+void		mv_left(t_pmlx *pmlx);
+void		mv_right(t_pmlx *pmlx);
+int			ft_parse(t_pmlx *pmlx, char *filename);
 void		putpix(t_pmlx *pmlx, int x, int y, t_color color);
 int			raycast();
 void		dda(t_ray *ray, t_pmlx *pmlx);
@@ -251,13 +262,13 @@ int			deal_key_leave(int key, t_pmlx *pmlx);
 int			deal_key(int key, t_pmlx *pmlx);
 void		forward(t_pmlx *pmlx);
 void		downward(t_pmlx *pmlx);
-void		mv_left(t_pmlx *pmlx);
-void		mv_right(t_pmlx *pmlx);
+void		rot_left(t_pmlx *pmlx);
+void		rot_right(t_pmlx *pmlx);
 void		main_loop(t_pmlx *pmlx);
 void		init_texture(t_pmlx *pmlx);
 t_w_check	init_w_check();
 void	 	init_parse();
-int         init_sprite(t_pmlx *pmlx);
+int			init_sprite(t_pmlx *pmlx);
 void		init_mlx(t_pmlx *pmlx);
 void		init_player(t_pmlx *pmlx);
 int			ft_strlen(char *str);
@@ -295,6 +306,7 @@ int			screenshot(t_pmlx *pmlx);
 void		err_parsing(t_pmlx *pmlx);
 int			ft_strcmp(char *str1, char *str2);
 void		ray_err(char *str, t_pmlx *pmlx);
+void		ft_destroy(t_pmlx *pmlx);
 void		ft_puterr(char *str, t_pmlx *pmlx);
 
 void		ft_putchar(char c);
