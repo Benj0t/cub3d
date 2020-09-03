@@ -9,7 +9,7 @@
 	set_null(&pmlx);
 	if (argc == 2 || argc == 3)
 	{
-		if (argc == 3 && ft_strcmp(argv[2], "--save"))
+		if (argc == 3 && ft_strcmp(argv[2], "--save") != 0)
 			ft_puterr("Invalid second argument", &pmlx);
 		if (!(ft_parse(&pmlx, argv[1])) || pmlx.s.n_key != 8)
 			ft_puterr("Parsing error", &pmlx);

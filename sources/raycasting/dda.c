@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 12:49:40 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:32:06 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:49:21 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	dda(t_ray *ray, t_pmlx *pmlx)
 	{
 		if (ray->sidedistx < ray->sidedisty)
 		{
-			ray->sidedistx += ray->deltadistX;
+			ray->sidedistx += ray->deltadistx;
 			pmlx->pl.mapx += pmlx->pl.stepx;
 			ray->side = 0;
 			pmlx->tex.texnum = 0;
@@ -44,13 +44,13 @@ void	init_dda(t_ray *ray, t_pmlx *pmlx)
 	if (ray->raydirx < 0)
 	{
 		pmlx->pl.stepx = -1;
-		ray->sidedistx = (pmlx->pl.posx - pmlx->pl.mapx) * ray->deltadistX;
+		ray->sidedistx = (pmlx->pl.posx - pmlx->pl.mapx) * ray->deltadistx;
 	}
 	else
 	{
 		pmlx->pl.stepx = 1;
 		ray->sidedistx = (pmlx->pl.mapx + 1.0 - \
-		pmlx->pl.posx) * ray->deltadistX;
+		pmlx->pl.posx) * ray->deltadistx;
 	}
 	if (ray->raydiry < 0)
 	{
@@ -73,7 +73,7 @@ void	init_loop(t_ray *ray, t_pmlx *pmlx, int x)
 	ray->raydiry = pmlx->pl.diry + pmlx->pl.planey * ray->camerax;
 	pmlx->pl.mapx = (int)pmlx->pl.posx;
 	pmlx->pl.mapy = (int)pmlx->pl.posy;
-	ray->deltadistX = fabs(1 / ray->raydirx);
+	ray->deltadistx = fabs(1 / ray->raydirx);
 	ray->deltadisty = fabs(1 / ray->raydiry);
 	ray->hit = 0;
 	init_dda(ray, pmlx);

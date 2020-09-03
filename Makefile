@@ -65,7 +65,7 @@ L_CC = clang
 LINUX = 0
 FLAGS = -Wall -Wextra -Werror
 L_LIB = -L $(INC_PATH)minilibx_linux/minilibx/ -lmlx -L%%%%/../lib -lXext -lX11 -lm
-MAC_LIB = -L $(INC_PATH)minilibx/ -lmlx -framework OpenGL -framework Appkit
+MAC_LIB = -L ./minilibx/ -lmlx -framework OpenGL -framework Appkit
 
 ### COLORS ###
 

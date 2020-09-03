@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:37:44 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:56:58 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ int		raycast(t_pmlx *pmlx)
 		screenshot(pmlx);
 		ray_err("Screenshot done", pmlx);
 	}
-	mlx_hook(pmlx->mlx.win_ptr, KEYPRESS, KEYPRESSMASK,\
+	mlx_hook(pmlx->mlx.win_ptr, KEYPRESS, (1L << 0),\
 	&deal_key_press, pmlx);
-	mlx_hook(pmlx->mlx.win_ptr, KEYRELEASE, KEYRELEASEMASK,\
+	mlx_hook(pmlx->mlx.win_ptr, KEYRELEASE, (1L << 1),\
 	&deal_key_release, pmlx);
-	mlx_hook(pmlx->mlx.win_ptr, DESTROYNOTIFY, LEAVEWINDOWMASK,\
+	mlx_hook(pmlx->mlx.win_ptr, DESTROYNOTIFY, (1L << 5),\
 	&deal_key_leave, pmlx);
 	mlx_loop_hook(pmlx->mlx.mlx_ptr, &loop, pmlx);
 	mlx_loop(pmlx->mlx.mlx_ptr);

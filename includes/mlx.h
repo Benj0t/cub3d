@@ -6,48 +6,12 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:31 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/02 20:25:14 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:57:39 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MLX_H
-#define	MLX_H
-
-/*
- * ** Event mask define
- * */
-
-# define NOEVENTMASK 0L
-# define KEYPRESSMASK (1L<<0)
-# define KEYRELEASEMASK (1L<<1)
-# define BUTTONPRESSMASK (1L<<2)
-# define BUTTONRELEASEMASK (1L<<3)
-# define ENTERWINDOWMASK (1L<<4)
-# define LEAVEWINDOWMASK (1L<<5)
-# define POINTERMOTIONMASK (1L<<6)
-# define POINTERMOTIONHINTMASK (1L<<7)
-# define BUTTON1MOTIONMASK (1L<<8)
-# define BUTTON2MOTIONMASK (1L<<9)
-# define BUTTON3MOTIONMASK (1L<<10)
-# define BUTTON4MOTIONMASK (1L<<11)
-# define BUTTON5MOTIONMASK (1L<<12)
-# define BUTTONMOTIONMASK (1L<<13)
-# define KEYMAPSTATEMASK (1L<<14)
-# define EXPOSUREMASK (1L<<15)
-# define VISIBILITYCHANGEMASK (1L<<16)
-# define STRUCTURENOTIFYMASK (1L<<17)
-# define RESIZEREDIRECTMASK (1L<<18)
-# define SUBSTRUCTURENOTIFYMASK (1L<<19)
-# define SUBSTRUCTUREREDIRECTMASK (1L<<20)
-# define FOCUSCHANGEMASK (1L<<21)
-# define PROPERTYCHANGEMASK (1L<<22)
-# define COLORMAPCHANGEMASK (1L<<23)
-# define OWNERGRABBUTTONMASK (1L<<24)
-
-/*
- * ** Event define
- * */
-
+# define MLX_H
 # define KEYPRESS 2
 # define KEYRELEASE 3
 # define BUTTONPRESS 4
@@ -71,11 +35,6 @@
 # define CONFIGURENOTIFY 22
 # define CONFIGUREREQUEST 23
 # define GRAVITYNOTIFY 24
-
-/*
- * ** Mouse button keycodes
- * */
-
 # define BUT1_KEY 1
 # define BUT2_KEY 2
 # define BUT3_KEY 3
@@ -83,15 +42,6 @@
 # define SCROLLDOWN_KEY 5
 # define SCROLLLEFT_KEY 6
 # define SCROLLRIGHT_KEY 7
-
-/*
- * ** Keyboard keys
- * */
-
-/*
- * ** Letters keys
- * */
-
 # define A_KEY 0
 # define B_KEY 11
 # define C_KEY 8
@@ -128,10 +78,6 @@
 # define S_KEY_M 1
 # define D_KEY_M 2
 # define ESC_KEY_M 53
-/*
- * ** Numbers (not numeric keypad ones)
- * */
-
 # define K1_KEY 18
 # define K2_KEY 19
 # define K3_KEY 20
@@ -142,23 +88,6 @@
 # define K8_KEY 28
 # define K9_KEY 25
 # define K0_KEY 29
-
-/*
- * ** Special characters
- * ** SP_KEY is the space ( ) key
- * ** BQ_KEY is the back quote (`) and tilde (~) key
- * ** MN_KEY is the minus (-) and underscore (_) key
- * ** PL_KEY is the plus (+) and equal (=) key
- * ** SBO_KEY is the square bracket opening ([) and brace opening ({) key
- * ** SBC_KEY is the square bracket closing (]) and brace closing (}) key
- * ** BSL_KEY is the backslash (\) and pipe (|) key
- * ** SC_KEY is the semicolon (;) and colon (:) key
- * ** SQ_KEY is the simple quote (') and double quote (") key
- * ** CM_KEY is the comma (,) and angle bracket opening (<) key
- * ** PT_KEY is the point (.) and angle bracket closing (>) key
- * ** SL_KEY is the slash (/) and question mark (?) key
- * */
-
 # define SP_KEY 49
 # define BQ_KEY 50
 # define MN_KEY 27
@@ -171,12 +100,6 @@
 # define CM_KEY 43
 # define PT_KEY 47
 # define SL_KEY 44
-
-/*
- * ** Functions keys, you might use fn key to use them
- * ** Seems that did not work. I don't know. Deso pas deso, au pire on les use pas.
- * */
-
 # define F1_KEY 122
 # define F2_KEY 120
 # define F3_KEY 99
@@ -196,32 +119,12 @@
 # define F17_KEY 64
 # define F18_KEY 79
 # define F19_KEY 80
-
-/*
- * ** Arrow keys
- * */
-
 # define UP_KEY 126
 # define DOWN_KEY 125
 # define RIGHT_KEY_L 124
 # define LEFT_KEY_L 123
 # define RIGHT_KEY_M 124
 # define LEFT_KEY_M 123
-
-/*
- * ** Special keys
- * ** CL_KEY is the caps lock key
- * ** LSFT_KEY and RLFT_KEY are the left shift and right shift keys
- * ** LCTRL_KEY and RCTRL_KEY are the left control and right control keys
- * ** LOPT_KEY and ROPT_KEY are the left option and right option keys
- * ** LCMD_KEY and RCMD_KEY are the left command and right command keys
- * ** LDEL_KEY and RDEL_KEY are the left delete and right delete keys
- * ** RTN_KEY is the return key
- * ** EJ_KEY is the eject key and doesn't react
- * ** PUP_KEY and PDOWN_KEY are the page up and page down keys
- * ** CLR_KEY is the clear key
- * */
-
 # define ESC_KEY 53
 # define TAB_KEY 48
 # define CL_KEY 272
@@ -239,22 +142,10 @@
 # define FN_KEY 279
 # define RDEL_KEY 117
 # define HOME_KEY 115
-# define end_KEY 119
+# define END_KEY 119
 # define PUP_KEY 116
 # define PDOWN_KEY 121
 # define CLR_KEY 71
-
-/*
- * ** Numeric keyboard keys, preceded by NK
- * ** NKEQ_KEY is the equal (=) key
- * ** NKSL_KEY is the slash (/) key
- * ** NKWC_KEY is the wildcard (*) key
- * ** NKMN_KEY is the minus (-) key
- * ** NKPL_KEY is the plus (+) key
- * ** NKPT_KEY is the point (.) key
- * ** NKNTR_KEY is the enter key
- * */
-
 # define NK1_KEY 83
 # define NK2_KEY 84
 # define NK3_KEY 85
@@ -272,109 +163,50 @@
 # define NKPL_KEY 69
 # define NKPT_KEY 65
 # define NKNTR_KEY 76
-
-#define RED_COMP 2
-#define GREEN_COMP 1
-#define BLUE_COMP 0
-#define ALPHA_COMP 3
+# define RED_COMP 2
+# define GREEN_COMP 1
+# define BLUE_COMP 0
+# define ALPHA_COMP 3
 
 void	*mlx_init();
-/*
-**  needed before everything else.
-**  return (void *)0 if failed
-*/
-
-
-/*
-** Basic actions
-*/
-
 void	*mlx_new_window(void *mlx_ptr, int size_x, int size_y, char *title);
-/*
-**  return void *0 if failed
-*/
-int	mlx_clear_window(void *mlx_ptr, void *win_ptr);
-int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
-/*
-**  origin for x & y is top left corner of the window
-**  y down is positive
-**  color is 0x00RRGGBB
-*/
-
-
-/*
-** Image stuff
-*/
-
-void	*mlx_new_image(void *mlx_ptr,int width,int height);
-/*
-**  return void *0 if failed
-*/
+int		mlx_clear_window(void *mlx_ptr, void *win_ptr);
+int		mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
+void	*mlx_new_image(void *mlx_ptr, int width, int height);
 char	*mlx_get_data_addr(void *img_ptr, int *bits_per_pixel,
-			   int *size_line, int *endian);
-/*
-**  endian : 0 = sever X is little endian, 1 = big endian
-**  endian : useless on macos, client and graphical framework have the same endian
-*/
-int	mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr,
+			int *size_line, int *endian);
+int		mlx_put_image_to_window(void *mlx_ptr, void *win_ptr, void *img_ptr,
 				int x, int y);
 unsigned int	mlx_get_color_value(void *mlx_ptr, int color);
-
-
-/*
-** dealing with Events
-*/
-
-int	mlx_mouse_hook (void *win_ptr, int (*funct_ptr)(), void *param);
-int	mlx_key_hook (void *win_ptr, int (*funct_ptr)(), void *param);
+int			mlx_mouse_hook (void *win_ptr, int (*funct_ptr)(), void *param);
+int			mlx_key_hook (void *win_ptr, int (*funct_ptr)(), void *param);
 int	mlx_expose_hook (void *win_ptr, int (*funct_ptr)(), void *param);
 
 int	mlx_loop_hook (void *mlx_ptr, int (*funct_ptr)(), void *param);
 int	mlx_loop (void *mlx_ptr);
-
 int	mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
-/*
-**  hook funct are called as follow :
-**
-**   expose_hook(void *param);
-**   key_hook(int keycode, void *param);
-**   mouse_hook(int button, int x,int y, void *param);
-**   loop_hook(void *param);
-**
-*/
-
-
-/*
-**  Usually asked...
-*/
-
 int	mlx_string_put(void *mlx_ptr, void *win_ptr, int x, int y, int color,
-		       char *string);
+		char *string);
 void	*mlx_xpm_to_image(void *mlx_ptr, char **xpm_data,
-			  int *width, int *height);
+			int *width, int *height);
 void	*mlx_xpm_file_to_image(void *mlx_ptr, char *filename,
-			       int *width, int *height);
-void    *mlx_png_file_to_image(void *mlx_ptr, char *file, int *width, int *height);
+			int *width, int *height);
+void	*mlx_png_file_to_image(void *mlx_ptr, char *file,\
+		int *width, int *height);
 
 int	mlx_destroy_window(void *mlx_ptr, void *win_ptr);
 
 int	mlx_destroy_image(void *mlx_ptr, void *img_ptr);
-
-/*
-**  generic hook system for all events, and minilibX functions that
-**    can be hooked. Some macro and defines from X11/X.h are needed here.
-*/
-
 int	mlx_hook(void *win_ptr, int x_event, int x_mask,
-                 int (*funct)(), void *param);
+			int (*funct)(), void *param);
 
-int     mlx_mouse_hide();
-int     mlx_mouse_show();
-int     mlx_mouse_move(void *win_ptr, int x, int y);
-int     mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
+int	mlx_mouse_hide();
+int	mlx_mouse_show();
+int	mlx_mouse_move(void *win_ptr, int x, int y);
+int	mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
 
 int	mlx_do_key_autorepeatoff(void *mlx_ptr);
 int	mlx_do_key_autorepeaton(void *mlx_ptr);
 int	mlx_do_sync(void *mlx_ptr);
 
-#endif /* MLX_H */
+#endif
