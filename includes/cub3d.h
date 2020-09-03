@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/02 20:27:16 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:38:31 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@
 #define RED_COMP 2
 #define GREEN_COMP 1
 #define BLUE_COMP 0
-#define texWidth 64
-#define texHeight 64
+#define TEXWIDTH 64
+#define TEXHEIGHT 64
 
-#define uDiv 1
-#define vDiv 1
-#define vMove 0.0
+#define UDIV 1
+#define VDIV 1
+#define VMOVE 0.0
 
 typedef struct	s_svec
 {
@@ -67,17 +67,17 @@ typedef struct	s_w_check
 
 typedef struct	s_color
 {
-	unsigned char	R;
-	unsigned char	G;
-	unsigned char	B;
-	unsigned char	A;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	unsigned char	a;
 }				t_color;
 
 typedef struct	s_parse
 {
 	int			sprite_num;
 	t_svec		*list;
-	int			tabHeight;
+	int			tabheight;
 	char		id;
 	char		*tmp;
 	char		*map_join;
@@ -87,15 +87,15 @@ typedef struct	s_parse
 	char		**tab;
 	int	 		fd;
 	int			n_key;
-	char		*NO;
-	char		*SO;
-	char		*WE;
-	char		*EA;
-	char		*S;
-	char		*C;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*s;
+	char		*c;
 	t_color 	floor;
 	t_color 	ceil;
-	t_vec		R;
+	t_vec		r;
 
 }				t_parse;
 
@@ -120,50 +120,50 @@ typedef struct  s_mlx
 
 typedef struct s_ray
 {
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistX;
+	double	deltadisty;
+	double	perpwalldist;
 	int		hit;
 	int		side;
 }				t_ray;
 
 typedef struct s_draw
 {
-	int		lineHeight;
-	int		Start;
-	int		End;
+	int		lineheight;
+	int		start;
+	int		end;
 }				t_draw;
 
 typedef struct s_player
 {
-	double		oldDirX;
-	double		oldPlaneX;
-	double		moveSpeed;
-	double		rotSpeed;
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
-	double		stepX;
-	double		stepY;
-	int			mapX;
-	int			mapY;
+	double		olddirx;
+	double		oldplanex;
+	double		movespeed;
+	double		rotspeed;
+	double		posx;
+	double		posy;
+	double		dirx;
+	double		diry;
+	double		planex;
+	double		planey;
+	double		stepx;
+	double		stepy;
+	int			mapx;
+	int			mapy;
 }				t_player;
 
 typedef struct s_wall
 {
-	int		texNum;
-	double	wallX;
-	double	texPos;
-	int		texX;
-	int		texY;
+	int		texnum;
+	double	wallx;
+	double	texpos;
+	int		texx;
+	int		texy;
 	double		step;
 }				t_wall;
 
@@ -174,30 +174,30 @@ typedef struct s_img
 	int		endian;
 	void	**addr;
 	char	**image;
-	int		img_H;
-	int		img_W;
+	int		img_h;
+	int		img_w;
 }				t_img;
 
 typedef struct	s_sprite
 {
-	int			*spriteOrder;
-	double		*spriteDistance;
-	double		spriteX;
-	double		spriteY;
-	double		spriteScreenX;
-	double		invDet;
-	double		transformX;
-	double		transformY;
-	int			vMoveScreen;
-	int			spriteHeight;
-	int			drawStartY;
-	int			drawStartX;
-	int			drawEndY;
-	int			drawEndX;
+	int			*sprite_order;
+	double		*sprite_distance;
+	double		spritex;
+	double		spritey;
+	double		spritescreenx;
+	double		invdet;
+	double		transformx;
+	double		transformy;
+	int			vmove_screen;
+	int			spriteheight;
+	int			drawstarty;
+	int			drawstartx;
+	int			drawendy;
+	int			drawendx;
 	int			stripe;
-	int			spriteWidth;
-	int			texX;
-	int			texY;
+	int			spritewidth;
+	int			texx;
+	int			texy;
 	int			d;
 
 	double		x;
@@ -207,12 +207,12 @@ typedef struct	s_sprite
 
 typedef struct	s_bool
 {
-	int			bool_W;
-	int			bool_A;
-	int			bool_S;
-	int			bool_D;
-	int			bool_L;
-	int			bool_R;
+	int			bool_w;
+	int			bool_a;
+	int			bool_s;
+	int			bool_d;
+	int			bool_l;
+	int			bool_r;
 }				t_bool;
 
 typedef struct	s_pmlx
@@ -251,7 +251,7 @@ int			raycast();
 void		dda(t_ray *ray, t_pmlx *pmlx);
 void		init_dda(t_ray *ray, t_pmlx *pmlx);
 void		init_loop(t_ray *ray, t_pmlx *pmlx, int x);
-void		ft_sprites(t_pmlx *pmlx, double zbuffer[pmlx->s.R.x]);
+void		ft_sprites(t_pmlx *pmlx, double zbuffer[pmlx->s.r.x]);
 void		sortSprites(t_pmlx *pmlx, int amount);
 void		ft_swap(t_vector *a, t_vector *b);
 void		err_raycast(t_pmlx *pmlx);

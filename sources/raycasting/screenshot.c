@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:53:01 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 14:56:00 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:24:59 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		bmp_header(t_pmlx *pmlx, int fd)
 	int		i;
 
 	i = 0;
-	head.size = (4 * pmlx->s.R.x * pmlx->s.R.y);
+	head.size = (4 * pmlx->s.r.x * pmlx->s.r.y);
 	head.reserved = 0;
 	head.offset_bits = 54;
 	head.header_bytes = 40;
@@ -28,8 +28,8 @@ int		bmp_header(t_pmlx *pmlx, int fd)
 	write(fd, &head.reserved, 4);
 	write(fd, &head.offset_bits, 4);
 	write(fd, &head.header_bytes, 4);
-	write(fd, &pmlx->s.R.x, 4);
-	write(fd, &pmlx->s.R.y, 4);
+	write(fd, &pmlx->s.r.x, 4);
+	write(fd, &pmlx->s.r.y, 4);
 	write(fd, &head.planes, 2);
 	write(fd, &pmlx->mlx.bpp, 2);
 	while (i++ < 6)
@@ -43,14 +43,14 @@ int		bmp_body(t_pmlx *pmlx, int fd)
 	int		line;
 	int		i_towrite;
 
-	line = pmlx->s.R.y - 1;
+	line = pmlx->s.r.y - 1;
 	i_towrite = 0;
 	while (line >= 0)
 	{
 		col = 0;
-		while (col < pmlx->s.R.x)
+		while (col < pmlx->s.r.x)
 		{
-			i_towrite = (line * pmlx->s.R.x + col) * 4;
+			i_towrite = (line * pmlx->s.r.x + col) * 4;
 			write(fd, &pmlx->mlx.data_addr[i_towrite], 4);
 			col++;
 		}

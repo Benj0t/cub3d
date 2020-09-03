@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:20 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 16:06:57 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:28:26 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		count_n(char *str)
 
 int				map_closed(t_pmlx *pmlx, int y, int x)
 {
-	if (y < 0 || x < 0 || x > pmlx->s.tabHeight ||\
+	if (y < 0 || x < 0 || x > pmlx->s.tabheight ||\
 		y >= ft_strlen(pmlx->s.cmap[x]))
 		ft_puterr("Map invalid", pmlx);
 	if (find_char("O1S", pmlx->s.cmap[x][y]))
@@ -55,12 +55,12 @@ int				convert_map(t_pmlx *pmlx)
 	int j;
 
 	i = 0;
-	pmlx->s.tabHeight = tab_len(pmlx->s.cmap);
+	pmlx->s.tabheight = tab_len(pmlx->s.cmap);
 	if (!(pmlx->s.map = (int **)malloc(sizeof(int *) * (\
-		pmlx->s.tabHeight + 1))))
+		pmlx->s.tabheight + 1))))
 		return (0);
-	pmlx->s.map[pmlx->s.tabHeight] = NULL;
-	while (i < pmlx->s.tabHeight)
+	pmlx->s.map[pmlx->s.tabheight] = NULL;
+	while (i < pmlx->s.tabheight)
 	{
 		j = -1;
 		len = ft_strlen(pmlx->s.cmap[i]);

@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:09:05 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/02 20:21:19 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:36:56 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	sort_sprites(t_pmlx *pmlx, int amount)
 	i = -1;
 	while (++i < amount)
 	{
-		sprites[i].distance = pmlx->sp.spriteDistance[i];
-		sprites[i].ordre = pmlx->sp.spriteOrder[i];
+		sprites[i].distance = pmlx->sp.sprite_distance[i];
+		sprites[i].ordre = pmlx->sp.sprite_order[i];
 	}
 	i = -1;
 	j = -1;
@@ -36,46 +36,46 @@ void	sort_sprites(t_pmlx *pmlx, int amount)
 	i = -1;
 	while (++i < amount)
 	{
-		pmlx->sp.spriteDistance[i] = sprites[amount - i - 1].distance;
-		pmlx->sp.spriteOrder[i] = sprites[amount - i - 1].ordre;
+		pmlx->sp.sprite_distance[i] = sprites[amount - i - 1].distance;
+		pmlx->sp.sprite_order[i] = sprites[amount - i - 1].ordre;
 	}
 }
 
 void	start_sp2(t_pmlx *pmlx, int i)
 {
-	if (pmlx->sp.drawStartY < 0)
-		pmlx->sp.drawStartY = 0;
-	pmlx->sp.drawEndY = pmlx->sp.spriteHeight / 2 +\
-						pmlx->s.R.y / 2 + pmlx->sp.vMoveScreen;
-	if (pmlx->sp.drawEndY >= pmlx->s.R.y)
-		pmlx->sp.drawEndY = pmlx->s.R.y - 1;
-	pmlx->sp.spriteWidth = abs((int)(pmlx->s.R.y /\
-						(pmlx->sp.transformY))) / uDiv;
-	pmlx->sp.drawStartX = -pmlx->sp.spriteWidth / 2 + pmlx->sp.spriteScreenX;
-	if (pmlx->sp.drawStartX < 0)
-		pmlx->sp.drawStartX = 0;
-	pmlx->sp.drawEndX = pmlx->sp.spriteWidth / 2 + pmlx->sp.spriteScreenX;
-	if (pmlx->sp.drawEndX >= pmlx->s.R.x)
-		pmlx->sp.drawEndX = pmlx->s.R.x - 1;
+	if (pmlx->sp.drawstarty < 0)
+		pmlx->sp.drawstarty = 0;
+	pmlx->sp.drawendy = pmlx->sp.spriteheight / 2 +\
+						pmlx->s.r.y / 2 + pmlx->sp.vmove_screen;
+	if (pmlx->sp.drawendy >= pmlx->s.r.y)
+		pmlx->sp.drawendy = pmlx->s.r.y - 1;
+	pmlx->sp.spritewidth = abs((int)(pmlx->s.r.y /\
+						(pmlx->sp.transformy))) / UDIV;
+	pmlx->sp.drawstartx = -pmlx->sp.spritewidth / 2 + pmlx->sp.spritescreenx;
+	if (pmlx->sp.drawstartx < 0)
+		pmlx->sp.drawstartx = 0;
+	pmlx->sp.drawendx = pmlx->sp.spritewidth / 2 + pmlx->sp.spritescreenx;
+	if (pmlx->sp.drawendx >= pmlx->s.r.x)
+		pmlx->sp.drawendx = pmlx->s.r.x - 1;
 }
 
 void	start_sp(t_pmlx *pmlx, int i)
 {
-	pmlx->sp.spriteX = pmlx->s.list[pmlx->sp.spriteOrder[i]].x - pmlx->pl.posX;
-	pmlx->sp.spriteY = pmlx->s.list[pmlx->sp.spriteOrder[i]].y - pmlx->pl.posY;
-	pmlx->sp.invDet = 1.0 / (pmlx->pl.planeX * pmlx->pl.dirY -\
-						pmlx->pl.dirX * pmlx->pl.planeY);
-	pmlx->sp.transformX = pmlx->sp.invDet * (pmlx->pl.dirY *\
-						pmlx->sp.spriteX - pmlx->pl.dirX * pmlx->sp.spriteY);
-	pmlx->sp.transformY = pmlx->sp.invDet * (-pmlx->pl.planeY *\
-					pmlx->sp.spriteX + pmlx->pl.planeX * pmlx->sp.spriteY);
-	pmlx->sp.spriteScreenX = (int)((pmlx->s.R.x / 2) *\
-						(1 + pmlx->sp.transformX / pmlx->sp.transformY));
-	pmlx->sp.vMoveScreen = (int)(vMove / pmlx->sp.transformY);
-	pmlx->sp.spriteHeight = abs((int)(pmlx->s.R.y /\
-							(pmlx->sp.transformY))) / vDiv;
-	pmlx->sp.drawStartY = -pmlx->sp.spriteHeight / 2 +\
-							pmlx->s.R.y / 2 + pmlx->sp.vMoveScreen;
+	pmlx->sp.spritex = pmlx->s.list[pmlx->sp.sprite_order[i]].x - pmlx->pl.posx;
+	pmlx->sp.spritey = pmlx->s.list[pmlx->sp.sprite_order[i]].y - pmlx->pl.posy;
+	pmlx->sp.invdet = 1.0 / (pmlx->pl.planex * pmlx->pl.diry -\
+						pmlx->pl.dirx * pmlx->pl.planey);
+	pmlx->sp.transformx = pmlx->sp.invdet * (pmlx->pl.diry *\
+						pmlx->sp.spritex - pmlx->pl.dirx * pmlx->sp.spritey);
+	pmlx->sp.transformy = pmlx->sp.invdet * (-pmlx->pl.planey *\
+					pmlx->sp.spritex + pmlx->pl.planex * pmlx->sp.spritey);
+	pmlx->sp.spritescreenx = (int)((pmlx->s.r.x / 2) *\
+						(1 + pmlx->sp.transformx / pmlx->sp.transformy));
+	pmlx->sp.vmove_screen = (int)(VMOVE / pmlx->sp.transformy);
+	pmlx->sp.spriteheight = abs((int)(pmlx->s.r.y /\
+							(pmlx->sp.transformy))) / VDIV;
+	pmlx->sp.drawstarty = -pmlx->sp.spriteheight / 2 +\
+							pmlx->s.r.y / 2 + pmlx->sp.vmove_screen;
 	start_sp2(pmlx, i);
 }
 
@@ -86,24 +86,24 @@ void	sprites_2(t_pmlx *pmlx, int stripe)
 	int		texy;
 	t_color	color;
 
-	y = pmlx->sp.drawStartY - 1;
-	while (++y < pmlx->sp.drawEndY)
+	y = pmlx->sp.drawstarty - 1;
+	while (++y < pmlx->sp.drawendy)
 	{
-		d = (y - pmlx->sp.vMoveScreen) * 256 - pmlx->s.R.y *\
-							128 + pmlx->sp.spriteHeight * 128;
-		texy = ((d * texHeight) / pmlx->sp.spriteHeight) / 256;
-		color.R = pmlx->img.image[4][(texWidth *\
-				texy + pmlx->sp.texX) * 4 + RED_COMP];
-		color.G = pmlx->img.image[4][(texWidth *\
-				texy + pmlx->sp.texX) * 4 + GREEN_COMP];
-		color.B = pmlx->img.image[4][(texWidth *\
-				texy + pmlx->sp.texX) * 4 + BLUE_COMP];
-		if (!(color.R == 0 && color.G == 0 && color.B == 0))
+		d = (y - pmlx->sp.vmove_screen) * 256 - pmlx->s.r.y *\
+							128 + pmlx->sp.spriteheight * 128;
+		texy = ((d * TEXHEIGHT) / pmlx->sp.spriteheight) / 256;
+		color.r = pmlx->img.image[4][(TEXWIDTH *\
+				texy + pmlx->sp.texx) * 4 + RED_COMP];
+		color.g = pmlx->img.image[4][(TEXWIDTH *\
+				texy + pmlx->sp.texx) * 4 + GREEN_COMP];
+		color.b = pmlx->img.image[4][(TEXWIDTH *\
+				texy + pmlx->sp.texx) * 4 + BLUE_COMP];
+		if (!(color.r == 0 && color.g == 0 && color.b == 0))
 			sp_rgb(pmlx, color, stripe, y);
 	}
 }
 
-void	ft_sprites(t_pmlx *pmlx, double zbuffer[pmlx->s.R.x])
+void	ft_sprites(t_pmlx *pmlx, double zbuffer[pmlx->s.r.x])
 {
 	int i;
 	int stripe;
@@ -114,13 +114,13 @@ void	ft_sprites(t_pmlx *pmlx, double zbuffer[pmlx->s.R.x])
 	while (++i < pmlx->s.sprite_num)
 	{
 		start_sp(pmlx, i);
-		stripe = pmlx->sp.drawStartX - 1;
-		while (++stripe < pmlx->sp.drawEndX)
+		stripe = pmlx->sp.drawstartx - 1;
+		while (++stripe < pmlx->sp.drawendx)
 		{
-			pmlx->sp.texX = (int)(256 * (stripe - (-pmlx->sp.spriteWidth / 2 +\
-			pmlx->sp.spriteScreenX)) * texWidth / pmlx->sp.spriteWidth) / 256;
-			if (pmlx->sp.transformY > 0 && stripe > 0 &&\
-				stripe < pmlx->s.R.x && pmlx->sp.transformY < zbuffer[stripe])
+			pmlx->sp.texx = (int)(256 * (stripe - (-pmlx->sp.spritewidth / 2 +\
+			pmlx->sp.spritescreenx)) * TEXWIDTH / pmlx->sp.spritewidth) / 256;
+			if (pmlx->sp.transformy > 0 && stripe > 0 &&\
+				stripe < pmlx->s.r.x && pmlx->sp.transformy < zbuffer[stripe])
 				sprites_2(pmlx, stripe);
 		}
 	}

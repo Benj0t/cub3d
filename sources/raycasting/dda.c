@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 12:49:40 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 12:52:17 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:32:06 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,65 +16,65 @@ void	dda(t_ray *ray, t_pmlx *pmlx)
 {
 	while (ray->hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->sidedistx < ray->sidedisty)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			pmlx->pl.mapX += pmlx->pl.stepX;
+			ray->sidedistx += ray->deltadistX;
+			pmlx->pl.mapx += pmlx->pl.stepx;
 			ray->side = 0;
-			pmlx->tex.texNum = 0;
+			pmlx->tex.texnum = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			pmlx->pl.mapY += pmlx->pl.stepY;
+			ray->sidedisty += ray->deltadisty;
+			pmlx->pl.mapy += pmlx->pl.stepy;
 			ray->side = 1;
-			pmlx->tex.texNum = 1;
+			pmlx->tex.texnum = 1;
 		}
-		if (pmlx->s.map[pmlx->pl.mapX][pmlx->pl.mapY] > 0)
+		if (pmlx->s.map[pmlx->pl.mapx][pmlx->pl.mapy] > 0)
 			ray->hit = 1;
 	}
-	if (pmlx->tex.texNum == 0 && pmlx->pl.posX > pmlx->pl.mapX)
-		pmlx->tex.texNum = 2;
-	else if (pmlx->tex.texNum && pmlx->pl.posY > pmlx->pl.mapY)
-		pmlx->tex.texNum = 3;
+	if (pmlx->tex.texnum == 0 && pmlx->pl.posx > pmlx->pl.mapx)
+		pmlx->tex.texnum = 2;
+	else if (pmlx->tex.texnum && pmlx->pl.posy > pmlx->pl.mapy)
+		pmlx->tex.texnum = 3;
 }
 
 void	init_dda(t_ray *ray, t_pmlx *pmlx)
 {
-	if (ray->rayDirX < 0)
+	if (ray->raydirx < 0)
 	{
-		pmlx->pl.stepX = -1;
-		ray->sideDistX = (pmlx->pl.posX - pmlx->pl.mapX) * ray->deltaDistX;
+		pmlx->pl.stepx = -1;
+		ray->sidedistx = (pmlx->pl.posx - pmlx->pl.mapx) * ray->deltadistX;
 	}
 	else
 	{
-		pmlx->pl.stepX = 1;
-		ray->sideDistX = (pmlx->pl.mapX + 1.0 - \
-		pmlx->pl.posX) * ray->deltaDistX;
+		pmlx->pl.stepx = 1;
+		ray->sidedistx = (pmlx->pl.mapx + 1.0 - \
+		pmlx->pl.posx) * ray->deltadistX;
 	}
-	if (ray->rayDirY < 0)
+	if (ray->raydiry < 0)
 	{
-		pmlx->pl.stepY = -1;
-		ray->sideDistY = (pmlx->pl.posY - pmlx->pl.mapY) * ray->deltaDistY;
+		pmlx->pl.stepy = -1;
+		ray->sidedisty = (pmlx->pl.posy - pmlx->pl.mapy) * ray->deltadisty;
 	}
 	else
 	{
-		pmlx->pl.stepY = 1;
-		ray->sideDistY = (pmlx->pl.mapY + 1.0 - pmlx->pl.posY) *\
-		ray->deltaDistY;
+		pmlx->pl.stepy = 1;
+		ray->sidedisty = (pmlx->pl.mapy + 1.0 - pmlx->pl.posy) *\
+		ray->deltadisty;
 	}
 	dda(ray, pmlx);
 }
 
 void	init_loop(t_ray *ray, t_pmlx *pmlx, int x)
 {
-	ray->cameraX = 2 * x / (double)pmlx->s.R.x - 1;
-	ray->rayDirX = pmlx->pl.dirX + pmlx->pl.planeX * ray->cameraX;
-	ray->rayDirY = pmlx->pl.dirY + pmlx->pl.planeY * ray->cameraX;
-	pmlx->pl.mapX = (int)pmlx->pl.posX;
-	pmlx->pl.mapY = (int)pmlx->pl.posY;
-	ray->deltaDistX = fabs(1 / ray->rayDirX);
-	ray->deltaDistY = fabs(1 / ray->rayDirY);
+	ray->camerax = 2 * x / (double)pmlx->s.r.x - 1;
+	ray->raydirx = pmlx->pl.dirx + pmlx->pl.planex * ray->camerax;
+	ray->raydiry = pmlx->pl.diry + pmlx->pl.planey * ray->camerax;
+	pmlx->pl.mapx = (int)pmlx->pl.posx;
+	pmlx->pl.mapy = (int)pmlx->pl.posy;
+	ray->deltadistX = fabs(1 / ray->raydirx);
+	ray->deltadisty = fabs(1 / ray->raydiry);
 	ray->hit = 0;
 	init_dda(ray, pmlx);
 }

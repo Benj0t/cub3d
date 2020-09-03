@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 16:03:43 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 14:45:04 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:24:59 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	sp_rgb(t_pmlx *pmlx, t_color color, int stripe, int y)
 {
-	pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + RED_COMP] = color.R;
-	pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + GREEN_COMP] = color.G;
-	pmlx->mlx.data_addr[(y * pmlx->s.R.x + stripe) * 4 + BLUE_COMP] = color.B;
+	pmlx->mlx.data_addr[(y * pmlx->s.r.x + stripe) * 4 + RED_COMP] = color.r;
+	pmlx->mlx.data_addr[(y * pmlx->s.r.x + stripe) * 4 + GREEN_COMP] = color.g;
+	pmlx->mlx.data_addr[(y * pmlx->s.r.x + stripe) * 4 + BLUE_COMP] = color.b;
 }
 
 void	store_rgb(t_color *c, int nb, int index)
 {
 	if (index == 1)
-		c->R = nb;
+		c->r = nb;
 	if (index == 2)
-		c->G = nb;
+		c->g = nb;
 	if (index == 3)
-		c->B = nb;
+		c->b = nb;
 }
 
 void	put_rgb(t_color *c, char **tab)

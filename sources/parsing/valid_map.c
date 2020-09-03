@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:53 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/27 16:01:13 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:30:14 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ int		valid_map(t_pmlx *pmlx)
 
 	ret = auth_char(pmlx);
 	if (!ret)
-		ret = map_closed(pmlx, pmlx->pl.posY, pmlx->pl.posX);
+		ret = map_closed(pmlx, pmlx->pl.posy, pmlx->pl.posx);
 	return (ret);
 }

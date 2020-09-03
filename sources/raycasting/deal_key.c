@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 18:49:55 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/02 18:12:02 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:37:44 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ int		deal_key_press(int key, t_pmlx *pmlx)
 	if (key == ESC_KEY_M)
 		ray_err("Leaving program", pmlx);
 	if (key == W_KEY_M)
-		pmlx->b.bool_W = 1;
+		pmlx->b.bool_w = 1;
 	if (key == S_KEY_M)
-		pmlx->b.bool_S = 1;
+		pmlx->b.bool_s = 1;
 	if (key == LEFT_KEY_M)
-		pmlx->b.bool_L = 1;
+		pmlx->b.bool_l = 1;
 	if (key == RIGHT_KEY_M)
-		pmlx->b.bool_R = 1;
+		pmlx->b.bool_r = 1;
 	if (key == A_KEY_M)
-		pmlx->b.bool_A = 1;
+		pmlx->b.bool_a = 1;
 	if (key == D_KEY_M)
-		pmlx->b.bool_D = 1;
+		pmlx->b.bool_d = 1;
 	main_loop(pmlx);
 	return (0);
 }
@@ -44,17 +44,17 @@ int		deal_key_release(int key, t_pmlx *pmlx)
 	if (key == ESC_KEY_M)
 		ray_err("Leaving program", pmlx);
 	if (key == W_KEY_M)
-		pmlx->b.bool_W = 0;
+		pmlx->b.bool_w = 0;
 	if (key == S_KEY_M)
-		pmlx->b.bool_S = 0;
+		pmlx->b.bool_s = 0;
 	if (key == LEFT_KEY_M)
-		pmlx->b.bool_L = 0;
+		pmlx->b.bool_l = 0;
 	if (key == RIGHT_KEY_M)
-		pmlx->b.bool_R = 0;
+		pmlx->b.bool_r = 0;
 	if (key == A_KEY_M)
-		pmlx->b.bool_A = 0;
+		pmlx->b.bool_a = 0;
 	if (key == D_KEY_M)
-		pmlx->b.bool_D = 0;
+		pmlx->b.bool_d = 0;
 	main_loop(pmlx);
 	return (0);
 }

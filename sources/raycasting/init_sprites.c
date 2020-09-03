@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 14:50:00 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 14:50:20 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:33:50 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ void	init_sp_tab(t_pmlx *pmlx)
 	i = -1;
 	while (++i < pmlx->s.sprite_num)
 	{
-		pmlx->sp.spriteOrder[i] = i;
-		pmlx->sp.spriteDistance[i] = ((pmlx->pl.posX - pmlx->s.list[i].x) *\
-			(pmlx->pl.posX - pmlx->s.list[i].x) + (pmlx->pl.posY -\
-			pmlx->s.list[i].y) * (pmlx->pl.posY - pmlx->s.list[i].y));
+		pmlx->sp.sprite_order[i] = i;
+		pmlx->sp.sprite_distance[i] = ((pmlx->pl.posx - pmlx->s.list[i].x) *\
+			(pmlx->pl.posx - pmlx->s.list[i].x) + (pmlx->pl.posy -\
+			pmlx->s.list[i].y) * (pmlx->pl.posy - pmlx->s.list[i].y));
 	}
 }
 
 int		init_sprite(t_pmlx *pmlx)
 {
-	if (!(pmlx->sp.spriteOrder = (int *)malloc(sizeof(int) *\
+	if (!(pmlx->sp.sprite_order = (int *)malloc(sizeof(int) *\
 		(pmlx->s.sprite_num))))
 		return (0);
-	if (!(pmlx->sp.spriteDistance = (double *)malloc(sizeof(double) *\
+	if (!(pmlx->sp.sprite_distance = (double *)malloc(sizeof(double) *\
 		(pmlx->s.sprite_num))))
 		return (0);
 	return (1);

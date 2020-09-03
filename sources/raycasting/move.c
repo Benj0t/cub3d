@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 12:59:01 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/02 18:27:04 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:30:47 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,68 +14,68 @@
 
 void	mv_right(t_pmlx *pmlx)
 {
-	if (pmlx->s.map[(int)(pmlx->pl.posX + pmlx->pl.planeX * pmlx->pl.moveSpeed)]\
-		[(int)pmlx->pl.posY] == 0)
-		pmlx->pl.posX += pmlx->pl.planeX * pmlx->pl.moveSpeed;
-	if (pmlx->s.map[(int)pmlx->pl.posX]\
-		[(int)(pmlx->pl.posY + pmlx->pl.planeY * pmlx->pl.moveSpeed)] == 0)
-		pmlx->pl.posY += pmlx->pl.planeY * pmlx->pl.moveSpeed;
+	if (pmlx->s.map[(int)(pmlx->pl.posx + pmlx->pl.planex * pmlx->pl.movespeed)]\
+		[(int)pmlx->pl.posy] == 0)
+		pmlx->pl.posx += pmlx->pl.planex * pmlx->pl.movespeed;
+	if (pmlx->s.map[(int)pmlx->pl.posx]\
+		[(int)(pmlx->pl.posy + pmlx->pl.planey * pmlx->pl.movespeed)] == 0)
+		pmlx->pl.posy += pmlx->pl.planey * pmlx->pl.movespeed;
 }
 
 void	mv_left(t_pmlx *pmlx)
 {
-	if (pmlx->s.map[(int)(pmlx->pl.posX - pmlx->pl.planeX * pmlx->pl.moveSpeed)]\
-		[(int)pmlx->pl.posY] == 0)
-		pmlx->pl.posX -= pmlx->pl.planeX * pmlx->pl.moveSpeed;
-	if (pmlx->s.map[(int)pmlx->pl.posX]\
-		[(int)(pmlx->pl.posY - pmlx->pl.planeY * pmlx->pl.moveSpeed)] == 0)
-		pmlx->pl.posY -= pmlx->pl.planeY * pmlx->pl.moveSpeed;
+	if (pmlx->s.map[(int)(pmlx->pl.posx - pmlx->pl.planex * pmlx->pl.movespeed)]\
+		[(int)pmlx->pl.posy] == 0)
+		pmlx->pl.posx -= pmlx->pl.planex * pmlx->pl.movespeed;
+	if (pmlx->s.map[(int)pmlx->pl.posx]\
+		[(int)(pmlx->pl.posy - pmlx->pl.planey * pmlx->pl.movespeed)] == 0)
+		pmlx->pl.posy -= pmlx->pl.planey * pmlx->pl.movespeed;
 }
 
 void	forward(t_pmlx *pmlx)
 {
-	if (pmlx->s.map[(int)(pmlx->pl.posX + pmlx->pl.dirX * pmlx->pl.moveSpeed)]\
-		[(int)pmlx->pl.posY] == 0)
-		pmlx->pl.posX += pmlx->pl.dirX * pmlx->pl.moveSpeed;
-	if (pmlx->s.map[(int)pmlx->pl.posX]\
-		[(int)(pmlx->pl.posY + pmlx->pl.dirY * pmlx->pl.moveSpeed)] == 0)
-		pmlx->pl.posY += pmlx->pl.dirY * pmlx->pl.moveSpeed;
+	if (pmlx->s.map[(int)(pmlx->pl.posx + pmlx->pl.dirx * pmlx->pl.movespeed)]\
+		[(int)pmlx->pl.posy] == 0)
+		pmlx->pl.posx += pmlx->pl.dirx * pmlx->pl.movespeed;
+	if (pmlx->s.map[(int)pmlx->pl.posx]\
+		[(int)(pmlx->pl.posy + pmlx->pl.diry * pmlx->pl.movespeed)] == 0)
+		pmlx->pl.posy += pmlx->pl.diry * pmlx->pl.movespeed;
 }
 
 void	downward(t_pmlx *pmlx)
 {
-	if (pmlx->s.map[(int)(pmlx->pl.posX - pmlx->pl.dirX * pmlx->pl.moveSpeed)]\
-		[(int)pmlx->pl.posY] == 0)
-		pmlx->pl.posX -= pmlx->pl.dirX * pmlx->pl.moveSpeed;
-	if (pmlx->s.map[(int)pmlx->pl.posX]\
-		[(int)(pmlx->pl.posY - pmlx->pl.dirY * pmlx->pl.moveSpeed)] == 0)
-		pmlx->pl.posY -= pmlx->pl.dirY * pmlx->pl.moveSpeed;
+	if (pmlx->s.map[(int)(pmlx->pl.posx - pmlx->pl.dirx * pmlx->pl.movespeed)]\
+		[(int)pmlx->pl.posy] == 0)
+		pmlx->pl.posx -= pmlx->pl.dirx * pmlx->pl.movespeed;
+	if (pmlx->s.map[(int)pmlx->pl.posx]\
+		[(int)(pmlx->pl.posy - pmlx->pl.diry * pmlx->pl.movespeed)] == 0)
+		pmlx->pl.posy -= pmlx->pl.diry * pmlx->pl.movespeed;
 }
 
 void	rot_left(t_pmlx *pmlx)
 {
-	pmlx->pl.oldDirX = pmlx->pl.dirX;
-	pmlx->pl.dirX = pmlx->pl.dirX * cos(pmlx->pl.rotSpeed) -\
-					pmlx->pl.dirY * sin(pmlx->pl.rotSpeed);
-	pmlx->pl.dirY = pmlx->pl.oldDirX * sin(pmlx->pl.rotSpeed) +\
-					pmlx->pl.dirY * cos(pmlx->pl.rotSpeed);
-	pmlx->pl.oldPlaneX = pmlx->pl.planeX;
-	pmlx->pl.planeX = pmlx->pl.planeX * cos(pmlx->pl.rotSpeed) -\
-					pmlx->pl.planeY * sin(pmlx->pl.rotSpeed);
-	pmlx->pl.planeY = pmlx->pl.oldPlaneX * sin(pmlx->pl.rotSpeed) +\
-					pmlx->pl.planeY * cos(pmlx->pl.rotSpeed);
+	pmlx->pl.olddirx = pmlx->pl.dirx;
+	pmlx->pl.dirx = pmlx->pl.dirx * cos(pmlx->pl.rotspeed) -\
+					pmlx->pl.diry * sin(pmlx->pl.rotspeed);
+	pmlx->pl.diry = pmlx->pl.olddirx * sin(pmlx->pl.rotspeed) +\
+					pmlx->pl.diry * cos(pmlx->pl.rotspeed);
+	pmlx->pl.oldplanex = pmlx->pl.planex;
+	pmlx->pl.planex = pmlx->pl.planex * cos(pmlx->pl.rotspeed) -\
+					pmlx->pl.planey * sin(pmlx->pl.rotspeed);
+	pmlx->pl.planey = pmlx->pl.oldplanex * sin(pmlx->pl.rotspeed) +\
+					pmlx->pl.planey * cos(pmlx->pl.rotspeed);
 }
 
 void	rot_right(t_pmlx *pmlx)
 {
-	pmlx->pl.oldDirX = pmlx->pl.dirX;
-	pmlx->pl.dirX = pmlx->pl.dirX * cos(-pmlx->pl.rotSpeed) -\
-					pmlx->pl.dirY * sin(-pmlx->pl.rotSpeed);
-	pmlx->pl.dirY = pmlx->pl.oldDirX * sin(-pmlx->pl.rotSpeed) +\
-					pmlx->pl.dirY * cos(-pmlx->pl.rotSpeed);
-	pmlx->pl.oldPlaneX = pmlx->pl.planeX;
-	pmlx->pl.planeX = pmlx->pl.planeX * cos(-pmlx->pl.rotSpeed) -\
-					pmlx->pl.planeY * sin(-pmlx->pl.rotSpeed);
-	pmlx->pl.planeY = pmlx->pl.oldPlaneX * sin(-pmlx->pl.rotSpeed) +\
-					pmlx->pl.planeY * cos(-pmlx->pl.rotSpeed);
+	pmlx->pl.olddirx = pmlx->pl.dirx;
+	pmlx->pl.dirx = pmlx->pl.dirx * cos(-pmlx->pl.rotspeed) -\
+					pmlx->pl.diry * sin(-pmlx->pl.rotspeed);
+	pmlx->pl.diry = pmlx->pl.olddirx * sin(-pmlx->pl.rotspeed) +\
+					pmlx->pl.diry * cos(-pmlx->pl.rotspeed);
+	pmlx->pl.oldplanex = pmlx->pl.planex;
+	pmlx->pl.planex = pmlx->pl.planex * cos(-pmlx->pl.rotspeed) -\
+					pmlx->pl.planey * sin(-pmlx->pl.rotspeed);
+	pmlx->pl.planey = pmlx->pl.oldplanex * sin(-pmlx->pl.rotspeed) +\
+					pmlx->pl.planey * cos(-pmlx->pl.rotspeed);
 }

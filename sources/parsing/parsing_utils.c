@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:55:31 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 11:23:03 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:30:14 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ext_check(char *str, char *ext)
 
 int		check_tex(t_pmlx *pmlx)
 {
-	if (!(pmlx->s.NO) || !(pmlx->s.EA) || !(pmlx->s.WE) || !(pmlx->s.SO))
+	if (!(pmlx->s.no) || !(pmlx->s.ea) || !(pmlx->s.we) || !(pmlx->s.so))
 		return (0);
 	return (1);
 }
@@ -28,8 +28,8 @@ void	set_pos(t_pmlx *pmlx, int j, int i)
 {
 	pmlx->s.id = pmlx->s.cmap[j][i];
 	pmlx->s.cmap[j][i] = '0';
-	pmlx->pl.posX = j + 0.5;
-	pmlx->pl.posY = i + 0.5;
+	pmlx->pl.posx = j + 0.5;
+	pmlx->pl.posy = i + 0.5;
 }
 
 int		get_pos(t_pmlx *pmlx)

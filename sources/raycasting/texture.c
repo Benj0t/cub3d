@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:09:09 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/08/28 13:33:34 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/03 16:33:21 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	init_texture(t_pmlx *pmlx)
 		return ;
 	pmlx->img.image[5] = NULL;
 	pmlx->img.addr[5] = NULL;
-	pmlx->img.addr[0] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.SO,\
-						&(pmlx->img.img_W), &(pmlx->img.img_H));
-	pmlx->img.addr[1] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.WE,\
-						&(pmlx->img.img_W), &(pmlx->img.img_H));
-	pmlx->img.addr[2] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.NO,\
-						&(pmlx->img.img_W), &(pmlx->img.img_H));
-	pmlx->img.addr[3] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.EA,\
-						&(pmlx->img.img_W), &(pmlx->img.img_H));
-	pmlx->img.addr[4] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.S,\
-						&(pmlx->img.img_W), &(pmlx->img.img_H));
+	pmlx->img.addr[0] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.so,\
+						&(pmlx->img.img_w), &(pmlx->img.img_h));
+	pmlx->img.addr[1] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.we,\
+						&(pmlx->img.img_w), &(pmlx->img.img_h));
+	pmlx->img.addr[2] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.no,\
+						&(pmlx->img.img_w), &(pmlx->img.img_h));
+	pmlx->img.addr[3] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.ea,\
+						&(pmlx->img.img_w), &(pmlx->img.img_h));
+	pmlx->img.addr[4] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.s,\
+						&(pmlx->img.img_w), &(pmlx->img.img_h));
 	i = 0;
 	while (i < 5)
 	{
