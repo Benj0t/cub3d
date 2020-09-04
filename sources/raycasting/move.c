@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 12:59:01 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:30:47 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/04 12:17:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	mv_right(t_pmlx *pmlx)
-{
-	if (pmlx->s.map[(int)(pmlx->pl.posx + pmlx->pl.planex * pmlx->pl.movespeed)]\
-		[(int)pmlx->pl.posy] == 0)
-		pmlx->pl.posx += pmlx->pl.planex * pmlx->pl.movespeed;
-	if (pmlx->s.map[(int)pmlx->pl.posx]\
-		[(int)(pmlx->pl.posy + pmlx->pl.planey * pmlx->pl.movespeed)] == 0)
-		pmlx->pl.posy += pmlx->pl.planey * pmlx->pl.movespeed;
-}
-
-void	mv_left(t_pmlx *pmlx)
-{
-	if (pmlx->s.map[(int)(pmlx->pl.posx - pmlx->pl.planex * pmlx->pl.movespeed)]\
-		[(int)pmlx->pl.posy] == 0)
-		pmlx->pl.posx -= pmlx->pl.planex * pmlx->pl.movespeed;
-	if (pmlx->s.map[(int)pmlx->pl.posx]\
-		[(int)(pmlx->pl.posy - pmlx->pl.planey * pmlx->pl.movespeed)] == 0)
-		pmlx->pl.posy -= pmlx->pl.planey * pmlx->pl.movespeed;
-}
 
 void	forward(t_pmlx *pmlx)
 {

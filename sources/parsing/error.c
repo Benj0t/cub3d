@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:49:36 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:33:50 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/04 12:17:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	free_tab(char **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
-}
-
-void	free_itab(int **tab)
-{
-	int i;
-
-	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
-}
 
 void	ft_destroy(t_pmlx *pmlx)
 {
@@ -46,8 +26,6 @@ void	ft_destroy(t_pmlx *pmlx)
 	free(pmlx->img.image);
 	mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);
 	mlx_destroy_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr);
-	i = -1;
-	int j = 0;
 }
 
 void	err_raycast(t_pmlx *pmlx)

@@ -18,8 +18,10 @@ int	store_res(t_pmlx *pmlx)
 		return (0);
 	pmlx->s.r.x = ft_atoi(pmlx->s.tab[1]);
 	pmlx->s.r.y = ft_atoi(pmlx->s.tab[2]);
-	pmlx->s.r.x = (pmlx->mlx.sizex < pmlx->s.r.x) ? pmlx->mlx.sizex : pmlx->s.r.x;
-	pmlx->s.r.y = (pmlx->mlx.sizey < pmlx->s.r.y) ? pmlx->mlx.sizey : pmlx->s.r.y;
+	pmlx->s.r.x = (pmlx->mlx.sizex < pmlx->s.r.x) ?\
+					pmlx->mlx.sizex : pmlx->s.r.x;
+	pmlx->s.r.y = (pmlx->mlx.sizey < pmlx->s.r.y) ?\
+					pmlx->mlx.sizey : pmlx->s.r.y;
 	if (pmlx->s.r.x <= 0 || pmlx->s.r.y <= 0)
 		return (0);
 	pmlx->s.n_key++;

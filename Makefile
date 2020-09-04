@@ -28,6 +28,7 @@ FILES =		./sources/raycasting/raycasting\
 			./sources/raycasting/init_sprites\
 			./sources/raycasting/deal_key\
 			./sources/raycasting/move\
+			./sources/raycasting/mv\
 			./sources/raycasting/sprites\
 			./sources/raycasting/texture\
 			./sources/parsing/parsing\
@@ -45,6 +46,7 @@ FILES =		./sources/raycasting/raycasting\
 			./sources/parsing/utils/ft_putchars\
 			./sources/parsing/utils/ft_strdup\
 			./sources/parsing/utils/ft_split\
+			./sources/parsing/utils/tab_utils\
 			./sources/parsing/utils/ft_strjoin_n\
 			./sources/parsing/utils/ft_substr\
 			./sources/parsing/utils/ft_strcmp\
@@ -64,7 +66,7 @@ CC = gcc
 L_CC = clang
 LINUX = 0
 FLAGS = -Wall -Wextra -Werror
-L_LIB = -L $(INC_PATH)minilibx_linux/minilibx/ -lmlx -L%%%%/../lib -lXext -lX11 -lm
+L_LIB = -L ./minilibx-linux/ -lmlx -L%%%%/../lib -lXext -lX11 -lm
 MAC_LIB = -L ./minilibx/ -lmlx -framework OpenGL -framework Appkit
 
 ### COLORS ###
@@ -85,7 +87,7 @@ all: 		$(NAME)
 
 $(NAME): 	$(OBJ)
 			@echo "$(CYAN)Constructing executable:$(NOC) $@"
-			@$(L_CC) -o $(NAME) $(OBJ) $(MAC_LIB)
+			@$(L_CC) -o $(NAME) $(OBJ) $(L_LIB)
 
 .c.o:		${SRCS}
 			@echo " $(VIOLET)[$(L_CC)] $(GREEN)[$(FLAGS)]$(NOC) $(YELLOW)in progress ...:$(NOC) $< $(RED)->$(NOC) $@"

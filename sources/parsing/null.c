@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   null.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 16:10:26 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:33:50 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/04 12:19:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		set_null(t_pmlx *pmlx)
 	pmlx->mlx.data_addr = NULL;
 	pmlx->mlx.sizex = 1920;
 	pmlx->mlx.sizey = 1080;
-	//mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(pmlx->mlx.sizex), &(pmlx->mlx.sizey));
+	mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(pmlx->mlx.sizex), &(pmlx->mlx.sizey));
 }
 
 void		init_parse(t_pmlx *pmlx)

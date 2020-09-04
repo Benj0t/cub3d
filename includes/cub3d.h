@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:51:57 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/04 12:21:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,4 +323,6 @@ void			free_tab(char **tab);
 void			set_null(t_pmlx *pmlx);
 void			init_sp_tab(t_pmlx *pmlx);
 int				init_sprite(t_pmlx *pmlx);
+void			free_tab(char **tab);
+void			free_itab(int **tab);
 #endif
