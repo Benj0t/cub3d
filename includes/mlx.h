@@ -202,6 +202,7 @@ int				mlx_destroy_window(void *mlx_ptr, void *win_ptr);
 int				mlx_destroy_image(void *mlx_ptr, void *img_ptr);
 int				mlx_hook(void *win_ptr, int x_event, int x_mask,
 				int (*funct)(), void *param);
+int				mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 int				mlx_mouse_hide();
 int				mlx_mouse_show();
 int				mlx_mouse_move(void *win_ptr, int x, int y);

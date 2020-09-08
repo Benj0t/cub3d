@@ -12,32 +12,28 @@
 
 #include "cub3d.h"
 
-void	ft_destroy(t_pmlx *pmlx)
+void	free_void(void **par)
 {
 	int i;
 
 	i = 0;
-	while (pmlx->img.addr[i])
-	{
-		free(pmlx->img.addr[i]);
-		free(pmlx->img.image[i++]);
-	}
-	free(pmlx->img.addr);
-	free(pmlx->img.image);
-	mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);
-	mlx_destroy_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr);
+	while (par[i])
+		free(par[i++]);
+	free(par);
 }
 
-void	err_raycast(t_pmlx *pmlx)
+void	ft_destroy(t_pmlx *pmlx)
 {
-	return ;
+	free_void(pmlx->img.addr);
+	mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);
+	mlx_destroy_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr);
 }
 
 void	ray_err(char *str, t_pmlx *pmlx)
 {
 	ft_putendl(str);
 	err_parsing(pmlx);
-	err_raycast(pmlx);
+	ft_putendl("O s k o u r");
 	ft_destroy(pmlx);
 	exit(1);
 }

@@ -16,7 +16,9 @@ int		main(int argc, char **argv)
 {
 	t_pmlx pmlx;
 
+	printf("aaaaaaa\n");
 	set_null(&pmlx);
+	printf("aaaaaaa\n");
 	if (argc == 2 || argc == 3)
 	{
 		if (argc == 3 && ft_strcmp(argv[2], "--save") != 0)

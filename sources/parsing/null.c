@@ -24,8 +24,10 @@ void		set_null(t_pmlx *pmlx)
 	pmlx->mlx.data_addr = NULL;
 	pmlx->mlx.sizex = 1920;
 	pmlx->mlx.sizey = 1080;
-	mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(pmlx->mlx.sizex), &(pmlx->mlx.sizey));
-}
+/*
+ * mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(pmlx->mlx.sizex), &(pmlx->mlx.sizey));
+*/
+ }
 
 void		init_parse(t_pmlx *pmlx)
 {
