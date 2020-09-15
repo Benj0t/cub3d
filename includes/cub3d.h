@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/04 12:21:33 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/15 18:47:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,8 @@ typedef struct	s_bmp
 	int planes;
 }				t_bmp;
 
+void			fake_mlx(t_pmlx *pmlx);
+void			take_screenshot(t_pmlx *pmlx);
 void			mv_left(t_pmlx *pmlx);
 void			mv_right(t_pmlx *pmlx);
 int				ft_parse(t_pmlx *pmlx, char *filename);

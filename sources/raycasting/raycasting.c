@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/15 11:44:12 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/15 19:04:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,28 +85,6 @@ int		loop(t_pmlx *pmlx)
 		rot_right(pmlx);
 	main_loop(pmlx);
 	return (0);
-}
-
-void	fake_mlx(t_pmlx *pmlx)
-{
-	pmlx->mlx.mlx_ptr = mlx_init();
-	pmlx->mlx.win_ptr = NULL;
-	pmlx->mlx.img_ptr = mlx_new_image(pmlx->mlx.mlx_ptr,\
-	pmlx->s.r.x, pmlx->s.r.y);
-	pmlx->mlx.data_addr = mlx_get_data_addr(pmlx->mlx.img_ptr,\
-	&(pmlx->mlx.bpp), &(pmlx->mlx.size_l), &(pmlx->mlx.endian));
-}
-
-void	take_screenshot(t_pmlx *pmlx)
-{
-	fake_mlx(pmlx);
-	init_player(pmlx);
-	if (init_sprite(pmlx) == 0)
-		ray_err("Sprites initialisation failed", pmlx);
-	init_texture(pmlx);
-	main_loop(pmlx);
-	screenshot(pmlx);
-	exit(2);
 }
 
 int		raycast(t_pmlx *pmlx)

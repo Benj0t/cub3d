@@ -24,6 +24,7 @@ vpath %.c sources/raycasting
 
 FILES =		./sources/raycasting/raycasting\
 			./sources/raycasting/dda\
+			./sources/raycasting/screenshot_init\
 			./sources/raycasting/draw\
 			./sources/raycasting/init_sprites\
 			./sources/raycasting/deal_key\
@@ -64,7 +65,6 @@ OBJ = $(SRCS:.c=.o)
 
 CC = gcc
 L_CC = clang
-LINUX = 0
 FLAGS = -Wall -Wextra -Werror
 L_LIB = -L ./minilibx-linux/ -lmlx -L%%%%/../lib -lXext -lX11 -lm
 MAC_LIB = -L ./minilibx/ -lmlx -framework OpenGL -framework Appkit
