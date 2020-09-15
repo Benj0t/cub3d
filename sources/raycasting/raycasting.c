@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:56:58 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/15 10:56:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	main_loop(t_pmlx *pmlx)
 	x = -1;
 	while (++x < pmlx->s.r.x)
 	{
+		ft_putendl("OSKOUR");
 		init_loop(&ray, pmlx, x);
+		ft_putendl("OSKOUR2");
 		if (ray.side == 0)
 			ray.perpwalldist = (pmlx->pl.mapx - pmlx->pl.posx +\
 			(1 - pmlx->pl.stepx) / 2) / ray.raydirx;
@@ -60,15 +62,19 @@ void	main_loop(t_pmlx *pmlx)
 		}
 		draw.lineheight = (int)(pmlx->s.r.y / ray.perpwalldist);
 		set_tex_prop(&ray, pmlx, &draw);
+		ft_putendl("OSKOUR3");
 		draw_ray(pmlx, x, draw, ray);
+		ft_putendl("OSKOUR4");
 		zbuffer[x] = ray.perpwalldist;
 	}
 	ft_sprites(pmlx, zbuffer);
-	mlx_put_image_to_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr,\
-	pmlx->mlx.img_ptr, 0, 0);
+	ft_putendl("OSKOUR5");
+	if (pmlx->screenshot == 0)
+		mlx_put_image_to_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr,\
+			pmlx->mlx.img_ptr, 0, 0);
 }
 
-int		loop(t_pmlx *pmlx)
+int		loop(t_pmlx *pmlx)	
 {
 	if (pmlx->b.bool_w == 1)
 		forward(pmlx);
@@ -86,24 +92,43 @@ int		loop(t_pmlx *pmlx)
 	return (0);
 }
 
-int		raycast(t_pmlx *pmlx)
+void	fake_mlx(t_pmlx *pmlx)
 {
-	init_mlx(pmlx);
+	pmlx->mlx.mlx_ptr = mlx_init();
+	pmlx->mlx.win_ptr = NULL;
+	pmlx->mlx.img_ptr = mlx_new_image(pmlx->mlx.mlx_ptr,\
+	pmlx->s.r.x, pmlx->s.r.y);
+	pmlx->mlx.data_addr = mlx_get_data_addr(pmlx->mlx.img_ptr,\
+	&(pmlx->mlx.bpp), &(pmlx->mlx.size_l), &(pmlx->mlx.endian));
+}
+
+void	take_screenshot(t_pmlx *pmlx)
+{
+	fake_mlx(pmlx);
 	init_player(pmlx);
 	if (init_sprite(pmlx) == 0)
 		ray_err("Sprites initialisation failed", pmlx);
 	init_texture(pmlx);
-	if (pmlx->screenshot == 1)
-	{
-		main_loop(pmlx);
-		screenshot(pmlx);
-		ray_err("Screenshot done", pmlx);
-	}
+	main_loop(pmlx);
+	screenshot(pmlx);
+	exit(2);
+}
+
+int		raycast(t_pmlx *pmlx)
+{
+	ft_putendl("AH");
+	(pmlx->screenshot == 1) ? take_screenshot(pmlx) : init_mlx(pmlx);
+	ft_putendl("AH");
+	init_player(pmlx);
+	ft_putendl("AH");
+	if (init_sprite(pmlx) == 0)
+		ray_err("Sprites initialisation failed", pmlx);
+	init_texture(pmlx);
 	mlx_hook(pmlx->mlx.win_ptr, KEYPRESS, (1L << 0),\
 	&deal_key_press, pmlx);
 	mlx_hook(pmlx->mlx.win_ptr, KEYRELEASE, (1L << 1),\
 	&deal_key_release, pmlx);
-	mlx_hook(pmlx->mlx.win_ptr, DESTROYNOTIFY, (1L << 5),\
+	mlx_hook(pmlx->mlx.win_ptr, 33, (1L << 17),\
 	&deal_key_leave, pmlx);
 	mlx_loop_hook(pmlx->mlx.mlx_ptr, &loop, pmlx);
 	mlx_loop(pmlx->mlx.mlx_ptr);

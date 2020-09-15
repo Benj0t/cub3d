@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 16:10:26 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/04 12:19:31 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/14 10:59:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void		set_null(t_pmlx *pmlx)
 {
 	init_parse(pmlx);
+	pmlx->screenshot = 0;
 	pmlx->sp.sprite_distance = NULL;
 	pmlx->sp.sprite_order = NULL;
 	pmlx->img.addr = NULL;
@@ -24,9 +25,6 @@ void		set_null(t_pmlx *pmlx)
 	pmlx->mlx.data_addr = NULL;
 	pmlx->mlx.sizex = 1920;
 	pmlx->mlx.sizey = 1080;
-/*
- * mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(pmlx->mlx.sizex), &(pmlx->mlx.sizey));
-*/
  }
 
 void		init_parse(t_pmlx *pmlx)
