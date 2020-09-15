@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/15 10:56:52 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/15 11:44:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ void	main_loop(t_pmlx *pmlx)
 	x = -1;
 	while (++x < pmlx->s.r.x)
 	{
-		ft_putendl("OSKOUR");
 		init_loop(&ray, pmlx, x);
-		ft_putendl("OSKOUR2");
 		if (ray.side == 0)
 			ray.perpwalldist = (pmlx->pl.mapx - pmlx->pl.posx +\
 			(1 - pmlx->pl.stepx) / 2) / ray.raydirx;
@@ -62,13 +60,10 @@ void	main_loop(t_pmlx *pmlx)
 		}
 		draw.lineheight = (int)(pmlx->s.r.y / ray.perpwalldist);
 		set_tex_prop(&ray, pmlx, &draw);
-		ft_putendl("OSKOUR3");
 		draw_ray(pmlx, x, draw, ray);
-		ft_putendl("OSKOUR4");
 		zbuffer[x] = ray.perpwalldist;
 	}
 	ft_sprites(pmlx, zbuffer);
-	ft_putendl("OSKOUR5");
 	if (pmlx->screenshot == 0)
 		mlx_put_image_to_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr,\
 			pmlx->mlx.img_ptr, 0, 0);
@@ -116,11 +111,8 @@ void	take_screenshot(t_pmlx *pmlx)
 
 int		raycast(t_pmlx *pmlx)
 {
-	ft_putendl("AH");
 	(pmlx->screenshot == 1) ? take_screenshot(pmlx) : init_mlx(pmlx);
-	ft_putendl("AH");
 	init_player(pmlx);
-	ft_putendl("AH");
 	if (init_sprite(pmlx) == 0)
 		ray_err("Sprites initialisation failed", pmlx);
 	init_texture(pmlx);
