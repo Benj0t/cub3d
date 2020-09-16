@@ -14,10 +14,15 @@
 
 void		init_mlx(t_pmlx *pmlx)
 {
+	int x;
+	int y;
 	pmlx->img.bpp = 0;
 	pmlx->img.s_line = 0;
 	pmlx->img.endian = 0;
 	pmlx->mlx.mlx_ptr = mlx_init();
+	mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(x), &(y));
+	pmlx->s.r.x = (x < pmlx->s.r.x) ? x : pmlx->s.r.x;
+	pmlx->s.r.y = (y < pmlx->s.r.y) ? y : pmlx->s.r.y;
 	pmlx->mlx.win_ptr = mlx_new_window(pmlx->mlx.mlx_ptr, pmlx->s.r.x,\
 	pmlx->s.r.y, "Cub3D");
 	pmlx->mlx.img_ptr = mlx_new_image(pmlx->mlx.mlx_ptr,\

@@ -15,7 +15,6 @@
 int		deal_key_leave(int key, t_pmlx *pmlx)
 {
 	ray_err("Leaving program", pmlx);
-	exit(1);
 	return (0);
 }
 

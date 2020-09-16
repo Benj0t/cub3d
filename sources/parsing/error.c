@@ -40,7 +40,10 @@ void	ray_err(char *str, t_pmlx *pmlx)
 
 void	err_parsing(t_pmlx *pmlx)
 {
+	ft_putendl("O s k o u r");
+	pmlx->s.list = NULL;
 	(pmlx->s.list) ? free(pmlx->s.list) : 0;
+	ft_putendl("O s k o u r");
 	(pmlx->s.no) ? free(pmlx->s.no) : 0;
 	(pmlx->s.so) ? free(pmlx->s.so) : 0;
 	(pmlx->s.we) ? free(pmlx->s.we) : 0;
@@ -49,8 +52,11 @@ void	err_parsing(t_pmlx *pmlx)
 	(pmlx->s.line) ? free(pmlx->s.line) : 0;
 	(pmlx->s.tmp) ? free(pmlx->s.tmp) : 0;
 	(pmlx->s.map_join) ? free(pmlx->s.map_join) : 0;
+	ft_putendl("O s k o u r1");
 	(pmlx->s.cmap) ? free_tab(pmlx->s.cmap) : 0;
+	ft_putendl("O s k o u r2");
 	(pmlx->s.map) ? free_itab(pmlx->s.map) : 0;
+	ft_putendl("O s k o u r3");
 	(pmlx->s.c) ? free(pmlx->s.c) : 0;
 	(pmlx->sp.sprite_distance) ? free(pmlx->sp.sprite_distance) : 0;
 	(pmlx->sp.sprite_order) ? free(pmlx->sp.sprite_order) : 0;
