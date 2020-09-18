@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:42 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/15 10:55:12 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/18 12:40:07 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		init_mlx(t_pmlx *pmlx)
 {
 	int x;
 	int y;
+
 	pmlx->img.bpp = 0;
 	pmlx->img.s_line = 0;
 	pmlx->img.endian = 0;

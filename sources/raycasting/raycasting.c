@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/15 19:04:34 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/18 12:34:30 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,11 @@ void	main_loop(t_pmlx *pmlx)
 		zbuffer[x] = ray.perpwalldist;
 	}
 	ft_sprites(pmlx, zbuffer);
-	if (pmlx->screenshot == 0)
-		mlx_put_image_to_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr,\
-			pmlx->mlx.img_ptr, 0, 0);
+	(pmlx->screenshot == 0) ? mlx_put_image_to_window(pmlx->mlx.mlx_ptr,\
+		pmlx->mlx.win_ptr, pmlx->mlx.img_ptr, 0, 0) : 0;
 }
 
-int		loop(t_pmlx *pmlx)	
+int		loop(t_pmlx *pmlx)
 {
 	if (pmlx->b.bool_w == 1)
 		forward(pmlx);

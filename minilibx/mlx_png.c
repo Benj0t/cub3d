@@ -25,7 +25,7 @@ unsigned char magic[PNG_MAGIC_SIZE] = {137, 80, 78, 71, 13, 10, 26, 10};
 #define	ERR_MAGIC_WRONG	2
 #define	ERR_STRUCT_INCOMPLETE	3
 #define	ERR_STRUCT_HDR	4
-#define	ERR_STRUCT_end	5
+#define	ERR_STRUCT_END	5
 #define	ERR_STRUCT_CRC	6
 #define	ERR_STRUCT_INCIMPL 7
 #define	ERR_STRUCT_DAT	8
@@ -194,14 +194,14 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
 	  z_strm.next_out = z_out;
 	  z_ret = inflate(&z_strm, Z_NO_FLUSH);
 	  //	  printf("inflate ret %d avail_out %d\n", z_ret, z_strm.avail_out);
-	  if (z_ret != Z_OK && z_ret != Z_STREAM_end)
+	  if (z_ret != Z_OK && z_ret != Z_STREAM_END)
 	    {
-	      inflateend(&z_strm);
+	      inflateEnd(&z_strm);
 	      return (ERR_ZLIB);
 	    }
 	  if (b_pos + Z_CHUNK - z_strm.avail_out > img->width*img->height*pi->bpp+img->height)
 	    {
-	      inflateend(&z_strm);
+	      inflateEnd(&z_strm);
 	      return (ERR_DATA_MISMATCH);
 	    }
 	  bcopy(z_out, buffer+b_pos, Z_CHUNK - z_strm.avail_out);
@@ -209,7 +209,7 @@ int	mipng_data(mlx_img_list_t *img, unsigned char *dat, png_info_t *pi)
 	}
       dat += len + 4 + 4 + 4;
     } 
-  inflateend(&z_strm);
+  inflateEnd(&z_strm);
   if (b_pos != img->width*img->height*pi->bpp+img->height)
     {
       //      printf("pb : bpos %d vs expected %d\n", b_pos, img->width*img->height*pi->bpp+img->height);
@@ -287,10 +287,10 @@ int	mipng_structure(unsigned char *ptr, int size, unsigned char **hdr, unsigned 
 		return (ERR_STRUCT_HDR);
 	      *hdr = ptr;
 	    }
-	  if (mipng_is_type(ptr, "Iend"))
+	  if (mipng_is_type(ptr, "IEND"))
 	    {
 	      if (len != 0 || size != 4+4+4)
-		return (ERR_STRUCT_end);
+		return (ERR_STRUCT_END);
 	      end = 1;
 	    }
 	  if (mipng_is_type(ptr, "IDAT"))
@@ -394,7 +394,7 @@ void	*mlx_png_file_to_image(mlx_ptr_t *xvar, char *file, int *width, int *height
   unsigned char		*ptr;
   mlx_img_list_t        *img;
 
-  if ((fd = open(file, O_RDONLY)) == -1 || (size = lseek(fd, 0, SEEK_end)) == -1 ||
+  if ((fd = open(file, O_RDONLY)) == -1 || (size = lseek(fd, 0, SEEK_END)) == -1 ||
       (ptr = mmap(0, size, PROT_READ, MAP_PRIVATE, fd, 0)) == (void *)MAP_FAILED)
     {
       if (fd >= 0)

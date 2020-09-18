@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/18 12:23:11 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/18 12:36:25 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,6 @@ typedef struct	s_mlx
 	int		endian;
 	int		bpp;
 	int		size_l;
-	int		sizex;
-	int		sizey;
 }				t_mlx;
 
 typedef struct	s_ray

@@ -86,10 +86,13 @@ WHITE = \033[1;37m
 all: 		$(NAME)
 
 $(NAME): 	$(OBJ)
+			@echo "$(BLUE)Building mlx:$(BLUE) $@"
+			@cd ./minilibx-linux && make && cd ..
 			@echo "$(CYAN)Constructing executable:$(NOC) $@"
-			@$(L_CC) -o $(NAME) $(OBJ) $(L_LIB)
+			@$(L_CC) -o $(NAME) $(OBJ) $(MAC_LIB)
 
 .c.o:		${SRCS}
+
 			@echo " $(VIOLET)[$(L_CC)] $(GREEN)[$(FLAGS)]$(NOC) $(YELLOW)in progress ...:$(NOC) $< $(RED)->$(NOC) $@"
 			@$(L_CC) -c -I$(INC_PATH) $< -o ${<:.c=.o}
 clean:
