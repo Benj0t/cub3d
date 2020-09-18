@@ -6,13 +6,13 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 18:49:55 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:37:44 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/18 12:22:52 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		deal_key_leave(int key, t_pmlx *pmlx)
+int		deal_key_leave(t_pmlx *pmlx)
 {
 	ray_err("Leaving program", pmlx);
 	return (0);

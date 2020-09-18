@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/15 18:47:27 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/18 12:23:11 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ void			err_raycast(t_pmlx *pmlx);
 void			draw_ray(t_pmlx *pmlx, int x, t_draw draw, t_ray ray);
 int				deal_key_press(int key, t_pmlx *pmlx);
 int				deal_key_release(int key, t_pmlx *pmlx);
-int				deal_key_leave(int key, t_pmlx *pmlx);
+int				deal_key_leave(t_pmlx *pmlx);
 int				deal_key(int key, t_pmlx *pmlx);
 void			forward(t_pmlx *pmlx);
 void			downward(t_pmlx *pmlx);
