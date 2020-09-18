@@ -59,7 +59,6 @@ FILES =		./sources/raycasting/raycasting\
 			./sources/parsing/pos\
 			./sources/raycasting/screenshot\
 
-
 SRCS = $(addsuffix .c, $(FILES))
 OBJ = $(SRCS:.c=.o)
 
@@ -83,16 +82,21 @@ VIOLET = \033[1;35m
 CYAN = \033[1;36m
 WHITE = \033[1;37m
 
-all: 		$(NAME)
+all: 		MLX $(NAME)
 
 $(NAME): 	$(OBJ)
 			@echo "$(CYAN)Constructing executable:$(NOC) $@"
 			@$(L_CC) -o $(NAME) $(OBJ) $(L_LIB)
+MLX:
+			@echo "$(CYAN)Building mlx:$(NOC) $@"
+			@cd ./minilibx-linux && make && cd ..
 
 .c.o:		${SRCS}
 			@echo " $(VIOLET)[$(L_CC)] $(GREEN)[$(FLAGS)]$(NOC) $(YELLOW)in progress ...:$(NOC) $< $(RED)->$(NOC) $@"
 			@$(L_CC) -c -I$(INC_PATH) $< -o ${<:.c=.o}
 clean:
+	@echo "\n$(RED)Cleaning mlx: $(NOC) $@"
+	@cd ./minilibx-linux && make clean && cd ..
 	@echo "\n$(RED)Removing '.o' objects: $(NOC) $@"
 	@rm -f $(OBJ)
 
@@ -102,4 +106,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean re fclean
+.PHONY: all clean re fclean MLX
