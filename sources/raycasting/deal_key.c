@@ -34,7 +34,7 @@ int		deal_key_press(int key, t_pmlx *pmlx)
 		pmlx->b.bool_a = 1;
 	if (key == D_KEY_L)
 		pmlx->b.bool_d = 1;
-	main_loop(pmlx);
+	loop(pmlx);
 	return (0);
 }
 
@@ -54,6 +54,6 @@ int		deal_key_release(int key, t_pmlx *pmlx)
 		pmlx->b.bool_a = 0;
 	if (key == D_KEY_L)
 		pmlx->b.bool_d = 0;
-	main_loop(pmlx);
+	loop(pmlx);
 	return (0);
 }

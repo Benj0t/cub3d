@@ -240,6 +240,7 @@ typedef struct	s_bmp
 	int planes;
 }				t_bmp;
 
+int				loop(t_pmlx *pmlx);
 void			fake_mlx(t_pmlx *pmlx);
 void			take_screenshot(t_pmlx *pmlx);
 void			mv_left(t_pmlx *pmlx);
