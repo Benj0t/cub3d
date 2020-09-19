@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 10:51:24 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/18 12:34:37 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/20 01:12:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	take_screenshot(t_pmlx *pmlx)
 	fake_mlx(pmlx);
 	init_player(pmlx);
 	if (init_sprite(pmlx) == 0)
-		ray_err("Sprites initialisation failed", pmlx);
+		ray_err("Error", pmlx, 1);
 	init_texture(pmlx);
 	main_loop(pmlx);
 	screenshot(pmlx);

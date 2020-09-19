@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_sprite.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 14:47:47 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:24:18 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/20 00:54:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		sprites_tab(t_pmlx *pmlx)
 	i = -1;
 	if (!(pmlx->s.list = (t_svec *)malloc(sizeof(t_svec) * (\
 		pmlx->s.sprite_num + 1))))
-		return (0);
+		ft_puterr("Error", pmlx, 1);
 	while (pmlx->s.cmap[++i])
 	{
 		while (pmlx->s.cmap[i][j])

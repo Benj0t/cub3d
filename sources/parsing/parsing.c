@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:15 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:46:26 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/20 01:09:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		get_arg(t_pmlx *pmlx)
 		return (store_c(pmlx));
 	else
 	{
-		ft_puterr("Invalid map argument", pmlx);
+		ft_puterr("Error", pmlx, 1);
 	}
 	return (1);
 }
@@ -45,10 +45,10 @@ void	add_line2(t_pmlx *pmlx)
 	{
 		if (!(pmlx->s.tmp = ft_strjoin(pmlx->s.map_join, pmlx->s.line,\
 			(ft_strlen(pmlx->s.map_join) + ft_strlen(pmlx->s.line)))))
-			ft_puterr("Malloc failed (strjoin)", pmlx);
+			ft_puterr("Error", pmlx, 1);
 		free(pmlx->s.map_join);
 		if (!(pmlx->s.map_join = ft_strdup(pmlx->s.tmp)))
-			ft_puterr("Malloc failed (strdup)", pmlx);
+			ft_puterr("Error", pmlx, 1);
 		free(pmlx->s.tmp);
 		pmlx->s.tmp = NULL;
 	}
@@ -57,17 +57,17 @@ void	add_line2(t_pmlx *pmlx)
 void	add_line(t_pmlx *pmlx)
 {
 	if (!(pmlx->s.map_join = ft_strdup_n(pmlx->s.line)))
-		ft_puterr("Malloc failed (strdup)", pmlx);
+		ft_puterr("Error", pmlx, 1);
 	free(pmlx->s.line);
 	while ((get_next_line(pmlx->s.fd, &(pmlx->s.line))) > 0)
 		if (ft_strlen(pmlx->s.line) > 0)
 		{
 			if (!(pmlx->s.tmp = ft_strjoin_n(pmlx->s.map_join, pmlx->s.line,\
 				(ft_strlen(pmlx->s.map_join) + ft_strlen(pmlx->s.line)))))
-				ft_puterr("Malloc failed (strjoin)", pmlx);
+				ft_puterr("Error", pmlx, 1);
 			free(pmlx->s.map_join);
 			if (!(pmlx->s.map_join = ft_strdup(pmlx->s.tmp)))
-				ft_puterr("Malloc failed (strdup)", pmlx);
+				ft_puterr("Error", pmlx, 1);
 			free(pmlx->s.tmp);
 			free(pmlx->s.line);
 			pmlx->s.tmp = NULL;
@@ -80,7 +80,7 @@ int		ft_parse(t_pmlx *pmlx, char *filename)
 {
 	if ((pmlx->s.fd = open(filename, O_RDONLY)) <= 0 ||\
 		(ext_check(filename, ".cub") != 0))
-		ft_puterr("Wrong file", pmlx);
+		ft_puterr("Error", pmlx, 1);
 	pmlx->s.tmp = NULL;
 	while ((get_next_line(pmlx->s.fd, &(pmlx->s.line))) > 0)
 	{
@@ -93,7 +93,7 @@ int		ft_parse(t_pmlx *pmlx, char *filename)
 			else
 			{
 				if (!get_arg(pmlx))
-					ft_puterr("Error in your .cub arguments", pmlx);
+					ft_puterr("Error", pmlx, 1);
 			}
 			free_tab(pmlx->s.tab);
 			free(pmlx->s.line);

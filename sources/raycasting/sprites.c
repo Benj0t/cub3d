@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:09:05 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/15 19:03:13 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/19 22:03:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	sort_sprites(t_pmlx *pmlx, int amount)
 	}
 }
 
-void	start_sp2(t_pmlx *pmlx, int i)
+void	start_sp2(t_pmlx *pmlx)
 {
 	if (pmlx->sp.drawstarty < 0)
 		pmlx->sp.drawstarty = 0;
@@ -76,7 +76,7 @@ void	start_sp(t_pmlx *pmlx, int i)
 							(pmlx->sp.transformy))) / VDIV;
 	pmlx->sp.drawstarty = -pmlx->sp.spriteheight / 2 +\
 							pmlx->s.r.y / 2 + pmlx->sp.vmove_screen;
-	start_sp2(pmlx, i);
+	start_sp2(pmlx);
 }
 
 void	sprites_2(t_pmlx *pmlx, int stripe)

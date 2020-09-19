@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 13:23:40 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/14 12:38:25 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/20 01:10:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	putpix(t_pmlx *pmlx, int x, int y, t_color color)
 	pmlx->mlx.data_addr[pos + BLUE_COMP] = color.b;
 }
 
-void	draw_ray(t_pmlx *pmlx, int x, t_draw draw, t_ray ray)
+void	draw_ray(t_pmlx *pmlx, int x, t_draw draw)
 {
 	int		y;
 	t_color	color;

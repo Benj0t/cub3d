@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/18 12:36:25 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/20 00:55:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,7 @@ void			ft_sprites(t_pmlx *pmlx, double zbuffer[pmlx->s.r.x]);
 void			sort_sprites(t_pmlx *pmlx, int amount);
 void			ft_swap(t_vector *a, t_vector *b);
 void			err_raycast(t_pmlx *pmlx);
-void			draw_ray(t_pmlx *pmlx, int x, t_draw draw, t_ray ray);
+void			draw_ray(t_pmlx *pmlx, int x, t_draw draw);
 int				deal_key_press(int key, t_pmlx *pmlx);
 int				deal_key_release(int key, t_pmlx *pmlx);
 int				deal_key_leave(t_pmlx *pmlx);
@@ -305,9 +305,10 @@ void			pos_dealer(t_pmlx *pmlx, char c);
 int				screenshot(t_pmlx *pmlx);
 void			err_parsing(t_pmlx *pmlx);
 int				ft_strcmp(char *str1, char *str2);
-void			ray_err(char *str, t_pmlx *pmlx);
+void			ray_err(char *str, t_pmlx *pmlx, int err);
 void			ft_destroy(t_pmlx *pmlx);
-void			ft_puterr(char *str, t_pmlx *pmlx);
+void			ft_putendl_fd(char *str, int fd);
+void			ft_puterr(char *str, t_pmlx *pmlx, int err);
 void			ft_putchar(char c);
 void			ft_putendl(char *str);
 void			ft_putstr(char *str);

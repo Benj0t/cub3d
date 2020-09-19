@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchars.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:47:29 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:24:19 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/20 00:55:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_putendl_fd(char *str, int fd)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		write(1, &(str[i++]), fd);
+	write(1, "\n", fd);
+}
 
 void	ft_putendl(char *str)
 {

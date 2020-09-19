@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/18 12:34:30 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/20 01:12:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	main_loop(t_pmlx *pmlx)
 		}
 		draw.lineheight = (int)(pmlx->s.r.y / ray.perpwalldist);
 		set_tex_prop(&ray, pmlx, &draw);
-		draw_ray(pmlx, x, draw, ray);
+		draw_ray(pmlx, x, draw);
 		zbuffer[x] = ray.perpwalldist;
 	}
 	ft_sprites(pmlx, zbuffer);
@@ -91,7 +91,7 @@ int		raycast(t_pmlx *pmlx)
 	(pmlx->screenshot == 1) ? take_screenshot(pmlx) : init_mlx(pmlx);
 	init_player(pmlx);
 	if (init_sprite(pmlx) == 0)
-		ray_err("Sprites initialisation failed", pmlx);
+		ray_err("Error", pmlx, 1);
 	init_texture(pmlx);
 	mlx_hook(pmlx->mlx.win_ptr, KEYPRESS, (1L << 0),\
 	&deal_key_press, pmlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:49:36 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/18 12:22:36 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/20 00:59:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,21 @@ void	free_void(void **par)
 
 void	ft_destroy(t_pmlx *pmlx)
 {
-	free_void(pmlx->img.addr);
+	(pmlx->img.addr) ? free_void(pmlx->img.addr) : NULL;
 	mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);
 	mlx_destroy_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr);
 }
 
-void	ray_err(char *str, t_pmlx *pmlx)
+void	ray_err(char *str, t_pmlx *pmlx, int err)
 {
-	ft_putendl(str);
+	ft_putendl_fd(str, err + 1);
 	err_parsing(pmlx);
 	ft_destroy(pmlx);
-	exit(1);
+	exit(err);
 }
 
 void	err_parsing(t_pmlx *pmlx)
 {
-	pmlx->s.list = NULL;
 	(pmlx->s.list) ? free(pmlx->s.list) : 0;
 	(pmlx->s.no) ? free(pmlx->s.no) : 0;
 	(pmlx->s.so) ? free(pmlx->s.so) : 0;
@@ -56,9 +55,9 @@ void	err_parsing(t_pmlx *pmlx)
 	(pmlx->sp.sprite_order) ? free(pmlx->sp.sprite_order) : 0;
 }
 
-void	ft_puterr(char *str, t_pmlx *pmlx)
+void	ft_puterr(char *str, t_pmlx *pmlx, int err)
 {
-	ft_putendl(str);
+	ft_putendl_fd(str, err + 1);
 	err_parsing(pmlx);
-	exit(1);
+	exit(err);
 }
