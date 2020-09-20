@@ -1,11 +1,11 @@
-R 1000  800
-NO ./tex/stone.xpm
-WE ./tex/wood.xpm
-SO ./tex/metal.xpm
-EA ./tex/skull_octocat.xpm
-S ./tex/pillar.xpm
-F 252,3,207
-C 225,30,0
+R 720 480
+NO images/wood.xpm
+SO images/greystone.xpm
+WE images/redbrick.xpm
+EA images/eagle.xpm
+S images/mv.xpm
+F 75,74,74
+C 1,10,254
 
 111111
 100001

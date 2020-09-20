@@ -80,13 +80,12 @@ int			ft_skip_whitespaces(char *str)
 
 static char	**split_free(char **tab, int j, t_pmlx *pmlx)
 {
-	ft_putendl("Malloc failed (ft_split)");
 	while (--j >= 0)
 	{
 		free(tab[j]);
 	}
 	free(tab);
-	err_parsing(pmlx);
+	ft_puterr("Error", pmlx, 1);
 	return (NULL);
 }
 
@@ -105,7 +104,7 @@ char		**ft_split(char *str, t_pmlx *pmlx)
 	i = ft_skip_whitespaces(str);
 	j = -1;
 	if (!(tab = (char**)malloc(sizeof(char*) * (i + 1))))
-		ft_puterr("Malloc failed (ft_split)", pmlx);
+		ft_puterr("Error", pmlx, 1);
 	tab[i] = NULL;
 	while (++j < i)
 	{

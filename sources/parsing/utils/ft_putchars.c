@@ -18,8 +18,10 @@ void	ft_putendl_fd(char *str, int fd)
 
 	i = 0;
 	while (str[i])
-		write(1, &(str[i++]), fd);
-	write(1, "\n", fd);
+	{
+		write(fd, &(str[i++]), 1);
+	}
+	write(fd, "\n", 1);
 }
 
 void	ft_putendl(char *str)

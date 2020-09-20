@@ -1,11 +1,11 @@
-R 1000 800
-NO 75,155,105
-SO ./tex/skull_octocat.xpm
-WE ./tex/skull_octocat.xpm
-EA ./tex/skull_octocat.xpm
-S ./tex/skull_octocat.xpm
-F 252,3,207
-C 225,30,0
+R 720 480
+NO images/wood.xpm
+SO images/greystone.xpm
+WE images/redbrick.xpm
+EA images/eagle.xpm
+S images/mv.xpm
+F 75,74,74
+C 1,10,254
 
 11111111111111111111111111111
 10000000001100000000000000001

@@ -1,11 +1,11 @@
-R 1000  600
-WE ./tex/wood.xpm
-NO ./tex/stone.xpm
-SO ./tex/metal.xpm
-EA ./tex/alex.xpm
-S ./tex/pillar.xpm
-F 209,209,209
-C 23,236,255
+R 720 480
+NO images/wood.xpm
+SO images/greystone.xpm
+WE images/redbrick.xpm
+EA images/eagle.xpm
+S images/mv.xpm
+F 75,74,74
+C 1,10,254
 
 
   111 111 111 11111111                   

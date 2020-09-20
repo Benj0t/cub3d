@@ -1,13 +1,11 @@
-R 1000 800
-
-NO ./tex/8-bit.png
-SO 252,3,207
-WE 252,3,207
-EA 252,3,207
-S 252,3,207
-
-C 225,30,0
-
+R 720 480
+NO images/wood.xpm
+SO images/greystone.xpm
+WE images/redbrick.xpm
+EA images/eagle.xpm
+S images/mv.xpm
+F 75,74,74
+C 1,10,254
 111111
 100001
 1N2001
