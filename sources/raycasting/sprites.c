@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:09:05 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/19 22:03:58 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/20 16:16:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void	sort_sprites(t_pmlx *pmlx, int amount)
 void	start_sp2(t_pmlx *pmlx)
 {
 	if (pmlx->sp.drawstarty < 0)
+	{
 		pmlx->sp.drawstarty = 0;
+	}
 	pmlx->sp.drawendy = pmlx->sp.spriteheight / 2 +\
 						pmlx->s.r.y / 2 + pmlx->sp.vmove_screen;
 	if (pmlx->sp.drawendy >= pmlx->s.r.y)

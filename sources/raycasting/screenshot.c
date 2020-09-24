@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:53:01 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 01:13:32 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/20 16:16:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ int		screenshot(t_pmlx *pmlx)
 
 	fd = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
-		ray_err("Error", pmlx, 1);
+		ray_err("Error\nImpossible to open file", pmlx, 1);
 	if (bmp_header(pmlx, fd))
-		ray_err("Error", pmlx, 1);
+		ray_err("Error\nScreenshot impossible", pmlx, 1);
 	if (bmp_body(pmlx, fd))
-		ray_err("Error", pmlx, 1);
+		ray_err("Error\nScreenshot impossible", pmlx, 1);
 	close(fd);
 	return (0);
 }

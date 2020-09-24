@@ -30,7 +30,7 @@ void	dda(t_ray *ray, t_pmlx *pmlx)
 			ray->side = 1;
 			pmlx->tex.texnum = 1;
 		}
-		if (pmlx->s.map[pmlx->pl.mapx][pmlx->pl.mapy] > 0)
+		if (pmlx->s.map[pmlx->pl.mapx][pmlx->pl.mapy] == 1)
 			ray->hit = 1;
 	}
 	if (pmlx->tex.texnum == 0 && pmlx->pl.posx > pmlx->pl.mapx)

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:09:09 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 01:14:45 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/20 16:16:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	init_texture(t_pmlx *pmlx)
 	int i;
 
 	if (!(pmlx->img.image = (char **)malloc(sizeof(char *) * (6))))
-		ray_err("Error", pmlx, 1);
+		ray_err("Error\n(malloc)", pmlx, 1);
 	if (!(pmlx->img.addr = (void **)malloc(sizeof(void *) * (6))))
-		ray_err("Error", pmlx, 1);
+		ray_err("Error\n(malloc)", pmlx, 1);
 	pmlx->img.image[5] = NULL;
 	pmlx->img.addr[5] = NULL;
 	pmlx->img.addr[0] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.so,\

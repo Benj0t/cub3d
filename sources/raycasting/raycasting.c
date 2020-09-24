@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 01:12:18 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/20 16:15:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,21 @@ void	main_loop(t_pmlx *pmlx)
 		zbuffer[x] = ray.perpwalldist;
 	}
 	ft_sprites(pmlx, zbuffer);
-	(pmlx->screenshot == 0) ? mlx_put_image_to_window(pmlx->mlx.mlx_ptr,\
-		pmlx->mlx.win_ptr, pmlx->mlx.img_ptr, 0, 0) : 0;
+}
+
+void	init_image(t_pmlx *pmlx)
+{
+	if (pmlx->mlx.img_ptr)
+		mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);
+	pmlx->mlx.img_ptr = mlx_new_image(pmlx->mlx.mlx_ptr,\
+	pmlx->s.r.x, pmlx->s.r.y);
+	pmlx->mlx.data_addr = mlx_get_data_addr(pmlx->mlx.img_ptr,\
+	&(pmlx->mlx.bpp), &(pmlx->mlx.size_l), &(pmlx->mlx.endian));
 }
 
 int		loop(t_pmlx *pmlx)
 {
+	init_image(pmlx);
 	if (pmlx->b.bool_w == 1)
 		forward(pmlx);
 	if (pmlx->b.bool_s == 1)
@@ -83,6 +92,8 @@ int		loop(t_pmlx *pmlx)
 	if (pmlx->b.bool_r == 1)
 		rot_right(pmlx);
 	main_loop(pmlx);
+	(pmlx->screenshot == 0) ? mlx_put_image_to_window(pmlx->mlx.mlx_ptr,\
+		pmlx->mlx.win_ptr, pmlx->mlx.img_ptr, 0, 0) : 0;
 	return (0);
 }
 
@@ -91,7 +102,7 @@ int		raycast(t_pmlx *pmlx)
 	(pmlx->screenshot == 1) ? take_screenshot(pmlx) : init_mlx(pmlx);
 	init_player(pmlx);
 	if (init_sprite(pmlx) == 0)
-		ray_err("Error", pmlx, 1);
+		ray_err("Error\nSprite initialisation error", pmlx, 1);
 	init_texture(pmlx);
 	mlx_hook(pmlx->mlx.win_ptr, KEYPRESS, (1L << 0),\
 	&deal_key_press, pmlx);

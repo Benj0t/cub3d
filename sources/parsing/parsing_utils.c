@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:55:31 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:30:14 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/20 16:11:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ext_check(char *str, char *ext)
 int		check_tex(t_pmlx *pmlx)
 {
 	if (!(pmlx->s.no) || !(pmlx->s.ea) || !(pmlx->s.we) || !(pmlx->s.so))
-		return (0);
+		ft_puterr("Error\nMissing texture", pmlx, 1);
 	return (1);
 }
 
@@ -70,6 +70,6 @@ int		get_char(char c)
 	if (c == '1')
 		return (1);
 	if (c == '2')
-		return (0);
+		return (2);
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 14:50:00 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 01:11:52 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/20 16:14:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int		init_sprite(t_pmlx *pmlx)
 {
 	if (!(pmlx->sp.sprite_order = (int *)malloc(sizeof(int) *\
 		(pmlx->s.sprite_num))))
-		ray_err("Error", pmlx, 1);
+		ray_err("Error\n(malloc)", pmlx, 1);
 	if (!(pmlx->sp.sprite_distance = (double *)malloc(sizeof(double) *\
 		(pmlx->s.sprite_num))))
-		ray_err("Error", pmlx, 1);
+		ray_err("Error\n(malloc)", pmlx, 1);
 	return (1);
 }

@@ -26,10 +26,7 @@ void		init_mlx(t_pmlx *pmlx)
 	pmlx->s.r.y = (y < pmlx->s.r.y) ? y : pmlx->s.r.y;
 	pmlx->mlx.win_ptr = mlx_new_window(pmlx->mlx.mlx_ptr, pmlx->s.r.x,\
 	pmlx->s.r.y, "Cub3D");
-	pmlx->mlx.img_ptr = mlx_new_image(pmlx->mlx.mlx_ptr,\
-	pmlx->s.r.x, pmlx->s.r.y);
-	pmlx->mlx.data_addr = mlx_get_data_addr(pmlx->mlx.img_ptr,\
-	&(pmlx->mlx.bpp), &(pmlx->mlx.size_l), &(pmlx->mlx.endian));
+	pmlx->mlx.img_ptr = NULL;
 }
 
 static void	init_dir2(t_pmlx *pmlx)

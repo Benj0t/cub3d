@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 10:51:24 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 01:12:33 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/20 16:15:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	take_screenshot(t_pmlx *pmlx)
 	fake_mlx(pmlx);
 	init_player(pmlx);
 	if (init_sprite(pmlx) == 0)
-		ray_err("Error", pmlx, 1);
+		ray_err("Error\nSprite initialisation error", pmlx, 1);
 	init_texture(pmlx);
 	main_loop(pmlx);
 	screenshot(pmlx);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:20 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 01:09:03 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/20 16:11:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int				map_closed(t_pmlx *pmlx, int y, int x)
 {
 	if (y < 0 || x < 0 || x > pmlx->s.tabheight ||\
 		y >= ft_strlen(pmlx->s.cmap[x]))
-		ft_puterr("Error", pmlx, 1);
+		ft_puterr("Error\nMap", pmlx, 1);
 	if (find_char("O1S", pmlx->s.cmap[x][y]))
 		return (1);
 	if (pmlx->s.cmap[x][y] == '\0' || pmlx->s.cmap[x][y] == ' ')
-		ft_puterr("Error", pmlx, 1);
+		ft_puterr("Error\nMap", pmlx, 1);
 	if (pmlx->s.cmap[x][y] == '0')
 		pmlx->s.cmap[x][y] = 'O';
 	else if (pmlx->s.cmap[x][y] == '2')
@@ -58,18 +58,18 @@ int				convert_map(t_pmlx *pmlx)
 	pmlx->s.tabheight = tab_len(pmlx->s.cmap);
 	if (!(pmlx->s.map = (int **)malloc(sizeof(int *) * (\
 		pmlx->s.tabheight + 1))))
-		ft_puterr("Error", pmlx, 1);
+		ft_puterr("Error\n(malloc)", pmlx, 1);
 	pmlx->s.map[pmlx->s.tabheight] = NULL;
 	while (i < pmlx->s.tabheight)
 	{
 		j = -1;
 		len = ft_strlen(pmlx->s.cmap[i]);
 		if (!(pmlx->s.map[i] = (int *)malloc(sizeof(int) * (len + 1))))
-			ft_puterr("Error", pmlx, 1);
+			ft_puterr("Error\n(malloc)", pmlx, 1);
 		pmlx->s.map[i][len] = '\0';
 		while (++j < len)
 			if ((pmlx->s.map[i][j] = get_char(pmlx->s.cmap[i][j])) == -1)
-				ft_puterr("Error", pmlx, 1);
+				ft_puterr("Error\nWrong character", pmlx, 1);
 		i++;
 	}
 	return (1);
@@ -88,7 +88,7 @@ int				create_map(t_pmlx *pmlx)
 	start = 0;
 	n = count_n(pmlx->s.map_join);
 	if (!(pmlx->s.cmap = (char **)malloc(sizeof(char *) * (n + 1))))
-		ft_puterr("Error", pmlx, 1);
+		ft_puterr("Error\n(malloc)", pmlx, 1);
 	pmlx->s.cmap[n] = NULL;
 	while (j < n)
 	{
@@ -97,7 +97,7 @@ int				create_map(t_pmlx *pmlx)
 			i++;
 		len = i - start;
 		if (!(pmlx->s.cmap[j++] = ft_substr(pmlx->s.map_join, start, len)))
-			ft_puterr("Error", pmlx, 1);
+			ft_puterr("Error\n(malloc)", pmlx, 1);
 	}
 	return (1);
 }
