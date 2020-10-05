@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 15:48:12 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 16:15:28 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/05 20:26:49 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int		raycast(t_pmlx *pmlx)
 {
 	(pmlx->screenshot == 1) ? take_screenshot(pmlx) : init_mlx(pmlx);
 	init_player(pmlx);
+	init_texture(pmlx);
 	if (init_sprite(pmlx) == 0)
 		ray_err("Error\nSprite initialisation error", pmlx, 1);
-	init_texture(pmlx);
 	mlx_hook(pmlx->mlx.win_ptr, KEYPRESS, (1L << 0),\
 	&deal_key_press, pmlx);
 	mlx_hook(pmlx->mlx.win_ptr, KEYRELEASE, (1L << 1),\

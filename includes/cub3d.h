@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 00:55:52 by marvin           ###   ########.fr       */
+/*   Updated: 2020/09/24 18:15:00 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,7 @@ int				store_c(t_pmlx *pmlx);
 int				tab_is_digit(char **tab);
 int				tab_is_rgb(char **tab);
 void			put_rgb(t_color *c, char **tab);
+void			free_void(void **par);
 void			sp_rgb(t_pmlx *pmlx, t_color color, int stripe, int y);
 int				tab_len(char **tab);
 void			pos_north(t_pmlx *pmlx);

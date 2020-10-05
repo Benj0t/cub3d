@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   null.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 16:10:26 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/18 12:36:17 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/24 18:22:14 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void		set_null(t_pmlx *pmlx)
 	pmlx->mlx.img_ptr = NULL;
 	pmlx->mlx.win_ptr = NULL;
 	pmlx->mlx.data_addr = NULL;
+	pmlx->b.bool_w = 0;
+	pmlx->b.bool_s = 0;
+	pmlx->b.bool_a = 0;
+	pmlx->b.bool_d = 0;
+	pmlx->b.bool_l = 0;
+	pmlx->b.bool_r = 0;
 }
 
 void		init_parse(t_pmlx *pmlx)

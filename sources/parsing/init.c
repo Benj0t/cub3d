@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:42 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/18 12:40:07 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/09/24 18:16:00 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		init_mlx(t_pmlx *pmlx)
 	pmlx->mlx.win_ptr = mlx_new_window(pmlx->mlx.mlx_ptr, pmlx->s.r.x,\
 	pmlx->s.r.y, "Cub3D");
 	pmlx->mlx.img_ptr = NULL;
+	pmlx->mlx.data_addr = NULL;
 }
 
 static void	init_dir2(t_pmlx *pmlx)
