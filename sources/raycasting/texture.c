@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:09:09 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/10/05 22:00:02 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/06 17:43:06 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	init_texture(t_pmlx *pmlx)
 {
 	int i;
 
-	if (!(pmlx->img.image = (char **)malloc(sizeof(char *) * (6))))
-		ray_err("Error\n(malloc)", pmlx, 1);
 	if (!(pmlx->img.addr = (void **)malloc(sizeof(void *) * (6))))
 		ray_err("Error\n(malloc)", pmlx, 1);
-	pmlx->img.image[5] = NULL;
 	pmlx->img.addr[5] = NULL;
 	set_texture(pmlx);
+	if (!(pmlx->img.image = (char **)malloc(sizeof(char *) * (6))))
+		ray_err("Error\n(malloc)", pmlx, 1);
+	pmlx->img.image[5] = NULL;
 	i = 0;
 	while (i < 5)
 	{

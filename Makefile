@@ -65,7 +65,7 @@ OBJ = $(SRCS:.c=.o)
 CC = gcc
 L_CC = clang
 FLAGS = -Wall -Wextra -Werror
-L_LIB = -L ./minilibx-linux/ -lmlx -L%%%%/../lib -lXext -lX11 -lm
+L_LIB = -L ./minilibx/ -lmlx -L%%%%/../lib -lXext -lX11 -lm
 MAC_LIB = -L ./minilibx/ -lmlx -framework OpenGL -framework Appkit
 
 ### COLORS ###
@@ -86,17 +86,17 @@ all: 		MLX $(NAME)
 
 $(NAME): 	$(OBJ)
 			@echo "$(CYAN)Constructing executable:$(NOC) $@"
-			@$(L_CC) $(FLAGS) -o $(NAME) $(OBJ) $(L_LIB)
+			@$(L_CC) $(FLAGS) -o $(NAME) $(OBJ) $(MAC_LIB)
 MLX:
 			@echo "$(CYAN)Building mlx:$(NOC) $@"
-			@cd ./minilibx-linux && make && cd ..
+			@cd ./minilibx && make && cd ..
 
 .c.o:		${SRCS}
 			@echo " $(VIOLET)[$(L_CC)] $(GREEN)[$(FLAGS)]$(NOC) $(YELLOW)in progress ...:$(NOC) $< $(RED)->$(NOC) $@"
 			@$(L_CC) $(FLAGS) -c -I$(INC_PATH) $< -o ${<:.c=.o}
 clean:
 	@echo "\n$(RED)Cleaning mlx: $(NOC) $@"
-	@cd ./minilibx-linux && make clean && cd ..
+	@cd ./minilibx && make clean && cd ..
 	@echo "\n$(RED)Removing '.o' objects: $(NOC) $@"
 	@rm -f $(OBJ)
 

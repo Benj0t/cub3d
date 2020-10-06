@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:49:36 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/25 16:02:53 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/06 17:44:01 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	ft_destroy(t_pmlx *pmlx)
 {
 	//(pmlx->img.addr) ? free_void(pmlx->img.addr) : NULL;
 	(pmlx->img.image) ? free_tab(pmlx->img.image) : NULL;
-	mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);
+	if (pmlx->mlx.img_ptr)
+		mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);
 	mlx_destroy_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr);
 }
 
