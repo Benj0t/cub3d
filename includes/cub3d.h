@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/24 18:15:00 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/06 18:13:22 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct	s_color
 
 typedef struct	s_parse
 {
+	int			nb_line;
 	int			sprite_num;
 	t_svec		*list;
 	int			tabheight;
@@ -86,6 +87,11 @@ typedef struct	s_parse
 	char		**tab;
 	int			fd;
 	int			n_key;
+	int			no_key;
+	int			we_key;
+	int			so_key;
+	int			ea_key;
+	int			s_key;
 	char		*no;
 	char		*so;
 	char		*we;

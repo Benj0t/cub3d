@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:15 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 16:13:24 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/06 18:15:27 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	add_line2(t_pmlx *pmlx)
 
 void	add_line(t_pmlx *pmlx)
 {
+	pmlx->s.nb_line++;
 	if (!(pmlx->s.map_join = ft_strdup_n(pmlx->s.line)))
 		ft_puterr("Error\n(malloc)", pmlx, 1);
 	free(pmlx->s.line);
@@ -99,5 +100,7 @@ int		ft_parse(t_pmlx *pmlx, char *filename)
 			free(pmlx->s.line);
 		}
 	}
+	if (pmlx->s.nb_line == 0)
+		ft_puterr("Error\nNo map", pmlx, 1);
 	return (1);
 }

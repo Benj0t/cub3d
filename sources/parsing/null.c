@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   null.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 16:10:26 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/24 18:22:14 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/06 18:14:19 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 void		set_null(t_pmlx *pmlx)
 {
 	init_parse(pmlx);
+	pmlx->s.no_key = 0;
+	pmlx->s.s_key = 0;
+	pmlx->s.we_key = 0;
+	pmlx->s.so_key = 0;
+	pmlx->s.ea_key = 0;
+	pmlx->s.nb_line = 0;
 	pmlx->screenshot = 0;
 	pmlx->sp.sprite_distance = NULL;
 	pmlx->sp.sprite_order = NULL;
