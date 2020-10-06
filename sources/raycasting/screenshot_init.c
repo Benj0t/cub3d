@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 10:51:24 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/20 16:15:43 by marvin           ###   ########.fr       */
+/*   Updated: 2020/10/06 18:37:05 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 void	fake_mlx(t_pmlx *pmlx)
 {
+	int x;
+	int y;
+
+	//mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(x), &(y));
+	x = 1920;
+	y = 1080;
+	pmlx->s.r.x = (x < pmlx->s.r.x) ? x : pmlx->s.r.x;
+	pmlx->s.r.y = (y < pmlx->s.r.y) ? y : pmlx->s.r.y;
 	pmlx->mlx.mlx_ptr = mlx_init();
 	pmlx->mlx.win_ptr = NULL;
 	pmlx->mlx.img_ptr = mlx_new_image(pmlx->mlx.mlx_ptr,\
