@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/10/06 18:13:22 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:00:34 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ typedef struct	s_bmp
 	int planes;
 }				t_bmp;
 
+long long int	ft_atoll(char *str);
 int				loop(t_pmlx *pmlx);
 void			fake_mlx(t_pmlx *pmlx);
 void			take_screenshot(t_pmlx *pmlx);

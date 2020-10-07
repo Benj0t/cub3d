@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:49:36 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/10/06 17:44:01 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/07 13:59:17 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	free_void(void **par)
 
 void	ft_destroy(t_pmlx *pmlx)
 {
-	//(pmlx->img.addr) ? free_void(pmlx->img.addr) : NULL;
 	(pmlx->img.image) ? free_tab(pmlx->img.image) : NULL;
 	if (pmlx->mlx.img_ptr)
 		mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);

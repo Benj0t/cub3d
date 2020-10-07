@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:42 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/10/06 18:29:28 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:59:02 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		init_mlx(t_pmlx *pmlx)
 {
 	int x;
 	int y;
-	
+
 	pmlx->img.bpp = 0;
 	pmlx->img.s_line = 0;
 	pmlx->img.endian = 0;

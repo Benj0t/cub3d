@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:09:09 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/10/06 18:18:58 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/07 13:53:14 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 void	set_texture(t_pmlx *pmlx)
 {
-	if ((pmlx->img.addr[0] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.so,\
-						&(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
+	if ((pmlx->img.addr[0] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr,\
+		pmlx->s.so, &(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
 		ray_err("Error\nWrong texture file", pmlx, 1);
-	if ((pmlx->img.addr[1] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.we,\
-						&(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
+	if ((pmlx->img.addr[1] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr,\
+		pmlx->s.we, &(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
 		ray_err("Error\nWrong texture file", pmlx, 1);
-	if ((pmlx->img.addr[2] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.no,\
-						&(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
+	if ((pmlx->img.addr[2] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr,\
+		pmlx->s.no, &(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
 		ray_err("Error\nWrong texture file", pmlx, 1);
-	if ((pmlx->img.addr[3] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.ea,\
-						&(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
+	if ((pmlx->img.addr[3] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr,\
+		pmlx->s.ea, &(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
 		ray_err("Error\nWrong texture file", pmlx, 1);
-	if ((pmlx->img.addr[4] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr, pmlx->s.s,\
-						&(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
+	if ((pmlx->img.addr[4] = mlx_xpm_file_to_image(pmlx->mlx.mlx_ptr,\
+		pmlx->s.s, &(pmlx->img.img_w), &(pmlx->img.img_h))) == NULL)
 		ray_err("Error\nWrong texture file", pmlx, 1);
 }
 

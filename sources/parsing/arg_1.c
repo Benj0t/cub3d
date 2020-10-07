@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 16:12:23 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/18 12:35:55 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/07 17:46:22 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 int	store_res(t_pmlx *pmlx)
 {
+	long long int x;
+	long long int y;
+
 	if (tab_len(pmlx->s.tab) != 3 || (!tab_is_digit(pmlx->s.tab)))
 		return (0);
-	pmlx->s.r.x = ft_atoi(pmlx->s.tab[1]);
-	pmlx->s.r.y = ft_atoi(pmlx->s.tab[2]);
+	x = ft_atoll(pmlx->s.tab[1]);
+	y = ft_atoll(pmlx->s.tab[2]);
+	pmlx->s.r.x = (x > 2147483647) ? 2147483647 : x;
+	pmlx->s.r.y = (y > 2147483647) ? 2147483647 : y;
 	if (pmlx->s.r.x <= 0 || pmlx->s.r.y <= 0)
 		return (0);
 	pmlx->s.n_key++;
