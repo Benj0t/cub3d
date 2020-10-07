@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:49:36 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/10/07 13:59:17 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:06:56 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ray_err(char *str, t_pmlx *pmlx, int err)
 	ft_putendl_fd(str, err + 1);
 	ft_destroy(pmlx);
 	err_parsing(pmlx);
+	system("leaks cub3d");
 	exit(err);
 }
 
@@ -61,5 +62,6 @@ void	ft_puterr(char *str, t_pmlx *pmlx, int err)
 {
 	ft_putendl_fd(str, err + 1);
 	err_parsing(pmlx);
+	system("leaks cub3d");
 	exit(err);
 }

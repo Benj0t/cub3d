@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 16:10:26 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/10/06 18:14:19 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:13:02 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void		set_null(t_pmlx *pmlx)
 	pmlx->s.we_key = 0;
 	pmlx->s.so_key = 0;
 	pmlx->s.ea_key = 0;
+	pmlx->s.f_key = 0;
+	pmlx->s.c_key = 0;
+	pmlx->s.r_key = 0;
 	pmlx->s.nb_line = 0;
 	pmlx->screenshot = 0;
 	pmlx->sp.sprite_distance = NULL;

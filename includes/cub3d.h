@@ -6,7 +6,7 @@
 /*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:21 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/10/07 18:00:34 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/07 18:12:17 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ typedef struct	s_parse
 	int			fd;
 	int			n_key;
 	int			no_key;
+	int			r_key;
+	int			f_key;
+	int			c_key;
 	int			we_key;
 	int			so_key;
 	int			ea_key;
