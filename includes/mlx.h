@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 13:51:31 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/09/03 16:57:39 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/10 16:18:32 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@
 # define F19_KEY 80
 # define UP_KEY 126
 # define DOWN_KEY 125
-# define RIGHT_KEY_L 124
-# define LEFT_KEY_L 123
+# define RIGHT_KEY_L 65363
+# define LEFT_KEY_L 65361
 # define RIGHT_KEY_M 124
 # define LEFT_KEY_M 123
 # define ESC_KEY 53

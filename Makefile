@@ -65,7 +65,7 @@ OBJ = $(SRCS:.c=.o)
 CC = gcc
 L_CC = clang
 FLAGS = -Wall -Wextra -Werror
-L_LIB = -L ./minilibx/ -lmlx -L%%%%/../lib -lXext -lX11 -lm
+L_LIB = -L ./minilibx-linux/ -lmlx -L%%%%/../lib -lXext -lX11 -lm
 MAC_LIB = -L ./minilibx/ -lmlx -framework OpenGL -framework Appkit
 
 ### COLORS ###
