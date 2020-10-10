@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bemoreau <bemoreau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bemoreau <bemoreau@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 13:08:42 by bemoreau          #+#    #+#             */
-/*   Updated: 2020/10/07 17:59:02 by bemoreau         ###   ########.fr       */
+/*   Updated: 2020/10/10 16:03:22 by bemoreau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void		init_mlx(t_pmlx *pmlx)
 	pmlx->img.s_line = 0;
 	pmlx->img.endian = 0;
 	pmlx->mlx.mlx_ptr = mlx_init();
-	// mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(x), &(y));
-	x = 1920;
-	y = 1080;
+	mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(x), &(y));
 	pmlx->s.r.x = (x < pmlx->s.r.x) ? x : pmlx->s.r.x;
 	pmlx->s.r.y = (y < pmlx->s.r.y) ? y : pmlx->s.r.y;
 	pmlx->mlx.win_ptr = mlx_new_window(pmlx->mlx.mlx_ptr, pmlx->s.r.x,\

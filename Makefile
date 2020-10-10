@@ -86,17 +86,17 @@ all: 		MLX $(NAME)
 
 $(NAME): 	$(OBJ)
 			@echo "$(CYAN)Constructing executable:$(NOC) $@"
-			@$(L_CC) $(FLAGS) -o $(NAME) $(OBJ) $(MAC_LIB)
+			@$(L_CC) $(FLAGS) -o $(NAME) $(OBJ) $(L_LIB)
 MLX:
 			@echo "$(CYAN)Building mlx:$(NOC) $@"
-			@cd ./minilibx && make && cd ..
+			@cd ./minilibx-linux && make && cd ..
 
 .c.o:		${SRCS}
 			@echo " $(VIOLET)[$(L_CC)] $(GREEN)[$(FLAGS)]$(NOC) $(YELLOW)in progress ...:$(NOC) $< $(RED)->$(NOC) $@"
 			@$(L_CC) $(FLAGS) -c -I$(INC_PATH) $< -o ${<:.c=.o}
 clean:
 	@echo "\n$(RED)Cleaning mlx: $(NOC) $@"
-	@cd ./minilibx && make clean && cd ..
+	@cd ./minilibx-linux && make clean && cd ..
 	@echo "\n$(RED)Removing '.o' objects: $(NOC) $@"
 	@rm -f $(OBJ)
 
