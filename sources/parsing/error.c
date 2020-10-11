@@ -25,7 +25,6 @@ void	free_void(void **par)
 
 void	ft_destroy(t_pmlx *pmlx)
 {
-	(pmlx->img.image) ? free_tab(pmlx->img.image) : NULL;
 	if (pmlx->mlx.img_ptr)
 		mlx_destroy_image(pmlx->mlx.mlx_ptr, pmlx->mlx.img_ptr);
 	mlx_destroy_window(pmlx->mlx.mlx_ptr, pmlx->mlx.win_ptr);
@@ -36,7 +35,6 @@ void	ray_err(char *str, t_pmlx *pmlx, int err)
 	ft_putendl_fd(str, err + 1);
 	ft_destroy(pmlx);
 	err_parsing(pmlx);
-	system("leaks cub3d");
 	exit(err);
 }
 
@@ -62,6 +60,5 @@ void	ft_puterr(char *str, t_pmlx *pmlx, int err)
 {
 	ft_putendl_fd(str, err + 1);
 	err_parsing(pmlx);
-	system("leaks cub3d");
 	exit(err);
 }
