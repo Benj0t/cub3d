@@ -17,10 +17,10 @@ void	fake_mlx(t_pmlx *pmlx)
 	int x;
 	int y;
 
+	pmlx->mlx.mlx_ptr = mlx_init();
 	mlx_get_screen_size(pmlx->mlx.mlx_ptr, &(x), &(y));
 	pmlx->s.r.x = (x < pmlx->s.r.x) ? x : pmlx->s.r.x;
 	pmlx->s.r.y = (y < pmlx->s.r.y) ? y : pmlx->s.r.y;
-	pmlx->mlx.mlx_ptr = mlx_init();
 	pmlx->mlx.win_ptr = NULL;
 	pmlx->mlx.img_ptr = mlx_new_image(pmlx->mlx.mlx_ptr,\
 	pmlx->s.r.x, pmlx->s.r.y);
